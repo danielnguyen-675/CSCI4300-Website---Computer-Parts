@@ -10,7 +10,9 @@
     <body>
         <h1>Register, bitch</h1>
 
-        <form id="register" method="post" onsubmit="return false">
+        <p>An * indicates a required field.</p>
+
+        <form id="register" method="post" onsubmit="return checkFields()">
             <label>First Name:</label>
             <input id="fName" type="text"><span id="req1">*</span><br>
 
