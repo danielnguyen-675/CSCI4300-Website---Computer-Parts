@@ -7,7 +7,9 @@ var checkFields = function() {
     var fName = $("fName").value;
     var lName = $("lName").value;
     var email = $("email").value;
+    var email2 = $("email2").value;
     var password = $("password").value;
+    var password2 = $("password2").value;
     var phone = $("phone").value;
     var isValid = true;
 
@@ -15,19 +17,22 @@ var checkFields = function() {
     var req1 = "*";
     var req2 = "*";
     var req3 = "*";
+    var req3b = "*";
     var req4 = "*";
+    var req4b = "*";
     var req5 = "*";
 
     //check to see if fields are correctly filled
     //check first name
-    if ( fName == "" ) {
-        req1 = "First name cannot be empty."
+    var regexName = /[a-z ,.'-]+/i;
+    if ( !regexName.test(fName) ) {
+        req1 = "First name is invalid."
         isValid = false;
     }
 
     //check last name
-    if ( lName == "" ) {
-        req2 = "Last name cannot be empty."
+    if ( !regexName.test(lName) ) {
+        req2 = "Last name is invalid."
         isValid = false;
     }
 
@@ -45,7 +50,53 @@ var checkFields = function() {
         }
     }
 
+    //see if email is reentered correctly
+    if ( email.length != 0 ) {
+        if ( email != email2 ) {
+            req3b = "Email addresses much match.";
+            isValid = false;
+        }
+    }
+
     //check password
+    var hasUpper = false;
+    var hasUnique = false;
+    var hasNumber = false;
+    //special characters
+    var special = "!#$%&'()*+,-./<=>?@^_|~";
+    if ( password.length < 8 ) {
+        req4 = "Password must be at least 8 characters long.";
+        isValid = false;
+    }
+    else {
+        //check if contains uppercase/unique character
+        for ( var i = 0; i < password.length; i++ ) {
+            if ( password.charAt(i) == password.charAt(i).toUpperCase() ) {
+                hasUpper = true;
+            }
+            if ( !isNaN(password.charAt(i)) ) {
+                hasNumber = true;
+            }
+            for ( var j = 0; j < special.length; j++ ) {
+                if ( password.charAt(i) == special.charAt(j) ) {
+                    hasUnique = true;
+                }
+            }
+        }
+
+        if ( !(hasNumber && hasUnique && hasUpper) ) {
+            req4 = "Password must contain at least one uppercase letter, a number, and one of the following unique characters:\n! # $ % & ' ( ) * + , - . / < = > ? @ ^ _ | ~";
+            isValid = false;
+        }
+    }
+
+    //check to see if password matches
+    if ( password.length != 0 ) {
+        if ( password != password2 ) {
+            req4b = "Passwords much match.";
+            isValid = false;
+        }
+    }
 
     //check phone number
     if ( phone.length = 0 ) {
@@ -58,23 +109,25 @@ var checkFields = function() {
             req5 = "Phone number must be of the form (123) 456-7890";
             isValid = false;
         }
-
-        console.log(regexPhone.test(phone));
     }
 
     if ( isValid ) {
-        var req1 = "";
-        var req2 = "";
-        var req3 = "";
-        var req4 = "";
-        var req5 = "";
+        req1 = "";
+        req2 = "";
+        req3 = "";
+        req3b = "";
+        req4 = "";
+        req4b = "";
+        req5 = "";
     }
 
     //reset span values
     $("req1").innerHTML = req1;
     $("req2").innerHTML = req2;
     $("req3").innerHTML = req3;
+    $("req3b").innerHTML = req3b;
     $("req4").innerHTML = req4;
+    $("req4b").innerHTML = req4b;
     $("req5").innerHTML = req5;
 
     return isValid;
@@ -84,7 +137,9 @@ var clearFields = function() {
 	$("req1").innerHTML = "*";
 	$("req2").innerHTML = "*";
     $("req3").innerHTML = "*";
+    $("req3b").innerHTML = "*";
     $("req4").innerHTML = "*";
+    $("req4b").innerHTML = "*";
     $("req5").innerHTML = "*";
 }
 
