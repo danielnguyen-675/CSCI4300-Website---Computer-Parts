@@ -63,7 +63,7 @@ var checkFields = function () {
     var hasUnique = false;
     var hasNumber = false;
     //special characters
-    var special = "!#$%&'()*+,-./<=>?@^_|~";
+    var special = "!#$%&'()*+,-.<=>?@^_|~";
     if (password.length < 8) {
         req4 = "Password must be at least 8 characters long.";
         isValid = false;
@@ -85,7 +85,7 @@ var checkFields = function () {
         }
 
         if (!(hasNumber && hasUnique && hasUpper)) {
-            req4 = "Password must contain at least one uppercase letter, a number, and one of the following unique characters:\n! # $ % & ' ( ) * + , - . / < = > ? @ ^ _ | ~";
+            req4 = "Password must contain:\nat least one uppercase letter,\na number, and\none of the following unique characters:\n! # $ % & ' ( ) * + , - . < = > ? @ ^ _ | ~";
             isValid = false;
         }
     }
@@ -109,16 +109,6 @@ var checkFields = function () {
             req5 = "Phone number must be of the form (123) 456-7890";
             isValid = false;
         }
-    }
-
-    if (isValid) {
-        req1 = "";
-        req2 = "";
-        req3 = "";
-        req3b = "";
-        req4 = "";
-        req4b = "";
-        req5 = "";
     }
 
     //reset span values

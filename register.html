@@ -3,42 +3,67 @@
 
 <head>
     <meta charset="utf-8">
-
+    <title>INSERT NAME OF SHOP</title>
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="register.js"></script>
 </head>
 
 <body>
-    <h1>Create an Account</h1>
+    <a href="shoppingView.html"><img src="uga.png" alt="University of Georgia"></a>
 
-    <p>An * indicates a required field.</p>
+    <header>
+        <h1 id="storeName">Neweregg</h1>
+        <h3>Find exclusive, high-quality products!</h3>
+    </header>
 
-    <form id="register" action="register.php" method="POST" onsubmit="return checkFields()">
-        <label>First Name:</label>
-        <input id="fName" type="text" name="fName"><span id="req1">*</span><br>
+    <main>
+        <h1>Create an Account</h1>
 
-        <label>Last Name:</label>
-        <input id="lName" type="text" name="lName"><span id="req2">*</span><br>
+        <p>An * indicates a required field.</p>
 
-        <label>Email:</label>
-        <input id="email" type="text" name="email"><span id="req3">*</span><br>
+        <form id="register" action="register.php" method="post" onsubmit="return checkFields()">
+            <label>First Name:</label>
+            <input id="fName" type="text">
+            <span class="required" id="req1">*</span><br>
 
-        <label>Re-enter Email:</label>
-        <input id="email2" type="text"><span id="req3b">*</span><br>
+            <label>Last Name:</label>
+            <input id="lName" type="text">
+            <span class="required" id="req2">*</span><br>
 
-        <label>Password:</label>
-        <input id="password" type="password" name="password"><span id="req4">*</span><br>
+            <label>Email:</label>
+            <input id="email" type="text">
+            <span class="required" id="req3">*</span><br>
 
-        <label>Re-enter Password:</label>
-        <input id="password2" type="password"><span id="req4b">*</span><br>
+            <label>Re-enter Email:</label>
+            <input id="email2" type="text">
+            <span class="required" id="req3b">*</span><br>
 
-        <label>Phone Number:</label>
-        <input id="phone" type="text" name="phone"><span id="req5">*</span><br>
+            <!-- keeps label and input together when error message displayed -->
+            <div id="anchor">
+                <label>Password:</label>
+                <input id="password" type="password">
+            </div>
+            <span class="required" id="req4">*</span><br>
 
-        <input id="submit" type="submit" value="Login"><br>
-        <input id="reset" type="reset" value="Clear Fields"><br>
-    </form>
+            <label>Re-enter Password:</label>
+            <input id="password2" type="password">
+            <span class="required" id="req4b">*</span><br>
 
-    <p>Already have an account? <a href="#">Log in here</a>!</p>
+            <label>Phone Number:</label>
+            <input id="phone" type="text">
+            <span class="required" id="req5">*</span><br>
+
+            <input id="submit" type="submit" value="Create Account">
+            <input id="reset" type="reset" value="Clear Fields"><br>
+        </form>
+
+        <p>Already have an account? <a href="login.php">Log in here</a>!</p>
+    </main>
+
+    <footer>
+        <p>&copy; INSERT NAME OF SHOP HERE</p>
+    </footer>
 </body>
 
 </html>
