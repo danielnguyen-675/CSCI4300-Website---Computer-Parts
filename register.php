@@ -1,14 +1,14 @@
-<?php 
-    require('connection.php');
-    session_start();
-    $firstName=$_POST['fName'];
-    $lastName=$_POST['lName'];
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    $phoneNumber=$_POST['phone'];
-    $userStatus = '1';
+<?php
+require('connection');
+session_start();
+$firstName = $_POST['fName'];
+$lastName = $_POST['lName'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$phoneNumber = $_POST['phone'];
+$userStatus = '1';
 
-    if (!empty($firstName) && !empty($lastName) && !empty($email) && !empty($password) & !empty($phoneNumber)) {
+if (!empty($firstName) && !empty($lastName) && !empty($email) && !empty($password) & !empty($phoneNumber)) {
 
     //PHP code + SQL code to QUERY into the DATABASE
     $sqlquery = 'INSERT INTO customer 
@@ -26,9 +26,8 @@
     $statement->closeCursor();
 
     //include an html back to the home page
-    include('shoppingView.html');
-    
-    } else {
+
+} else {
     //Go back to the registration page if failed. 
-        
-    }
+
+}
