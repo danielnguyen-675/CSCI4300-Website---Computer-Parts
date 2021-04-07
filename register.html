@@ -22,17 +22,17 @@
 
         <p>An * indicates a required field.</p>
 
-        <form id="register" action="register.php" method="post" onsubmit="return checkFields()">
+        <form id="editAccount" action="register.php" method="post" onsubmit="return checkFields()">
             <label>First Name:</label>
-            <input id="fName" type="text" name="fName">
+            <input id="fName" name="fName" type="text">
             <span class="required" id="req1">*</span><br>
 
             <label>Last Name:</label>
-            <input id="lName" type="text" name="lName">
+            <input id="lName" name="lName" type="text">
             <span class="required" id="req2">*</span><br>
 
             <label>Email:</label>
-            <input id="email" type="text" name="email">
+            <input id="email" name="email" type="text">
             <span class="required" id="req3">*</span><br>
 
             <label>Re-enter Email:</label>
@@ -42,7 +42,7 @@
             <!-- keeps label and input together when error message displayed -->
             <div id="anchor">
                 <label>Password:</label>
-                <input id="password" type="password" name="password">
+                <input id="password" name="password" type="password">
             </div>
             <span class="required" id="req4">*</span><br>
 
@@ -51,7 +51,7 @@
             <span class="required" id="req4b">*</span><br>
 
             <label>Phone Number:</label>
-            <input id="phone" type="text" name="phone">
+            <input id="phone" name="phone" type="text">
             <span class="required" id="req5">*</span><br>
 
             <input id="submit" type="submit" value="Create Account">
