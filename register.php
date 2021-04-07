@@ -1,5 +1,5 @@
 <?php
-require('connection');
+require('includes/connection.php');
 session_start();
 $firstName = $_POST['fName'];
 $lastName = $_POST['lName'];
