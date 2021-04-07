@@ -24,7 +24,7 @@
       $selector = bin2hex(random_bytes(8));
       $token = random_bytes(32);
       //url for user
-      $url = "localhost/bookstore/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+      $url = "localhost/computerparts/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
       $expires = date("U") + 3600;
 
@@ -32,7 +32,7 @@
       $sql = "DELETE FROM pwdreset WHERE pwdResetEmail = ?";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../forgottenpassword.php?error=sqlerror");
+          header("Location: ../forgotpw.php?error=sqlerror");
           exit();
       } else {
           mysqli_stmt_bind_param($stmt, "s", $userEmail);
@@ -42,7 +42,7 @@
       $sql = "INSERT INTO pwdreset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?, ?, ?, ?); ";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../forgottenpassword.php?error=sqlerror");
+          header("Location: ../forgotpw.php?error=sqlerror");
           exit();
       } else {
           //token should be encrypted
@@ -64,7 +64,7 @@
       $sql = "SELECT * FROM users WHERE email=?; ";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../forgottenpassword.php?error=sqlerror");
+          header("Location: ../forgotpw.php?error=sqlerror");
           exit();
       } else {
           mysqli_stmt_bind_param($stmt, "s", $userEmail);
@@ -76,10 +76,10 @@
                   //if send mail function doesn't work, error msg in URL
                   if (!$mail->Send()) {
                       $msg = "Mailer Error: " . $mail->ErrorInfo;
-                      header("Location: ../forgottenpassword.php?mailError=$msg");
+                      header("Location: ../forgotpw.php?mailError=$msg");
                       exit();
                   } else {
-                      header("Location: ../forgottenpassword.php?sentmail=success");
+                      header("Location: ../forgotpw.php?sentmail=success");
                       exit();
                   }
                   /*
@@ -91,16 +91,16 @@
                   exit();
                   */
               } else {
-                  header("Location: ../forgottenpassword.php?error=notfound");
+                  header("Location: ../forgotpw.php?error=notfound");
                   exit();
               }
           }
-          header("Location: ../forgottenpassword.php?error=notfound");
+          header("Location: ../forgotpw.php?error=notfound");
           exit();
       }
       mysqli_stmt_close($stmt);
       mysqli_close($connection);
   } else {
-      header("Location: ../forgottenpassword.php?forgotpwd=badlink");
+      header("Location: ../forgotpw.php?forgotpwd=badlink");
       exit();
   }
