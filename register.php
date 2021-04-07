@@ -24,6 +24,7 @@ if (!empty($firstName) && !empty($lastName) && !empty($email) && !empty($passwor
     $statement->bindValue(':userStatus', $userStatus);
     $statement->execute();
     $statement->closeCursor();
+    //testinggggg
 
     //include an html back to the home page
 
