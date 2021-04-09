@@ -15,8 +15,8 @@
       $mail->Host = 'ssl://smtp.gmail.com';
       $mail->Port = '465';
       $mail->isHTML(true);
-      $mail->Username = 'secrets.email';
-      $mail->Password = 'secrets.emailpw';
+      $mail->Username = 'txl.workspace@gmail.com';
+      $mail->Password = '#txlwork';
       $mail->SetFrom('no-reply@sktstore.com');
       $mail->Subject = 'Reset Your Password';
 
@@ -32,7 +32,7 @@
       $sql = "DELETE FROM pwdreset WHERE pwdResetEmail = ?";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../forgotpw.php?error=sqlerror");
+          header("Location: ../forgotpw.php?error=sqlerrorDELETE");
           exit();
       } else {
           mysqli_stmt_bind_param($stmt, "s", $userEmail);
@@ -42,7 +42,7 @@
       $sql = "INSERT INTO pwdreset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?, ?, ?, ?); ";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../forgotpw.php?error=sqlerror");
+          header("Location: ../forgotpw.php?error=sqlerrorINSERT");
           exit();
       } else {
           //token should be encrypted
@@ -61,10 +61,10 @@
       $mail->AddAddress($userEmail);
 
       //check for email in DB
-      $sql = "SELECT * FROM users WHERE email=?; ";
+      $sql = "SELECT * FROM customer WHERE email=?; ";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../forgotpw.php?error=sqlerror");
+          header("Location: ../forgotpw.php?error=sqlerrorSELECT");
           exit();
       } else {
           mysqli_stmt_bind_param($stmt, "s", $userEmail);

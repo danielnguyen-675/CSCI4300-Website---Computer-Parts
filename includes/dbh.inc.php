@@ -3,7 +3,7 @@
   define('serverName', 'localhost:3555');
   define('dbUsername', 'root');
   define('dbPassword', 'root');
-  define('dbName', 'bookstore');
+  define('dbName', 'pcparts');
 
   $connection = mysqli_connect(serverName, dbUsername, dbPassword, dbName);
 

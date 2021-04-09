@@ -1,3 +1,7 @@
+<?php
+    session_start();
+ ?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -5,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
-    <link rel="stylesheet" href="stylesheets/shoppingview.css">
+    <link rel="stylesheet" href="stylesheets/homepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -24,6 +28,17 @@
     <a href="#">Contact</a>
     <a href="editaccount.php">Account</a>
     <a href="#">Cart</a>
+    <form action="includes/logout.inc.php" method="post">
+      <?php
+      if (isset($_SESSION['customerID'])) {
+          echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
+      //echo "<p> You are logged in </p>";
+      } else {
+          //echo "<p> You are logged out </p>";
+      }
+       ?>
+    </form>
+
 
     <div class="search-container">
         <form action="/action_page.php">
@@ -47,6 +62,25 @@
 <main id="mainMain">
 
     <h2>Display GPUs here</h2>
+    <?php
+      if (isset($_GET['newPwd'])) {
+          if ($_GET['newPwd'] == "success") {
+              echo '<h2 style="text-align:center;"> Your password was updated! </h2>';
+              echo '<p style="text-align:center;"> Please login with your new password. </p>';
+          }
+      }
+      if (isset($_GET['activate'])) {
+          if ($_GET['activate'] == "success") {
+              echo '<h2 style="text-align:center;"> Your account was activated! </h2>';
+          }
+      }
+      if (isset($_GET['user'])) {
+          if ($_GET['user'] == "activationrequired") {
+              echo '<h2 style="text-align:center;"> You need to activate your account. Check your email! </h2>';
+          }
+      }
+
+     ?>
 
     <br>
     <br>

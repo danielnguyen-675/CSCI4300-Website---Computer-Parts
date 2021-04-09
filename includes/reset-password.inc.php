@@ -50,7 +50,7 @@
                 } elseif ($tokenCheck == true) {
                     $tokenEmail = $row['pwdResetEmail'];
 
-                    $sql = "SELECT * FROM users WHERE email = ? ;";
+                    $sql = "SELECT * FROM customer WHERE email = ? ;";
                     $stmt = mysqli_stmt_init($connection);
                     if (!mysqli_stmt_prepare($stmt, $sql)) {
                         header("Location: ../homepage.php?error=sqlerror-resetPwd2");
@@ -64,7 +64,7 @@
                             header("Location: ../homepage.php?error=invalidRequest3");
                             exit();
                         } else {
-                            $sql = "UPDATE users SET password = ? WHERE email = ?";
+                            $sql = "UPDATE customer SET password = ? WHERE email = ?";
                             $stmt = mysqli_stmt_init($connection);
                             if (!mysqli_stmt_prepare($stmt, $sql)) {
                                 header("Location: ../homepage.php?error=sqlerror-resetPwd3");
