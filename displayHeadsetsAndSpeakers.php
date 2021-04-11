@@ -1,6 +1,9 @@
 <?php
-require("./includes/dbh.inc.php");
+require("./includes/connection.php");
 session_start();
+
+$query = "SELECT * FROM products WHERE categoryName='Headsets and Speakers'";
+$products = $db->query($query);
 
 ?>
 
@@ -9,6 +12,15 @@ session_start();
 <html lang="en">
 
 <head>
+
+    <style>
+        .HeadsetsandSpeakersImg {
+            max-width: 1000%;
+            max-height: 1000%;
+            display: block;
+        }
+    </style>
+
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
     <link rel="stylesheet" href="stylesheets/homepage.css">
@@ -16,9 +28,7 @@ session_start();
 </head>
 
 <body>
-
     <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
-
     <header>
         <h1 id="storeName">Neweregg</h1>
         <h3>Find exclusive, high-quality products!</h3>
@@ -62,41 +72,31 @@ session_start();
             <a href="./displayHeadsetsAndSpeakers.php">Headsets & Speakers</a>
         </div>
     </aside>
-
     <main id="mainMain">
 
-        <h2>HOMEPAGE
-        </h2>
-        <h3>
-            DISPLAY FEATURED ITEMS & DISCOUNTED ITEMS
-        </h3>
-        <?php
-        if (isset($_GET['newPwd'])) {
-            if ($_GET['newPwd'] == "success") {
-                echo '<h2 style="text-align:center;"> Your password was updated! </h2>';
-                echo '<p style="text-align:center;"> Please login with your new password. </p>';
-            }
-        }
-        if (isset($_GET['activate'])) {
-            if ($_GET['activate'] == "success") {
-                echo '<h2 style="text-align:center;"> Your account was activated! </h2>';
-            }
-        }
-        if (isset($_GET['user'])) {
-            if ($_GET['user'] == "activationrequired") {
-                echo '<h2 style="text-align:center;"> You need to activate your account. Check your email! </h2>';
-            }
-        }
+        <table>
+            <tr>
+                <th>Headsets and Speakersfor Sale</th>
+            </tr>
+            <?php foreach ($products as $product) { ?>
+                <tr>
+                    <td><?php echo $product['prodName'] ?></td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo '$' . $product['prodPrice'] ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo 'Stock: ' . $product['prodStock'] ?> </td>
+                </tr>
+                <tr>
+                    <td><img src="<?php echo $product['productImage'] ?> " class="HeadsetsandSpeakersImg"></td>
+                </tr>
+            <?php } ?>
+        </table>
 
-        ?>
-
-        <br>
-        <br>
-        <br>
-        <br>
     </main>
-
-
 
     <footer>
         <p>&copy; INSERT NAME OF SHOP HERE</p>
