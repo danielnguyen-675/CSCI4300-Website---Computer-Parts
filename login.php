@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['customerID'])) {
-    header("Location: shoppingview.html");
+    header("Location: editaccount.php");
     exit();
 }
 ?>
@@ -12,7 +12,7 @@ if (isset($_SESSION['customerID'])) {
     <head>
         <meta charset="utf-8">
         <title>INSERT NAME OF SHOP</title>
-        <link rel="stylesheet" href="stylesheets/forgotpw.css">
+        <link rel="stylesheet" href="stylesheets/login.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="scripts/register.js"></script>
     </head>
@@ -26,11 +26,13 @@ if (isset($_SESSION['customerID'])) {
         </header>
 
         <main>
-          <form action="includes/forgotpw.inc.php" method="post">
-            <h1>Reset Your Password</h1>
-            <p> Enter your email to get a link in your inbox with instructions to reset your email. </p>
+          <form action="includes/login.inc.php" method="post">
+            <h1 id="loginh1">Login</h1>
+
             <label for="email"><b> Email: </b></label>
             <input type="email" placeholder="Enter email here" name="email" required><br>
+            <label for="password"><b> Password: </b></label>
+            <input type="password" placeholder="Password" name="password" required><br>
 
             <?php
             if (isset($_GET['error'])) {
@@ -42,19 +44,18 @@ if (isset($_SESSION['customerID'])) {
                 if ($_GET['sentmail'] == "success") {
                     echo '<p style="color:blue">Email has been sent. Check your email!</p>';
                 }
-                /*
-                              elseif ($_GET['sentmail'] == "failed") {
-                                  echo '<p style="color:red">Email has not been sent.</p>';
-                              }
-                */
             }
             if (isset($_GET['mailError'])) {
                 echo '<p style="color:red"> Email has not been sent.  Mail system error - check header.</p>' . $_GET[$msg];
             }
             ?>
 
-            <button id="forgotpwsubmit" type="submit" name="forgotpwd-submit"> Send email </button>
-           </form>
+            <button id="loginsubmit" type="submit" name="login-submit"> Login </button><br>
+          </form>
+          <form>
+            <a href="register.php"> <button type="button" name="register-submit" value="ignore" formnovalidate> Register </button> </a>
+          </form>
+          <a id="forgotpwlink" href="forgotpw.php"> Forgot your password? </a>
         </main>
 
         <footer>

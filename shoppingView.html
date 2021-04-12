@@ -5,181 +5,60 @@
 <head>
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
-    <link rel="stylesheet" href="shoppingView.css">
+    <link rel="stylesheet" href="stylesheets/shoppingView.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 
-<a href="shoppingView.html"><img src="uga.png" alt="University of Georgia"></a>
+    <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
 
-<header>
-    <h1 id="storeName">Neweregg</h1>
-    <h3>Find exclusive, high-quality products!</h3>
-</header>
+    <header>
+        <h1 id="storeName">Neweregg</h1>
+        <h3>Find exclusive, high-quality products!</h3>
+    </header>
 
-<div class="mainNavigation">
-    <a class="active" href="shoppingView.html">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <a href="#">Account Info</a>
-    <a href="#">Cart</a>
+    <div class="mainNavigation">
+        <a class="active" href="homepage.php">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="editaccount.php">Account</a>
+        <a href="#">Cart</a>
 
-    <div class="search-container">
-        <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-</div>
-
-<aside id="leftSide">
-    <div class="vertical-menu">
-        <a href="#" class="active">Graphics Cards</a>
-        <a href="#">CPUs</a>
-        <a href="#">Mouse & Keyboard</a>
-        <a href="#">RAM</a>
-        <a href="#">Power Supplies</a>
-        <a href="#">Storage</a>
-    </div>
-</aside>
-
-<main id="mainMain">
-
-    <div class="cell">
-        <h2 class="shoppingViewTitlesFEATURED">Featured Items</h2>
-        <div class="row">
-            <div class="column">
-                <img
-                        src="itemPictures/asus_dual_geforce_gtx_1650.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>ASUS Dual Geforce GTX 1650</h4>
-                <p>$475.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-
-            <div class="column">
-                <img
-                        src="itemPictures/gigabyte_geforce_gtx_1650.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>Gigabyte GeForce GTX 1650</h4>
-                <p>$447.00</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-            <div class="column">
-                <img
-                        src="itemPictures/gigabyte_geforce_rtx_2060.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>Gigabyte Geforce RTX 2060</h4>
-                <p>$893.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-            <div class="column">
-                <img
-                        src="itemPictures/msi_geforce_gtx_1660_super.jpg"
-                        alt="Picture Currently Unavaiable"
-                />
-                <h4>MSI GeForce GTX 1660 Super</h4>
-                <p>$849.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
+        <div class="search-container">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
         </div>
     </div>
 
-    <div class="cell">
-        <h2 class="shoppingViewTitlesALL">All Items</h2>
-        <div class="row">
-            <div class="column">
-                <img
-                        src="itemPictures/asus_tufgaming_geforce_gtx_1650.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>ASUS TUF Gaming Geforce GTX 1650</h4>
-                <p>$434.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-
-            <div class="column">
-                <img
-                        src="itemPictures/msi_geforce_rtx_2060.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>MSI GeForce RTX 2060</h4>
-                <p>$938.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-            <div class="column">
-                <img
-                        src="itemPictures/gigabyte_radeon_rx_5500_xt.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>GIGABYTE Radeon RX 5500 XT</h4>
-                <p>$483.39</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-            <div class="column">
-                <img
-                        src="itemPictures/asus_tufgaming_geforce_gtx_1650_super.jpg"
-                        alt="Picture Currently Unavaiable"
-                />
-                <h4>ASUS TUF Gaming GeForce GTX 1650 Super</h4>
-                <p>$519.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
+    <aside id="leftSide">
+        <div class="vertical-menu">
+            <a href="#" class="active">Graphics Cards</a>
+            <a href="#">CPUs</a>
+            <a href="#">Mouse & Keyboard</a>
+            <a href="#">RAM</a>
+            <a href="#">Power Supplies</a>
+            <a href="#">Storage</a>
         </div>
-    </div>
+    </aside>
 
-    <div class="cell">
-        <div class="row">
-            <div class="column">
-                <img
-                        src="itemPictures/asus_phoenix_geforce_gtx_1650.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>ASUS Phoenix GeForce GTX 1650</h4>
-                <p>$478.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
+    <main id="mainMain">
 
-            <div class="column">
-                <img
-                        src="itemPictures/msi_geforce_rtx_2070.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>MSI GeForce RTX 2070</h4>
-                <p>$963.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-            <div class="column">
-                <img
-                        src="itemPictures/evga_geforce_gtx_1060.jpg"
-                        alt="Picture Unavaiable"
-                />
-                <h4>EVGA GeForce GTX 1060</h4>
-                <p>$924.95</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-            <div class="column">
-                <img
-                        src="itemPictures/msi_geforce_gtx_1650.jpg"
-                        alt="Picture Currently Unavaiable"
-                />
-                <h4>MSI GeForce GTX 1650</h4>
-                <p>$454.99</p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
-            </div>
-        </div>
-    </div>
-</main>
+        <h2>Display GPUs here</h2>
+
+        <br>
+        <br>
+        <br>
+        <br>
+    </main>
 
 
 
-<footer>
-    <p>&copy; Neweregg</p>
-</footer>
+    <footer>
+        <p>&copy; INSERT NAME OF SHOP HERE</p>
+    </footer>
 
 </body>
 
