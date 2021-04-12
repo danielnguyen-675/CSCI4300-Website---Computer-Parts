@@ -74,27 +74,26 @@ $products = $db->query($query);
     </aside>
     <main id="mainMain">
 
-        <table>
-            <tr>
-                <th>GPU's for Sale</th>
-            </tr>
+
+
+
+    <div class="cell">
+        <div class="row">
             <?php foreach ($products as $product) { ?>
-                <tr>
-                    <td><?php echo $product['prodName'] ?></td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo '$' . $product['prodPrice'] ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?php echo 'Stock: ' . $product['prodStock'] ?> </td>
-                </tr>
-                <tr>
-                    <td><img src="<?php echo $product['productImage'] ?> " class="GPUImg"></td>
-                </tr>
+            <div class="column">
+                <img
+                        src="<?php echo $product['productImage'] ?> "
+                        class="GPUImg"
+                        alt="Picture Unavaiable"
+                />
+                <h4><?php echo $product['prodName'] ?></h4>
+                <p><?php echo '$' . $product['prodPrice'] ?></p>
+                <p><?php echo 'Stock: ' . $product['prodStock'] ?></p>
+                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
+            </div>
             <?php } ?>
-        </table>
+    </div>
+
 
     </main>
 
