@@ -22,7 +22,7 @@ if (isset($_POST['registration-submit'])) {
     //empty fields check
     if (empty($address) || empty($city) || empty($state) || empty($zipcode) || empty($phone) || empty($country)) {
         //    echo ($username $password $confirmPassword $name $email $address $city $state $zipcode $phone $country);
-        echo "<h2>" . email . "</h2>";
+        echo "<h2>" . $email . "</h2>";
         header("Location: ../register.php?error=emptyfields&email=" . $email . "&firstname=" . $firstName . "&lastname=" . $lastName . "&address=" . $address . "&city=" . $city . "&state=" . $state . "&zipcode=" . $zipcode . "&phone=" . $phone . "&country=" . $country);
         exit();
     //invalid email format
@@ -116,54 +116,60 @@ if (isset($_POST['registration-submit'])) {
             //user account info and user address has been inserted
             //Send user activation email
             //PHPMailer setup
-            $mail = new PHPMailer\PHPMailer\PHPMailer();
-            $mail->isSMTP();
-            $mail->SMTPAuth = true;
-            $mail->SMTPSecure = 'tls';
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = '587';
-            $mail->isHTML(true);
-            $mail->Username = 'txl.workspace@gmail.com';
-            $mail->Password = '#txlwork';
-            $mail->SetFrom('no-reply@sktstore.com');
-            $mail->Subject = 'Activate Your Account';
+            try {
+                $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+                $mail->isSMTP();
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'tls';
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Port = '587';
+                $mail->isHTML(true);
+                $mail->Username = 'txl.workspace@gmail.com';
+                $mail->Password = '#txlwork';
+                $mail->SetFrom('no-reply@sktstore.com');
+                $mail->Subject = 'Activate Your Account';
 
-            //tokens - authentication
-            $selector = bin2hex(random_bytes(8));
-            $token = random_bytes(32);
-            //url for user
-            $url = "localhost/computerparts/account-activate.php?selector=" . $selector . "&validator=" . bin2hex($token);
-            //token expiration
-            $expires = date("U") + 3600;
-            //insert into activation table in db
-            $sql = "INSERT INTO useractivate (userActivateEmail, userActivateSelector, userActivateToken, userActivateExpires) VALUES (?, ?, ?, ?); ";
-            $stmt = mysqli_stmt_init($connection);
-            if (!mysqli_stmt_prepare($stmt, $sql)) {
-                header("Location: ../register.php?mailError=activatemailsqlerror");
-                exit();
-            } else {
-                $hashedToken = password_hash($token, PASSWORD_DEFAULT);
-                mysqli_stmt_bind_param($stmt, "ssss", $email, $selector, $hashedToken, $expires);
-                mysqli_stmt_execute($stmt);
-            }
+                //tokens - authentication
+                $selector = bin2hex(random_bytes(8));
+                $token = random_bytes(32);
+                //url for user
+                $url = "localhost/computerparts/account-activate.php?selector=" . $selector . "&validator=" . bin2hex($token);
+                //token expiration
+                $expires = date("U") + 3600;
+                //insert into activation table in db
+                $sql = "INSERT INTO useractivate (userActivateEmail, userActivateSelector, userActivateToken, userActivateExpires) VALUES (?, ?, ?, ?); ";
+                $stmt = mysqli_stmt_init($connection);
+                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                    header("Location: ../register.php?mailError=activatemailsqlerror");
+                    exit();
+                } else {
+                    $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+                    mysqli_stmt_bind_param($stmt, "ssss", $email, $selector, $hashedToken, $expires);
+                    mysqli_stmt_execute($stmt);
+                }
 
-            //PHPMailer continuted...
-            //Email message to user with activation instructions
-            $message = '<p> A new account was created with this email. <br></p>';
-            $message .= '<p> If you did not request this, ignore this message.<br></p>';
-            $message .= '<p> Here is your account activation link: <br></p>';
-            $message .= '<a href="' . $url . '">' . $url . '</a>';
-            $mail->Body = $message;
-            $mail->AddAddress($email);
+                //PHPMailer continuted...
+                //Email message to user with activation instructions
+                $message = '<p> A new account was created with this email. <br></p>';
+                $message .= '<p> If you did not request this, ignore this message.<br></p>';
+                $message .= '<p> Here is your account activation link: <br></p>';
+                $message .= '<a href="' . $url . '">' . $url . '</a>';
+                $mail->Body = $message;
+                $mail->AddAddress($email);
 
-            if (!$mail->Send()) {
-                $msg = "Mailer Error: " . $mail->ErrorInfo;
-                header("Location: ../register.php?mailError=$msg");
-                exit();
-            } else {
-                //all successful, redirect to submission message
-                header("Location: /computerparts/submission.html");
-                exit();
+                if (!$mail->Send()) {
+                    $msg = "Mailer Error: " . $mail->ErrorInfo;
+                    header("Location: ../register.php?mailError=$msg");
+                    exit();
+                } else {
+                    //all successful, redirect to submission message
+                    header("Location: /computerparts/submission.php");
+                    exit();
+                }
+            } catch (phpmailerException $e) {
+                echo $e->errorMessage(); //Error from PHPMailer
+            } catch (Exception $e) {
+                echo $e->getMessage(); //Other error messages
             }
         }
     }

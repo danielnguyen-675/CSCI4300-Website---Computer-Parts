@@ -53,9 +53,9 @@ $products = $db->query($query);
 
 
         <div class="search-container">
-            <form action="/action_page.php">
+            <form action="searchresults.php" method="post">
                 <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <button name="search-submit" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
     </div>

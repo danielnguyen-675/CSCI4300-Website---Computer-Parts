@@ -25,6 +25,24 @@ if (isset($_SESSION['customerID'])) {
             <h3>Find exclusive, high-quality products!</h3>
         </header>
 
+        <div class="mainNavigation">
+            <a class="active" href="homepage.php">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="editaccount.php">Account</a>
+            <a href="#">Cart</a>
+            <form action="includes/logout.inc.php" method="post">
+                <?php
+                if (isset($_SESSION['customerID'])) {
+                    echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
+                //echo "<p> You are logged in </p>";
+                } else {
+                    //echo "<p> You are logged out </p>";
+                }
+                ?>
+            </form>
+        </div>
+
         <main>
           <form action="includes/forgotpw.inc.php" method="post">
             <h1>Reset Your Password</h1>
