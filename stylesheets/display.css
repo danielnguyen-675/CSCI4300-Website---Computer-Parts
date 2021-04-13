@@ -5,6 +5,15 @@ html {
   background-color: white;
 }
 
+h2 {
+  text-align: center;
+}
+
+table {
+  margin-left: 12em;
+  
+}
+
 .prodImg {
   border-radius: 8px;
   width: 15em;
@@ -26,10 +35,6 @@ html {
   float: left;
   clear: both;
   width: 7em;
-}
-
-h1 {
-  width: 30em;
 }
 
 .prodContainer {
@@ -62,9 +67,10 @@ header h3 {
 }
 
 main {
-
+  float: left;
   padding-left: 3em;
   padding-right: 2em;
+  max-width: 622px;
 }
 
 #mainMain {

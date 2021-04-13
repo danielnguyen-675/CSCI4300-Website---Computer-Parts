@@ -1,3 +1,7 @@
+<?php
+    session_start();
+  ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,8 +39,7 @@
         </div>
 
         <main>
-            <h1>Thank you! Your submission has been received.</h1>
-            <h2>You will receive a confirmation email soon to activate your account.</h2>
+            <h1>Thank you! Your order has been received.</h1>
         </main>
 
         <footer>

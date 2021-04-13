@@ -42,11 +42,11 @@
         </header>
 
         <div class="mainNavigation">
-            <a class="active" href="homepage.php">Home</a>
+            <a href="homepage.php">Home</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
             <a href="editaccount.php">Account</a>
-            <a href="cart.php">Cart</a>
+            <a href="cart.php" class="active">Cart</a>
             <form action="includes/logout.inc.php" method="post">
                 <?php
                 if (isset($_SESSION['customerID'])) {
@@ -63,11 +63,12 @@
             <h1>Shopping Cart</h1>
             <?php
               //this echo prints out all SESSION variables for debug
-              echo '<pre>' . print_r($_SESSION, true) . '</pre>';
-              echo '<pre>line 66-67 in cart.php to remove/comment this debug info, this is displaying the current SESSION variables above</pre>';
+              //echo '<pre>' . print_r($_SESSION, true) . '</pre>';
+              //echo '<pre>line 66-67 in cart.php to remove/comment this debug info, this is displaying the current SESSION variables above</pre>';
 
-              //unset session array for debug
-              //unset($_SESSION['cart']);
+              //unset session arrays for debug
+              // unset($_SESSION['cart']);
+              // unset($_SESSION['cartQuantity']);
 
               if (!empty($_SESSION['cart'])) {
                   ?>
@@ -124,7 +125,13 @@
                     </td>
                   </tr>
                 </table>
-                <button id="checkoutbtn" type="submit" name="checkout-submit"> Checkout </button>
+                <form method="post" action="checkout.php">
+                  <!-- not needed rn
+                  <input type="hidden">
+                  <input type="hidden">
+                  -->
+                  <button id="checkoutbtn" type="submit" name="checkout-submit"> Checkout </button>
+                </form>
               <?php
               } else {
                   echo "<h2> Your cart is empty. </h2>";
@@ -135,7 +142,7 @@
         </main>
 
         <footer>
-            <p>&copy; INSERT NAME OF SHOP HERE</p>
+            <p>&copy; Neweregg</p>
         </footer>
     </body>
 </html>
