@@ -1,9 +1,10 @@
 <?php
-require("./includes/connection.php");
+require("includes/dbh.inc.php");
 session_start();
 
-$query = "SELECT * FROM products WHERE categoryName='CPU'";
-$products = $db->query($query);
+$sql = "SELECT * FROM products WHERE categoryName='CPU'";
+$result = mysqli_query($connection, $sql);
+$queryResult = mysqli_num_rows($result);
 
 ?>
 
@@ -12,12 +13,16 @@ $products = $db->query($query);
 <html lang="en">
 
 <head>
-
     <style>
-        .CPUImg {
-            max-width: 1000%;
-            max-height: 1000%;
-            display: block;
+        .prodImg {
+            width: 120%;
+        }
+
+        .prodContainer {
+            padding-left: 5px;
+            padding-bottom: 25px;
+            padding-right: 40px;
+            padding-top: 10px;
         }
     </style>
 
@@ -39,12 +44,12 @@ $products = $db->query($query);
         <a href="#">About</a>
         <a href="#">Contact</a>
         <a href="editaccount.php">Account</a>
-        <a href="cart.php">Cart</a>
+        <a href="#">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
             if (isset($_SESSION['customerID'])) {
                 echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-            //echo "<p> You are logged in </p>";
+                //echo "<p> You are logged in </p>";
             } else {
                 //echo "<p> You are logged out </p>";
             }
@@ -53,9 +58,9 @@ $products = $db->query($query);
 
 
         <div class="search-container">
-            <form action="searchresults.php" method="post">
+            <form action="/action_page.php">
                 <input type="text" placeholder="Search.." name="search">
-                <button name="search-submit" type="submit"><i class="fa fa-search"></i></button>
+                <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
     </div>
@@ -75,25 +80,37 @@ $products = $db->query($query);
     <main id="mainMain">
 
         <table>
-            <tr>
-                <th>CPU's for Sale</th>
-            </tr>
-            <?php foreach ($products as $product) { ?>
-                <tr>
-                    <td><?php echo $product['prodName'] ?></td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo '$' . $product['prodPrice'] ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?php echo 'Stock: ' . $product['prodStock'] ?> </td>
-                </tr>
-                <tr>
-                    <td><img src="<?php echo $product['productImage'] ?> " class="CPUImg"></td>
-                </tr>
-            <?php } ?>
+            <?php
+            $itemsRemaining = $queryResult;
+            $rowCount = intdiv($queryResult, 5) + 1;
+            for ($r = 0; $r < $rowCount; $r++) {
+                echo "<tr>";
+                for ($c = 0; $c < 5; $c++) {
+                    if ($itemsRemaining > 0) {
+            ?>
+                        <td>
+                            <?php
+                            $row = mysqli_fetch_assoc($result);
+                            $prodID = $row['productID'];
+                            $prodName = $row['prodName'];
+                            $img = $row['productImage']; ?>
+                            <div class="prodContainer">
+                                <form action="includes/addtocart.inc.php" method="post">
+                                    <img class="prodImg" src="<?php echo $img ?>" />
+                                    <p class="prodInfo"><b>Product: <br></b><?php echo "<a href=productView.php?productID=$prodID>$prodName</a>" ?></p>
+                                    <p class="prodInfo"><b>Manufacturer: </b><?php echo $row['manufacturerName'] ?></p>
+                                    <p class="prodInfo"><b>Price: $</b><?php echo $row['prodPrice'] ?></p>
+                                    <input type="hidden" name="productName" value="<?php echo $row['prodName']; ?>" />
+                                    <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button><br><br><br>
+                                </form>
+                            </div>
+                        </td>
+                    <?php
+                        $itemsRemaining--;
+                    } ?>
+            <?php }
+                echo "</tr>";
+            } ?>
         </table>
 
     </main>
