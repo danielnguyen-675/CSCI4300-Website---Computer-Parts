@@ -38,6 +38,7 @@ if (isset($_POST['registration-submit'])) {
         header("Location: ../register.php?error=passwordLength&email=" . $email);
         exit();
     } else {
+        /*DUPLICATE AS BELOW CODE BLOCK
         //field checks passed - begin
         //now check if username is duplicate
         $sql = "SELECT email FROM customer WHERE email=?";
@@ -56,6 +57,7 @@ if (isset($_POST['registration-submit'])) {
                 exit();
             }
         }
+        */
         //check for duplicate email
         $sql = "SELECT * FROM customer WHERE email = ?; ";
         $stmt = mysqli_stmt_init($connection);
@@ -64,7 +66,11 @@ if (isset($_POST['registration-submit'])) {
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $email);
-            mysqli_stmt_execute($stmt);
+            //mysqli_stmt_execute($stmt);
+            if (!mysqli_stmt_execute($stmt)) {
+                header("Location: ../register.php?SQLerror=selectEmailStmtFail");
+                exit();
+            }
             $result = mysqli_stmt_get_result($stmt);
             if ($row = mysqli_fetch_assoc($result)) {
                 //email found in DB - duplicate
@@ -84,7 +90,12 @@ if (isset($_POST['registration-submit'])) {
             $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
             mysqli_stmt_bind_param($stmt, "sssss", $hashedPwd, $firstName, $lastName, $email, $phone);
-            mysqli_stmt_execute($stmt);
+            //mysqli_stmt_execute($stmt);
+            if (!mysqli_stmt_execute($stmt)) {
+                $sqlerror = $stmt->error;
+                header("Location: ../register.php?SQLerror=INSERTINTOcustomerStmtFail&sqlError='$sqlerror'");
+                exit();
+            }
         }
         //insert into address table in DB with customerID foreign key
         $sql = "INSERT INTO address (customerID) SELECT customerID FROM customer WHERE email=?; ";
@@ -94,7 +105,12 @@ if (isset($_POST['registration-submit'])) {
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $email);
-            mysqli_stmt_execute($stmt);
+            //mysqli_stmt_execute($stmt);
+            if (!mysqli_stmt_execute($stmt)) {
+                $sqlerror = $stmt->error;
+                header("Location: ../register.php?SQLerror=INSERTINTOaddressStmtFail&SQLERROR='$sqlerror'");
+                exit();
+            }
         }
         //update address record with fields from registration form
         $sql = "UPDATE address
@@ -111,7 +127,12 @@ if (isset($_POST['registration-submit'])) {
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "ssssss", $address, $city, $state, $zipcode, $country, $email);
-            mysqli_stmt_execute($stmt);
+            //mysqli_stmt_execute($stmt);
+            if (!mysqli_stmt_execute($stmt)) {
+                $sqlerror = $stmt->error;
+                header("Location: ../register.php?SQLerror=UPDATEaddressSQLStmtFail&SQLERROR='$sqlerror'");
+                exit();
+            }
 
             //user account info and user address has been inserted
             //Send user activation email
@@ -145,7 +166,12 @@ if (isset($_POST['registration-submit'])) {
                 } else {
                     $hashedToken = password_hash($token, PASSWORD_DEFAULT);
                     mysqli_stmt_bind_param($stmt, "ssss", $email, $selector, $hashedToken, $expires);
-                    mysqli_stmt_execute($stmt);
+                    //mysqli_stmt_execute($stmt);
+                    if (!mysqli_stmt_execute($stmt)) {
+                        $sqlerror = $stmt->error;
+                        header("Location: ../register.php?SQLerror=INSERTINTOuseractivateSQLStmtFail&SQLERROR='$sqlerror'");
+                        exit();
+                    }
                 }
 
                 //PHPMailer continuted...

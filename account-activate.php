@@ -149,4 +149,12 @@ require("includes/dbh.inc.php");
     </footer>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+        <footer>
+            <p>&copy; Neweregg</p>
+        </footer>
+    </body>
+</html>
+>>>>>>> main

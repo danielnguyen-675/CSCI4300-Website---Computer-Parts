@@ -28,10 +28,6 @@ html {
   width: 7em;
 }
 
-h1 {
-  width: 30em;
-}
-
 .prodContainer {
   width: 33%;
   padding-right: 1px;
@@ -62,9 +58,10 @@ header h3 {
 }
 
 main {
-
+  float: left;
   padding-left: 3em;
   padding-right: 2em;
+  max-width: 622px;
 }
 
 #mainMain {

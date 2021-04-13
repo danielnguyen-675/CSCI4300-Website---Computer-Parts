@@ -1,3 +1,40 @@
+.productView {
+    padding: 20px 75px 75px 100px;
+    padding-bottom: 10em;
+    margin-right: 10em;
+}
+
+#itemDesc {
+  width: 650px;
+}
+
+#price {
+  clear: both;
+}
+
+.backbutton {
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+}
+
+#productImg {
+    width: 75%;
+    margin-bottom: 3em;
+    margin-right: 3em;
+    float: left;
+}
+
+#amount {
+  float: left;
+}
+
 html {
   font-family: Helvetica;
   max-width: 80%;
@@ -23,13 +60,8 @@ html {
 .addtocartbtn {
   padding: 5px;
   color: black;
-  float: left;
+  margin-top: 1em;
   clear: both;
-  width: 7em;
-}
-
-h1 {
-  width: 30em;
 }
 
 .prodContainer {
@@ -62,9 +94,10 @@ header h3 {
 }
 
 main {
-
+  float: left;
   padding-left: 3em;
   padding-right: 2em;
+  max-width: 622px;
 }
 
 #mainMain {
