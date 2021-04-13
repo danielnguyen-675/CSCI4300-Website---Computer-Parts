@@ -87,9 +87,14 @@ select {
   margin-top: 0.5em;
 }
 
-input[type="submit"], input[type="reset"] {
+input[type="submit"] {
   width: 10em;
-  margin: 0;
+  clear: both;
+  margin-left: 13.5em;
+}
+
+input[type="reset"] {
+  width: 10em;
 }
 
 .required {
