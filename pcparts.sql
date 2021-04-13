@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3555
--- Generation Time: Apr 09, 2021 at 01:48 PM
+-- Generation Time: Apr 13, 2021 at 05:40 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -42,8 +42,8 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`addressID`, `customerID`, `street`, `city`, `state`, `zipcode`, `country`) VALUES
-(2, 6, 'STREET', 'CITY', 'STATE', 'ZIPCODE', 'Afghanistan'),
-(3, 7, 'asd', 'asd', 'asd', 'asd', 'Afghanistan');
+(9, 13, 'asd', 'asd', 'asd', 'asd', 'Afghanistan'),
+(10, 14, 'ASD', 'asd', 'asd', 'asd', 'Afghanistan');
 
 -- --------------------------------------------------------
 
@@ -77,8 +77,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerID`, `firstName`, `lastName`, `email`, `password`, `phoneNumber`, `userStatus`) VALUES
-(6, 'FIRSTNAME', 'LASTNAME', 'monib53445@684hh.com', '$2y$10$JaTRmkeFbbIasaXPwgjLHO93YZhLxzm6U5jtwpXYNG4qNBlN8OiVa', '(789) 789-7897', 1),
-(7, 'test', 'test', 'test@test.com', '$2y$10$0oBuInPFCktu43GB1O2.mONdAIx4lk2suCZ4pBThOAZgSlHRD8w/e', '(123) 123-1234', 0);
+(13, 'test', 'test', 'xawowo7081@art2427.com', '$2y$10$hQ8BdwLsZapndtZMDtbmruoE5YEOuB2J1Ju5J0l2jY6k48gLk7zUm', '(123) 123-1234', 1),
+(14, 'TEST', 'TEST', 'novawom448@684hh.com', '$2y$10$MNhrFWzuz74eDHIewN9hteh24Awtlmzwfxe/DTtEFVaJ5XAFHMG7i', '(123) 123-1234', 0);
 
 -- --------------------------------------------------------
 
@@ -157,7 +157,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manufacturerName`, `categoryName`, `productImage`, `productDescription`) VALUES
-(1001, 'AMD Ryzen 7 3700X', 100, 329.99, 'AMD', 'GPU', 'https://c1.neweggimages.com/ProductImageCompressAll300/19-113-567-V11.jpg', '3rd Gen Ryzen\r\nSocket AM4\r\nMax Boost Frequency 4.4 GHz\r\nDDR4 Support\r\nL2 Cache 4MB\r\nL3 Cache 32MB\r\nThermal Design Power 65W\r\nWith Wraith Prism cooler'),
+(1001, 'AMD Ryzen 7 3700X', 100, 329.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImageCompressAll300/19-113-567-V11.jpg', '3rd Gen Ryzen\r\nSocket AM4\r\nMax Boost Frequency 4.4 GHz\r\nDDR4 Support\r\nL2 Cache 4MB\r\nL3 Cache 32MB\r\nThermal Design Power 65W\r\nWith Wraith Prism cooler'),
 (1002, 'GIGABYTE Geforce RTX 2060 6GB Graphics Card', 500, 896.88, 'Gigabyte', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-932-115-V07.jpg', 'NVIDIA Turing Architechure & Real Time Ray Tracing\r\nWINDFORCE 2X Cooling System with Alternate Spinning Fans\r\nIntuitive Controls with AORUS Engine\r\nCore Clock 1755 MHz\r\n'),
 (1003, 'ASUS TUF Gaming GeForce GTX 1650, 4GB', 800, 482.99, 'ASUS ', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-126-445-V01.jpg', '4GB 128-Bit GDDR6\r\nCore Clock 1410 MHz\r\nBoost Clock 1755 MHz (Gaming Mode), 1785 MHz (OC Mode)\r\n1 x DVI-D 1 x HDMI 2.0b 1 x DisplayPort 1.4\r\n896 CUDA Cores\r\nPCI Express 3.0'),
 (1004, 'MSI GeForce GTX 1660 6GB', 200, 849.99, 'MSI', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-137-476-V01.jpg', '6GB 192-Bit GDDR6\r\nBoost Clock 1830 MHz\r\n1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1408 CUDA Cores\r\nPCI Express 3.0 x16\r\n'),
@@ -350,7 +350,8 @@ CREATE TABLE `useractivate` (
 --
 
 INSERT INTO `useractivate` (`userActivateID`, `userActivateEmail`, `userActivateSelector`, `userActivateToken`, `userActivateExpires`) VALUES
-(3, 'test@test.com', '73594e2ce6e0c8bd', '$2y$10$Lr4MAp8FfAy9mElfFH1WFuK1s4eIf6NWDxpyHGZc4t1ZAW7zprGgK', '1617972276');
+(3, 'test@test.com', '73594e2ce6e0c8bd', '$2y$10$Lr4MAp8FfAy9mElfFH1WFuK1s4eIf6NWDxpyHGZc4t1ZAW7zprGgK', '1617972276'),
+(10, 'novawom448@684hh.com', 'ca8b9cb04bd32dd0', '$2y$10$LSFFPYsK0r2VXyRYt7V2kOJxZTMzxXsM8vvoh0Ipfnn5B.gkwCnhm', '1618272878');
 
 --
 -- Indexes for dumped tables
@@ -445,7 +446,7 @@ ALTER TABLE `useractivate`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -457,7 +458,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `manufacturer`
@@ -481,7 +482,7 @@ ALTER TABLE `paymentinfo`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1036;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1141;
 
 --
 -- AUTO_INCREMENT for table `pwdreset`
@@ -499,7 +500,7 @@ ALTER TABLE `shipments`
 -- AUTO_INCREMENT for table `useractivate`
 --
 ALTER TABLE `useractivate`
-  MODIFY `userActivateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userActivateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

@@ -29,7 +29,7 @@ session_start();
         <a href="#">About</a>
         <a href="#">Contact</a>
         <a href="editaccount.php">Account</a>
-        <a href="#">Cart</a>
+        <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
             if (isset($_SESSION['customerID'])) {
@@ -106,7 +106,7 @@ session_start();
                                 <p class="prodInfo"><b>Product: <br></b><?php echo $row['prodName']?></p>
                                 <p class="prodInfo"><b>Manufacturer: </b><?php echo $row['manufacturerName'] ?></p>
                                 <p class="prodInfo"><b>Price: </b><?php echo $row['prodPrice'] ?></p>
-                                <input type="hidden" name="productName" value="<?php echo $row['prodName']; ?>"/>
+                                <input type="hidden" name="productID" value="<?php echo $row['productID']; ?>"/>
                                 <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button><br><br><br>
                               </form>
                             </div>

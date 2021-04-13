@@ -30,16 +30,18 @@
                       $_SESSION['customerID'] = $row['customerID'];
                       $_SESSION['userStatus'] = $row['userStatus'];
 
-                      if ($row['userType'] == 'admin') {
-                          $_SESSION['userType'] = $row['userType'];
-                          header("Location: ../homepage.php?login=success&admin=true");
-                          exit();
-                      } else {
-                          $_SESSION['userType'] = $row['userType'];
-                          header("Location: ../homepage.php?login=success");
-                          //header("Location: ../homepage.php");
-                          exit();
-                      }
+                  /*
+                  if ($row['userType'] == 'admin') {
+                      $_SESSION['userType'] = $row['userType'];
+                      header("Location: ../homepage.php?login=success&admin=true");
+                      exit();
+                  } else {
+                      $_SESSION['userType'] = $row['userType'];
+                      header("Location: ../homepage.php?login=success");
+                      //header("Location: ../homepage.php");
+                      exit();
+                  }
+                  */
                   } else {
                       header("Location: ../login.php?error=wrongcredentials");
                       exit();

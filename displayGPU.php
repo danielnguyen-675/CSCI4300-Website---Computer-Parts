@@ -39,7 +39,7 @@ $products = $db->query($query);
         <a href="#">About</a>
         <a href="#">Contact</a>
         <a href="editaccount.php">Account</a>
-        <a href="#">Cart</a>
+        <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
             if (isset($_SESSION['customerID'])) {
