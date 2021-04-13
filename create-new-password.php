@@ -78,7 +78,7 @@ session_start();
         </main>
 
         <footer>
-            <p>&copy; INSERT NAME OF SHOP HERE</p>
+            <p>&copy; Neweregg</p>
         </footer>
     </body>
 </html>
