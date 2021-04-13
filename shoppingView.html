@@ -5,47 +5,48 @@
 <head>
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
-    <link rel="stylesheet" href="shoppingView.css">
+    <link rel="stylesheet" href="stylesheets/shoppingView.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 
-<a href="shoppingView.html"><img src="uga.png" alt="University of Georgia"></a>
+    <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
 
-<header>
-    <h1 id="storeName">Neweregg</h1>
-    <h3>Find exclusive, high-quality products!</h3>
-</header>
+    <header>
+        <h1 id="storeName">Neweregg</h1>
+        <h3>Find exclusive, high-quality products!</h3>
+    </header>
 
-<div class="mainNavigation">
-    <a class="active" href="shoppingView.html">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <a href="#">Account Info</a>
-    <a href="#">Cart</a>
+    <div class="mainNavigation">
+        <a class="active" href="homepage.php">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="editaccount.php">Account</a>
+        <a href="cart.php">Cart</a>
 
-    <div class="search-container">
-        <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        <div class="search-container">
+            <form action="searchresults.php" method="post">
+                <input type="text" placeholder="Search.." name="search">
+                <button name="search-submit" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
     </div>
-</div>
 
-<aside id="leftSide">
-    <div class="vertical-menu">
-        <a href="#" class="active">Graphics Cards</a>
-        <a href="#">CPUs</a>
-        <a href="#">Mouse & Keyboard</a>
-        <a href="#">RAM</a>
-        <a href="#">Power Supplies</a>
-        <a href="#">Storage</a>
-    </div>
-</aside>
+    <aside id="leftSide">
+        <div class="vertical-menu">
+            <a href="#" class="active">Graphics Cards</a>
+            <a href="#">CPUs</a>
+            <a href="#">Mouse & Keyboard</a>
+            <a href="#">RAM</a>
+            <a href="#">Power Supplies</a>
+            <a href="#">Storage</a>
+        </div>
+    </aside>
 
-<main id="mainMain">
+    <main id="mainMain">
 
+<<<<<<< HEAD
     <div class="cell">
         <h2 class="shoppingViewTitlesFEATURED">Featured Items</h2>
         <div class="row">
@@ -180,6 +181,21 @@
 <footer>
     <p>&copy; Neweregg</p>
 </footer>
+=======
+        <h2>Display GPUs here</h2>
+
+        <br>
+        <br>
+        <br>
+        <br>
+    </main>
+
+
+
+    <footer>
+        <p>&copy; INSERT NAME OF SHOP HERE</p>
+    </footer>
+>>>>>>> txl
 
 </body>
 

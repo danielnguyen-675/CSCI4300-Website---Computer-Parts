@@ -1,0 +1,135 @@
+html {
+  font-family: Helvetica;
+  max-width: 80%;
+  margin: auto;
+  background-color: white;
+}
+
+#storeName {
+  color: black;
+  margin-top: 14px;
+}
+
+img {
+  float: left;
+  object-fit: contain;
+  width: 23%;
+  height: 23%;
+  background: transparent !important;
+}
+
+header {
+  padding-left: 12%;
+  padding-top: 5px;
+  border-bottom: 2px solid #ff3333;
+  background-image: linear-gradient(to bottom, #ff3333 20%, #ff3333 80%);
+}
+
+header h3 {
+  color: white;
+}
+
+main {
+  float: left;
+  padding-left: 3em;
+  padding-right: 2em;
+  max-width: 100%;
+}
+
+footer {
+  text-align: center;
+  background-color: #ff3333;
+  padding: .5em;
+  clear: both;
+  border-top: 2px solid #ff3333;
+}
+
+footer p {
+  color: white;
+}
+
+body {
+  border: 2px solid black;
+  box-shadow: 15px 0 10px 0px black, -15px 0 10px 0px black;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/* Form Stuff */
+#req4 {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+#anchor {
+  display: inline-block;
+}
+
+label {
+  float: left;
+  text-align: right;
+  width: 12.5em;
+  margin: .5em;
+}
+
+input[type="text"], input[type="password"] {
+  width: 10em;
+  margin: .5em;
+}
+
+#country {
+  width: 15em;
+  margin-left: .5em;
+}
+
+#infosubmit, #inforeset {
+  width: 10em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: .5em;
+}
+
+#pwsubmit, #pwreset {
+  width: 10em;
+  margin-top: .5em;
+  margin-bottom: 1em;
+  margin-left: 16.6em;
+  margin-right: -16.1em;
+}
+
+.required {
+  color: #ff3333;
+  margin-left: .5em;
+  width: 300px;
+}
+
+.mainNavigation {
+  overflow: hidden;
+  background-color: black;
+}
+
+.mainNavigation a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.mainNavigation a:hover {
+  color: #ff3333;
+}
+
+.mainNavigation a.active {
+  color: #ff3333;
+}
+
+
+.mainNavigation input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}

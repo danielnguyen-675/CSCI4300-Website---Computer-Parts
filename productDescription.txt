@@ -1,0 +1,8 @@
+ProductID 1001 - 1020 (GPUs)
+ProductID 1021-1035 (CPUs)
+Product ID 1036-1050 (Mouse&Keyboard)
+Product ID 1051-1065 (RAM) 
+Product ID 1066-1080 (Power Supplies)
+Product ID 1081-1100 (Storage)
+Product ID 1101-1120 (Monitors)
+Product ID 1121-1140 (Headsets and Speakers)

@@ -72,24 +72,55 @@ label {
   margin: .5em;
 }
 
-#submit {
-  margin-left: 14em;
+input[type="text"], input[type="password"] {
+  width: 10em;
+  margin: .5em;
 }
 
-button {
-  margin-top: .5em;
-  float: left;
-  margin-left: 13.75em;
+#country {
+  width: 15em;
+  margin-left: .5em;
   margin-bottom: 1em;
 }
 
-input[type="email"] {
-  width: 20em;
-  margin: .5em;
+input[type="submit"], input[type="reset"] {
+  width: 10em;
+  margin: 0;
 }
 
 .required {
   color: #ff3333;
   margin-left: .5em;
   width: 300px;
+}
+
+.mainNavigation {
+  overflow: hidden;
+  background-color: black;
+}
+
+.mainNavigation a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.mainNavigation a:hover {
+  color: #ff3333;
+}
+
+.mainNavigation a.active {
+  color: #ff3333;
+}
+
+
+.mainNavigation input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
 }

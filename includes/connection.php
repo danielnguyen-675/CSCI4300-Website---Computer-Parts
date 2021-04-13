@@ -1,14 +1,12 @@
 <?php
-    $dsn = 'mysql:host=localhost; dbname=pcparts';
-    $username='root';
-    $password='';
+$dsn = 'mysql:host=localhost:3555; dbname=pcparts';
+$username = 'root';
+$password = 'root';
 
-    try {
-        $db = new PDO($dsn, $username, $password);
-        echo 'Connected to database successfully';
-    } catch (PDOException $e)
-    {
-        $error=$e->getMessage();
-        echo '<p> Unable to connect to database: ' .$error;
-        exit();
-    }
+try {
+    $db = new PDO($dsn, $username, $password);
+} catch (PDOException $e) {
+    $error = $e->getMessage();
+    echo '<p> Unable to connect to database: ' . $error;
+    exit();
+}
