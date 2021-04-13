@@ -2,7 +2,7 @@
 require("includes/dbh.inc.php");
 session_start();
 
-$sql = "SELECT * FROM products WHERE categoryName='RAM'";
+$sql = "SELECT * FROM products WHERE categoryName='Storage'";
 $result = mysqli_query($connection, $sql);
 $queryResult = mysqli_num_rows($result);
 
@@ -92,8 +92,8 @@ $queryResult = mysqli_num_rows($result);
                             <?php
                             $row = mysqli_fetch_assoc($result);
                             $img = $row['productImage'];
-                            $prodID = $row['productID'];
-                            $prodName = $row['prodName']; ?>
+                            $prodName = $row['prodName'];
+                            $prodID = $row['productID']; ?>
                             <div class="prodContainer">
                                 <form action="includes/addtocart.inc.php" method="post">
                                     <img class="prodImg" src="<?php echo $img ?>" />
