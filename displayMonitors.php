@@ -1,9 +1,10 @@
 <?php
-require("./includes/connection.php");
+require("includes/dbh.inc.php");
 session_start();
 
-$query = "SELECT * FROM products WHERE categoryName='Monitors'";
-$products = $db->query($query);
+$sql = "SELECT * FROM products WHERE categoryName='Monitors'";
+$result = mysqli_query($connection, $sql);
+$queryResult = mysqli_num_rows($result);
 
 ?>
 
@@ -12,15 +13,18 @@ $products = $db->query($query);
 <html lang="en">
 
 <head>
-
     <style>
-        .MonitorsImg {
-            max-width: 1000%;
-            max-height: 1000%;
-            display: block;
+        .prodImg {
+            width: 120%;
+        }
+
+        .prodContainer {
+            padding-left: 5px;
+            padding-bottom: 25px;
+            padding-right: 40px;
+            padding-top: 10px;
         }
     </style>
-
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
     <link rel="stylesheet" href="stylesheets/homepage.css">
@@ -73,27 +77,38 @@ $products = $db->query($query);
         </div>
     </aside>
     <main id="mainMain">
-
         <table>
-            <tr>
-                <th>Monitors for Sale</th>
-            </tr>
-            <?php foreach ($products as $product) { ?>
-                <tr>
-                    <td><?php echo $product['prodName'] ?></td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo '$' . $product['prodPrice'] ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?php echo 'Stock: ' . $product['prodStock'] ?> </td>
-                </tr>
-                <tr>
-                    <td><img src="<?php echo $product['productImage'] ?> " class="MonitorsImg"></td>
-                </tr>
-            <?php } ?>
+            <?php
+            $itemsRemaining = $queryResult;
+            $rowCount = intdiv($queryResult, 5) + 1;
+            for ($r = 0; $r < $rowCount; $r++) {
+                echo "<tr>";
+                for ($c = 0; $c < 5; $c++) {
+                    if ($itemsRemaining > 0) {
+            ?>
+                        <td>
+                            <?php
+                            $row = mysqli_fetch_assoc($result);
+                            $img = $row['productImage'];
+                            $prodID = $row['productID'];
+                            $prodName = $row['prodName']; ?>
+                            <div class="prodContainer">
+                                <form action="includes/addtocart.inc.php" method="post">
+                                    <img class="prodImg" src="<?php echo $img ?>" />
+                                    <p class="prodInfo"><b>Product: <br></b><?php echo "<a href=productView.php?productID=$prodID>$prodName</a>" ?></p>
+                                    <p class="prodInfo"><b>Manufacturer: </b><?php echo $row['manufacturerName'] ?></p>
+                                    <p class="prodInfo"><b>Price: $</b><?php echo $row['prodPrice'] ?></p>
+                                    <input type="hidden" name="productName" value="<?php echo $row['prodName']; ?>" />
+                                    <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button><br><br><br>
+                                </form>
+                            </div>
+                        </td>
+                    <?php
+                        $itemsRemaining--;
+                    } ?>
+            <?php }
+                echo "</tr>";
+            } ?>
         </table>
 
     </main>

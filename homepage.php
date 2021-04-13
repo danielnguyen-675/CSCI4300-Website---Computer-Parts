@@ -105,3 +105,7 @@ session_start();
 </body>
 
 </html>
+
+<?php
+session_destroy();
+?>
