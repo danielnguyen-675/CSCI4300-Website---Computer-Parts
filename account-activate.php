@@ -24,44 +24,34 @@ require("includes/dbh.inc.php");
 <body>
     <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
 
-<<<<<<< HEAD
-    <header>
-        <h1 id="storeName">Neweregg</h1>
-        <h3>Find exclusive, high-quality products!</h3>
-    </header>
-=======
-        <div class="mainNavigation">
-            <a class="active" href="homepage.php">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-            <a href="editaccount.php">Account</a>
-            <a href="cart.php">Cart</a>
-            <form action="includes/logout.inc.php" method="post">
-                <?php
-                if (isset($_SESSION['customerID'])) {
-                    echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
+    <div class="mainNavigation">
+        <a class="active" href="homepage.php">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="editaccount.php">Account</a>
+        <a href="cart.php">Cart</a>
+        <form action="includes/logout.inc.php" method="post">
+            <?php
+            if (isset($_SESSION['customerID'])) {
+                echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
                 //echo "<p> You are logged in </p>";
-                } else {
-                    //echo "<p> You are logged out </p>";
-                }
-                ?>
-            </form>
-        </div>
-
-        <main>
-          <?php
-          try {
-              $selector = trim($_GET['selector']);
-              $validator = trim($_GET['validator']);
-              $currentDate = date("U");
-          } catch (Exception $e) {
-              echo "<p>Your request could not be validated.</p>";
-              exit();
-          }
->>>>>>> main
+            } else {
+                //echo "<p> You are logged out </p>";
+            }
+            ?>
+        </form>
+    </div>
 
     <main>
         <?php
+        try {
+            $selector = trim($_GET['selector']);
+            $validator = trim($_GET['validator']);
+            $currentDate = date("U");
+        } catch (Exception $e) {
+            echo "<p>Your request could not be validated.</p>";
+            exit();
+        }
         try {
             $selector = trim($_GET['selector']);
             $validator = trim($_GET['validator']);

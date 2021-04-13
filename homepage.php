@@ -34,7 +34,7 @@ session_start();
             <?php
             if (isset($_SESSION['customerID'])) {
                 echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-            //echo "<p> You are logged in </p>";
+                //echo "<p> You are logged in </p>";
             } else {
                 //echo "<p> You are logged out </p>";
             }
@@ -105,10 +105,3 @@ session_start();
 </body>
 
 </html>
-<<<<<<< HEAD
-
-<?php
-session_destroy();
-?>
-=======
->>>>>>> main
