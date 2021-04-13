@@ -29,12 +29,12 @@ session_start();
         <a href="#">About</a>
         <a href="#">Contact</a>
         <a href="editaccount.php">Account</a>
-        <a href="#">Cart</a>
+        <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
             if (isset($_SESSION['customerID'])) {
                 echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-                //echo "<p> You are logged in </p>";
+            //echo "<p> You are logged in </p>";
             } else {
                 //echo "<p> You are logged out </p>";
             }
@@ -43,9 +43,9 @@ session_start();
 
 
         <div class="search-container">
-            <form action="/action_page.php">
+            <form action="searchresults.php" method="post">
                 <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <button name="search-submit" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
     </div>
@@ -105,7 +105,10 @@ session_start();
 </body>
 
 </html>
+<<<<<<< HEAD
 
 <?php
 session_destroy();
 ?>
+=======
+>>>>>>> main

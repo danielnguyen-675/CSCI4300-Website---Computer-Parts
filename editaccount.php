@@ -27,6 +27,24 @@
             <h3>Find exclusive, high-quality products!</h3>
         </header>
 
+        <div class="mainNavigation">
+            <a class="active" href="homepage.php">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="editaccount.php">Account</a>
+            <a href="cart.php">Cart</a>
+            <form action="includes/logout.inc.php" method="post">
+                <?php
+                if (isset($_SESSION['customerID'])) {
+                    echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
+                //echo "<p> You are logged in </p>";
+                } else {
+                    //echo "<p> You are logged out </p>";
+                }
+                ?>
+            </form>
+        </div>
+
         <main>
             <h1>Edit Account Settings</h1>
 
@@ -321,7 +339,7 @@
 
               <label> Current: </label>
               <input type="password" name ="currentPassword" placeholder="" required><br>
-              
+
               <!-- keeps label and input together when error message displayed -->
               <div id="anchor">
                   <label>New Password:</label>

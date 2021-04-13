@@ -160,4 +160,8 @@ $products = $db->query($query);
 </body>
 
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> main

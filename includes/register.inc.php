@@ -121,7 +121,10 @@ if (isset($_POST['registration-submit'])) {
                 $mail->isSMTP();
                 $mail->SMTPAuth = true;
                 $mail->SMTPSecure = 'tls';
+<<<<<<< HEAD
                 $mail->SMTPDebug = 2;
+=======
+>>>>>>> main
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Port = '587';
                 $mail->isHTML(true);
@@ -134,7 +137,11 @@ if (isset($_POST['registration-submit'])) {
                 $selector = bin2hex(random_bytes(8));
                 $token = random_bytes(32);
                 //url for user
+<<<<<<< HEAD
                 $url = "localhost:8080/computerparts/account-activate.php?selector=" . $selector . "&validator=" . bin2hex($token);
+=======
+                $url = "localhost/computerparts/account-activate.php?selector=" . $selector . "&validator=" . bin2hex($token);
+>>>>>>> main
                 //token expiration
                 $expires = date("U") + 3600;
                 //insert into activation table in db
@@ -164,7 +171,11 @@ if (isset($_POST['registration-submit'])) {
                     exit();
                 } else {
                     //all successful, redirect to submission message
+<<<<<<< HEAD
                     header("Location: /computerparts/submission.html");
+=======
+                    header("Location: /computerparts/submission.php");
+>>>>>>> main
                     exit();
                 }
             } catch (phpmailerException $e) {
