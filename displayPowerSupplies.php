@@ -1,9 +1,11 @@
 <?php
-require("./includes/connection.php");
+require("includes/dbh.inc.php");
 session_start();
 
-$query = "SELECT * FROM products WHERE categoryName='Power Supply'";
-$products = $db->query($query);
+$sql = "SELECT * FROM products WHERE categoryName='Power Supply'";
+$result = mysqli_query($connection, $sql);
+$queryResult = mysqli_num_rows($result);
+
 
 ?>
 
@@ -12,18 +14,21 @@ $products = $db->query($query);
 <html lang="en">
 
 <head>
-
     <style>
-        .PowerSuppliesImg {
-            max-width: 1000%;
-            max-height: 1000%;
-            display: block;
+        .prodImg {
+            width: 120%;
+        }
+
+        .prodContainer {
+            padding-left: 5px;
+            padding-bottom: 25px;
+            padding-right: 40px;
+            padding-top: 10px;
         }
     </style>
-
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
-    <link rel="stylesheet" href="stylesheets/homepage.css">
+    <link rel="stylesheet" href="stylesheets/display.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -44,7 +49,7 @@ $products = $db->query($query);
             <?php
             if (isset($_SESSION['customerID'])) {
                 echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-                //echo "<p> You are logged in </p>";
+            //echo "<p> You are logged in </p>";
             } else {
                 //echo "<p> You are logged out </p>";
             }
@@ -62,44 +67,59 @@ $products = $db->query($query);
 
     <aside id="leftSide">
         <div class="vertical-menu">
-            <a href="./displayGPU.php" class="active">Graphics Cards</a>
+            <a href="./displayGPU.php">Graphics Cards</a>
             <a href="./displayCPU.php">CPUs</a>
             <a href="./displayMouseAndKey.php">Mouse & Keyboard</a>
             <a href="./displayRAM.php">RAM</a>
-            <a href="./displayPowerSupplies.php">Power Supplies</a>
+            <a href="./displayPowerSupplies.php" class="active">Power Supplies</a>
             <a href="./displayStorage.php">Storage</a>
             <a href="./displayMonitors.php">Monitors</a>
             <a href="./displayHeadsetsAndSpeakers.php">Headsets & Speakers</a>
         </div>
     </aside>
     <main id="mainMain">
-
         <table>
-            <tr>
-                <th>Power Supplies for Sale</th>
-            </tr>
-            <?php foreach ($products as $product) { ?>
-                <tr>
-                    <td><?php echo $product['prodName'] ?></td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo '$' . $product['prodPrice'] ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?php echo 'Stock: ' . $product['prodStock'] ?> </td>
-                </tr>
-                <tr>
-                    <td><img src="<?php echo $product['productImage'] ?> " class="PowerSuppliesImg"></td>
-                </tr>
-            <?php } ?>
+            <?php
+            $itemsRemaining = $queryResult;
+
+            $rowCount = intdiv($queryResult, 5) + 1;
+            for ($r = 0; $r < $rowCount; $r++) {
+                echo "<tr>";
+                for ($c = 0; $c < 5; $c++) {
+                    if ($itemsRemaining > 0) {
+                        ?>
+                        <td>
+                            <?php
+                            $row = mysqli_fetch_assoc($result);
+                        $img = $row['productImage'];
+                        $prodID = $row['productID'];
+                        $prodName = $row['prodName']; ?>
+
+                            <div class="prodContainer">
+                                <form action="includes/addtocart.inc.php" method="post">
+                                    <img class="prodImg" src="<?php echo $img ?>" />
+                                    <p class="prodInfo"><b>Product: <br></b><?php echo "<a href=productView.php?productID=$prodID>$prodName</a>" ?></p>
+                                    <p class="prodInfo"><b>Manufacturer: </b><?php echo $row['manufacturerName'] ?></p>
+                                    <p class="prodInfo"><b>Price: </b>$<?php echo $row['prodPrice'] ?></p>
+                                    <input type="hidden" name="productID" value="<?php echo $row['productID']; ?>" />
+                                    <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button><br><br><br>
+                                </form>
+                            </div>
+                        </td>
+                    <?php
+                        $itemsRemaining--;
+                    } ?>
+            <?php
+                }
+                echo "</tr>";
+            } ?>
         </table>
+
 
     </main>
 
     <footer>
-        <p>&copy; INSERT NAME OF SHOP HERE</p>
+        <p>&copy; Neweregg</p>
     </footer>
 
 </body>

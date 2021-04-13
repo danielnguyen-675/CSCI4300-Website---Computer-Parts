@@ -1,26 +1,78 @@
 <?php
    session_start();
+   require 'includes/dbh.inc.php';
 
    //if user is not logged in, accessing this page redirects to login
    if (!isset($_SESSION['customerID'])) {
        header("Location: login.php");
        exit();
    }
+   if ($_SESSION['userStatus'] == 0) {
+       header("Location: homepage.php?user=activationrequired");
+       exit();
+   }
+   if (!empty($_SESSION['cart'])) {
+       $cartContent = $_SESSION['cart'];
+       $in = str_repeat('?,', count($cartContent) - 1) . '?'; // placeholders
+       $sql = "SELECT * FROM products WHERE productID IN ($in); ";
+       $stmt = $connection->prepare($sql); // prepare
+       $types = str_repeat('s', count($cartContent)); //types
+       $stmt->bind_param($types, ...$cartContent); // bind array at once
+       $stmt->execute();
+       $result = $stmt->get_result(); // get the mysqli result
+   }
 
-   ?>
+   //fill shipping address form with customer info and address - personal info
+   $customerID = $_SESSION['customerID'];
+
+   $sql = "SELECT * FROM customer WHERE customerID=?";
+   $stmt = $connection->prepare($sql); // prepare
+   if (!mysqli_stmt_prepare($stmt, $sql)) {
+       header("Location: checkout.php?error=sqlerror1");
+       exit();
+   } else {
+       mysqli_stmt_bind_param($stmt, "s", $customerID);
+       mysqli_stmt_execute($stmt);
+       $result = mysqli_stmt_get_result($stmt);
+       $row = mysqli_fetch_assoc($result);
+   }
+
+   $firstName = trim($row['firstName']);
+   $lastName = trim($row['lastName']);
+   $phoneNumber = trim($row['phoneNumber']);
+
+   //fill shipping address form with customer info and address - address
+   $sql = "SELECT * FROM address WHERE customerID=?";
+   if (!mysqli_stmt_prepare($stmt, $sql)) {
+       header("Location: checkout.php?error=sqlerror2");
+       exit();
+   } else {
+       mysqli_stmt_bind_param($stmt, "s", $customerID);
+       mysqli_stmt_execute($stmt);
+       $result = mysqli_stmt_get_result($stmt);
+       $row = mysqli_fetch_assoc($result);
+   }
+
+   $street = trim($row['street']);
+   $city = trim($row['city']);
+   $state = trim($row['state']);
+   $zipcode = trim($row['zipcode']);
+   $country = trim($row['country']);
+
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>INSERT NAME OF SHOP</title>
-        <link rel="stylesheet" href="stylesheets/editaccount.css">
+        <link rel="stylesheet" href="stylesheets/checkout.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="scripts/editaccount.js"></script>
+        <script src="scripts/register.js"></script>
     </head>
 
     <body>
-        <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
+        <a href="homepage.php"><img id="ugalogo" src="uga.png" alt="University of Georgia"></a>
 
         <header>
             <h1 id="storeName">Neweregg</h1>
@@ -31,8 +83,8 @@
             <a href="homepage.php">Home</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
-            <a href="editaccount.php" class="active">Account</a>
-            <a href="cart.php">Cart</a>
+            <a href="editaccount.php">Account</a>
+            <a href="cart.php" class="active">Cart</a>
             <form action="includes/logout.inc.php" method="post">
                 <?php
                 if (isset($_SESSION['customerID'])) {
@@ -45,48 +97,42 @@
             </form>
         </div>
 
+        <h1 id="checkouth1"> Checkout </h1>
+        <h2 id="shippingh2"> Shipping Details </h2>
+
         <main>
-            <h1>Edit Account Settings</h1>
+          <form id="infoForm" action="confirmOrder.php" method="post" onsubmit="return checkFields()">
+              <label>First Name:</label>
+              <input id="fName" name="fName" type="text" value="<?php echo $firstName; ?>" required>
+              <span class="required" id="req1">*</span><br>
 
-            <form id="personalinfo" action="includes/editaccount-info.inc.php" method="post" onsubmit="return checkFields()">
-                <label>First Name:</label>
-                <input id="fName" name="fName" type="text" required>
-                <span class="required" id="req1"></span><br>
+              <label>Last Name:</label>
+              <input id="lName" name="lName" type="text" value="<?php echo $lastName; ?>" required>
+              <span class="required" id="req2">*</span><br>
 
-                <label>Last Name:</label>
-                <input id="lName" name="lName" type="text" required>
-                <span class="required" id="req2"></span><br>
+              <label>Phone Number:</label>
+              <input id="phone" name="phone" type="text" value="<?php echo $phoneNumber; ?>" required>
+              <span class="required" id="req5">*</span><br>
 
-                <label>Email:</label>
-                <input id="email" name="email" type="text" required>
-                <span class="required" id="req3"></span><br>
+              <label> Street Address: </label>
+              <input type="text" name="address" placeholder="Street Address" value="<?php echo $street; ?>" required>
+              <span class="required" id="req6">*</span><br>
 
-                <label>Re-enter Email:</label>
-                <input id="email2" type="text" required>
-                <span class="required" id="req3b"></span><br>
+              <label> City: </label>
+              <input type="text" name="city" placeholder="City" value="<?php echo $city; ?>" required>
+              <span class="required" id="req7">*</span><br>
 
-                <label>Phone Number:</label>
-                <input id="phone" name="phone" type="text" required>
-                <span class="required" id="req5"></span><br>
+              <label> State: </label>
+              <input type="text" name="state" placeholder="State" value="<?php echo $state; ?>" required>
+              <span class="required" id="req8">*</span><br>
 
-                <label> Street Address: </label>
-                <input type="text" name ="address" placeholder="Street Address" required>
-                <span class="required" id="req6"></span><br>
+              <label> Postal Code: </label>
+              <input type="text" name="zipcode" placeholder="Postal Code" value="<?php echo $zipcode; ?>" required>
+              <span class="required" id="req9">*</span><br>
 
-                <label> City: </label>
-                <input type="text" name ="city" placeholder="City" required>
-                <span class="required" id="req7"></span><br>
-
-                <label> State: </label>
-                <input type="text" name ="state" placeholder="State" required>
-                <span class="required" id="req8"></span><br>
-
-                <label> Postal Code: </label>
-                <input type="text" name ="zipcode" placeholder="Postal Code" required>
-                <span class="required" id="req9"></span><br>
-
-                <label for="country">Country: </label>
-                <select name="country" id="country">
+              <label for="country">Country: </label>
+              <select name="country" id="country">
+                  <option value="<?php echo $country; ?>" selected><?php echo $country; ?></option>
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
                   <option value="Algeria">Algeria</option>
@@ -328,34 +374,31 @@
                   <option value="Yemen">Yemen</option>
                   <option value="Zambia">Zambia</option>
                   <option value="Zimbabwe">Zimbabwe</option>
-                </select>
-                <span class="required" id="req11"></span><br>
+              </select>
+              <span class="required" id="req11">*</span><br>
+              <!--
+              <h2>Payment Information</h2>
 
-                <input id="infosubmit" type="submit" name="editaccount-info-submit" value="Update Account">
-                <input id="inforeset" type="reset" value="Clear Fields"><br>
+              <label>Full Name:</label>
+              <input id="fullName" name="fullName" type="text" required>
+              <span class="required" id="req1">*</span><br>
 
-            </form>
-            <form id="passwordinfo" action="includes/editaccount-pw.inc.php" method="post" onsubmit="return checkFields()">
+              <label>Card Number:</label>
+              <input id="cardNumber" name="cardNumber" type="text" required>
+              <span class="required" id="">*</span><br>
 
-              <label> Current: </label>
-              <input type="password" name ="currentPassword" placeholder="" required><br>
+              <label>Expiry Date:</label>
+              <input id="expiry" name="expiry" type="date" required>
+              <span class="required" id="">*</span><br>
 
-              <!-- keeps label and input together when error message displayed -->
-              <div id="anchor">
-                  <label>New Password:</label>
-                  <input id="password" name="newPassword" type="password" required>
-              </div>
-              <span class="required" id="req4"></span><br>
+              <label>CVC:</label>
+              <input id="cvc" name="cvc" type="text" required>
+              <span class="required" id="">*</span><br>
+              -->
+              <input id="continue" type="submit" value="Continue" name="continuecheckout-submit">
+              <input id="reset" type="reset" value="Clear Fields"><br>
 
-              <label>Re-enter New Password:</label>
-              <input id="password2" type="password" name="confirmNewPassword" required>
-              <span class="required" id="req4b"></span><br>
-
-              <input id="pwsubmit" type="submit" name="editaccount-pw-submit" value="Update Password">
-              <input id="pwreset" type="reset" value="Clear Fields"><br><br>
-
-            </form>
-
+          </form>
         </main>
 
         <footer>

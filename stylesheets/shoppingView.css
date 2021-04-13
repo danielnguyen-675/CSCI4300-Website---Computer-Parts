@@ -29,18 +29,12 @@ header h3 {
     color: white;
 }
 
-main {
-    float: left;
-    padding-left: 3em;
-    padding-right: 2em;
-    max-width: 622px;
-}
 
 #mainMain {
     float: left;
     padding-left: 3em;
     padding-right: 2em;
-    max-width: 622px;
+    max-width: 100%;
 }
 
 
@@ -69,7 +63,6 @@ body {
 
 #leftSide{
     float: left;
-    max-width: 100%;
 }
 
 
@@ -89,21 +82,24 @@ body {
 
 
 
-/*Aside Menu*/
+/* SIDE MENU */
 .vertical-menu {
-    width: 200px; /* Set a width if you like */
+    width: 100%;
+    padding-left: 5em;
+    padding-top: 4em;
 }
 
 .vertical-menu a {
-    background-color: black; /* Grey background color */
-    color: white; /* Black text color */
-    display: block; /* Make the links appear below each other */
-    padding: 12px; /* Add some padding */
-    text-decoration: none; /* Remove underline from links */
+    background-color: black;
+    color: white;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
 }
 
 .vertical-menu a:hover {
-    color: #ff3333; /* Dark grey background on mouse-over */
+    color: #ff3333;
+    transform: translateX(20px);
 }
 
 .vertical-menu a.active {
@@ -112,6 +108,7 @@ body {
 
 
 
+/* MAIN MENU */
 
 * {box-sizing: border-box;}
 
@@ -185,3 +182,108 @@ body {
         border: 1px solid #ccc;
     }
 }
+
+/* ITEM VIEW */
+.row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+.cell {
+    max-width: 1190px;
+    margin: auto;
+    padding-left: 8em;
+    padding-right: 8em;
+}
+
+.column {
+    flex-basis: 25%;
+    padding-left: 50px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+}
+
+.column img {
+    width: 100%;
+}
+
+.column img:hover {
+    width: 100%;
+    transform: translateY(-20px);
+}
+
+.shoppingViewTitlesFEATURED, .shoppingViewTitlesALL {
+    text-align: left;
+    margin: 0 auto 40px;
+    font-size: 200%;
+    position: relative;
+    line-height: 60px;
+    color: #ff3333;
+}
+
+.shoppingViewTitlesFEATURED::after {
+    content: '';
+    background: black;
+    width: 230px;
+    height: 7px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-203%);
+}
+
+.shoppingViewTitlesALL::after {
+    content: '';
+    background: black;
+    width: 135px;
+    height: 7px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-347%);
+}
+
+h4 {
+    color: #555;
+    padding-top: 9em;
+    font-weight: bold;
+    margin: 0.3em;
+}
+
+.column p {
+    font-size: 14px;
+    display: inline-block;
+    padding-left: 0.5em;
+    padding-right: 0.75em;
+}
+
+
+
+
+/* ADD TO CART BUTTON */
+.addToCart {
+    border-radius: 3px;
+    background-color: #ff3333;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 0.75em;
+
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+
+
+
+
+
+

@@ -1,4 +1,143 @@
 <?php
-require("./includes/connection.php");
+session_start();
+require_once("./includes/connection.php");
+$productsID = $_GET['productID'];
+$query = "SELECT * FROM products WHERE productID=$productsID";
+$products = $db->query($query);
+//reading from the database from the PDO object named $products
 
-//this php will be displayed when user clicks on "view product" for each item 
+?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<script src="/scripts/productView.js"></script>
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>INSERT NAME OF SHOP</title>
+    <link rel="stylesheet" href="stylesheets/productView.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
+
+    <header>
+        <h1 id="storeName">Neweregg</h1>
+        <h3>Find exclusive, high-quality products!</h3>
+    </header>
+
+    <div class="mainNavigation">
+        <a class="active" href="homepage.php">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="editaccount.php">Account</a>
+        <a href="cart.php">Cart</a>
+        <form action="includes/logout.inc.php" method="post">
+            <?php
+            if (isset($_SESSION['customerID'])) {
+                echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
+            //echo "<p> You are logged in </p>";
+            } else {
+                //echo "<p> You are logged out </p>";
+            }
+            ?>
+        </form>
+
+
+        <div class="search-container">
+            <form action="searchresults.php" method="post">
+                <input type="text" placeholder="Search.." name="search">
+                <button name="search-submit" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <aside id="leftSide">
+        <div class="vertical-menu">
+            <a href="./displayGPU.php" class="active">Graphics Cards</a>
+            <a href="./displayCPU.php">CPUs</a>
+            <a href="./displayMouseAndKey.php">Mouse & Keyboard</a>
+            <a href="./displayRAM.php">RAM</a>
+            <a href="./displayPowerSupplies.php">Power Supplies</a>
+            <a href="./displayStorage.php">Storage</a>
+            <a href="./displayMonitors.php">Monitors</a>
+            <a href="./displayHeadsetsAndSpeakers.php">Headsets & Speakers</a>
+        </div>
+    </aside>
+
+    <main id="mainMain">
+        <?php
+        echo "<a href=\"javascript:history.go(-1)\" class='backbutton'>GO BACK</a>";
+        ?>
+
+        <div class="productView">
+            <?php
+            while ($row = $products->fetch(PDO::FETCH_ASSOC)) {
+                $name = $row['prodName'];
+                $image = $row['productImage'];
+                $description = $row['productDescription'];
+                $manufacturer = $row['manufacturerName'];
+                $stock = $row['prodStock'];
+                $price = $row['prodPrice'];
+            }
+            ?>
+            <h2><?php echo $name ?></h2>
+            <img src=<?php echo $image ?> id="productImg" />
+            <p id="price"><b>Price: </b>$<?php echo $price ?></p>
+            <p><b>Stock: </b><?php echo $stock ?> </p>
+            <p><b>Manufacturer: </b><?php echo $manufacturer ?> </p>
+            <p id="itemDesc"><b>Item Description: </b><?php echo $description ?></p>
+            <form action="includes/addtocart.inc.php" method="post">
+              <div id="input_div">
+                  <input type="text" name="productQuantity" size="2" value="1" maxlength="2" id="count">
+                  <input type="button" value="-" id="mins" onclick="minus()">
+                  <input type="button" value="+" id="plus" onclick="plus()">
+              </div>
+              <p id="amount"><b>Amount: </b>$<?php echo $price ?></p>
+              <input type="hidden" name="productID" value="<?php echo $productsID; ?>"/>
+              <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button>
+            </form>
+        </div>
+
+        <?php
+        if (isset($_GET['newPwd'])) {
+            if ($_GET['newPwd'] == "success") {
+                echo '<h2 style="text-align:center;"> Your password was updated! </h2>';
+                echo '<p style="text-align:center;"> Please login with your new password. </p>';
+            }
+        }
+        if (isset($_GET['activate'])) {
+            if ($_GET['activate'] == "success") {
+                echo '<h2 style="text-align:center;"> Your account was activated! </h2>';
+            }
+        }
+        if (isset($_GET['user'])) {
+            if ($_GET['user'] == "activationrequired") {
+                echo '<h2 style="text-align:center;"> You need to activate your account. Check your email! </h2>';
+            }
+        }
+
+        ?>
+
+        <br>
+        <br>
+        <br>
+        <br>
+    </main>
+
+
+
+    <footer>
+        <p>&copy; Neweregg</p>
+    </footer>
+
+
+
+</body>
+
+
+</html>
