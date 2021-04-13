@@ -5,7 +5,7 @@
       $email = trim($_POST['email']);
       $password = trim($_POST['password']);
 
-      if (empty($email) || empty(password)) {
+      if (empty($email) || empty($password)) {
           header("Location: ../login.php?error=emptyfields");
           exit();
       } else {
@@ -29,6 +29,8 @@
                       $_SESSION['email'] = $row['email'];
                       $_SESSION['customerID'] = $row['customerID'];
                       $_SESSION['userStatus'] = $row['userStatus'];
+                      header("Location: ../homepage.php?login=success");
+                      exit();
 
                   /*
                   if ($row['userType'] == 'admin') {

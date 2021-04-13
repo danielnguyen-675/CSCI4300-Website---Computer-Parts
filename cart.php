@@ -66,8 +66,9 @@
               echo '<pre>' . print_r($_SESSION, true) . '</pre>';
               echo '<pre>line 66-67 in cart.php to remove/comment this debug info, this is displaying the current SESSION variables above</pre>';
 
-              //unset session array for debug
-              //unset($_SESSION['cart']);
+              //unset session arrays for debug
+              // unset($_SESSION['cart']);
+              // unset($_SESSION['cartQuantity']);
 
               if (!empty($_SESSION['cart'])) {
                   ?>

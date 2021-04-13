@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("./includes/connection.php");
 $productsID = $_GET['productID'];
 $query = "SELECT * FROM products WHERE productID=$productsID";
@@ -13,34 +14,10 @@ $products = $db->query($query);
 <script src="/scripts/productView.js"></script>
 
 <head>
-    <style>
-        .productView {
-            border: 1px solid black;
-            padding: 20px 50px 100px;
-        }
-
-        .button {
-            font: bold 11px Arial;
-            text-decoration: none;
-            background-color: #EEEEEE;
-            color: #333333;
-            padding: 2px 6px 2px 6px;
-            border-top: 1px solid #CCCCCC;
-            border-right: 1px solid #333333;
-            border-bottom: 1px solid #333333;
-            border-left: 1px solid #CCCCCC;
-        }
-
-        #productImg {
-            width: 70%;
-            margin-bottom: 5px;
-            margin-right: 15px;
-        }
-    </style>
 
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
-    <link rel="stylesheet" href="stylesheets/homepage.css">
+    <link rel="stylesheet" href="stylesheets/productView.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -58,12 +35,12 @@ $products = $db->query($query);
         <a href="#">About</a>
         <a href="#">Contact</a>
         <a href="editaccount.php">Account</a>
-        <a href="#">Cart</a>
+        <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
             if (isset($_SESSION['customerID'])) {
                 echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-                //echo "<p> You are logged in </p>";
+            //echo "<p> You are logged in </p>";
             } else {
                 //echo "<p> You are logged out </p>";
             }
@@ -72,9 +49,9 @@ $products = $db->query($query);
 
 
         <div class="search-container">
-            <form action="/action_page.php">
+            <form action="searchresults.php" method="post">
                 <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <button name="search-submit" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
     </div>
@@ -94,35 +71,38 @@ $products = $db->query($query);
 
     <main id="mainMain">
         <?php
-        echo "<a href=\"javascript:history.go(-1)\" class='button'>GO BACK</a>";
+        echo "<a href=\"javascript:history.go(-1)\" class='backbutton'>GO BACK</a>";
         ?>
-        <h3>
-            <div class="productView">
-                <?php
-                while ($row = $products->fetch(PDO::FETCH_ASSOC)) {
-                    $name = $row['prodName'];
-                    $image = $row['productImage'];
-                    $description = $row['productDescription'];
-                    $manufacturer = $row['manufacturerName'];
-                    $stock = $row['prodStock'];
-                    $price = $row['prodPrice'];
-                }
-                ?>
-                <h2><?php echo $name ?></h2>
-                <img src=<?php echo $image ?> id="productImg" />
-                <p>Price: $<?php echo $price ?></p>
-                <p>Stock: <?php echo $stock ?> </p>
-                <p>Manufacturer: <?php echo $manufacturer ?> </p>
-                <p>Item Description: <?php echo $description ?></p>
-                <div id="input_div">
-                    <input type="text" size="5" value="1" id="count">
-                    <input type="button" value="-" id="mins" onclick="minus()">
-                    <input type="button" value="+" id="plus" onclick="plus()">
-                </div>
-                <h3>Amount: $<?php echo $price ?></h3>
-                <input type="button" value="Add to cart" method="post" class="button">
-            </div>
-        </h3>
+
+        <div class="productView">
+            <?php
+            while ($row = $products->fetch(PDO::FETCH_ASSOC)) {
+                $name = $row['prodName'];
+                $image = $row['productImage'];
+                $description = $row['productDescription'];
+                $manufacturer = $row['manufacturerName'];
+                $stock = $row['prodStock'];
+                $price = $row['prodPrice'];
+            }
+            ?>
+            <h2><?php echo $name ?></h2>
+            <img src=<?php echo $image ?> id="productImg" />
+            <p id="price"><b>Price: </b>$<?php echo $price ?></p>
+            <p><b>Stock: </b><?php echo $stock ?> </p>
+            <p><b>Manufacturer: </b><?php echo $manufacturer ?> </p>
+            <p id="itemDesc"><b>Item Description: </b><?php echo $description ?></p>
+            <form action="includes/addtocart.inc.php" method="post">
+              <div id="input_div">
+                  <input type="text" name="productQuantity" size="2" value="1" maxlength="2" id="count">
+                  <input type="button" value="-" id="mins" onclick="minus()">
+                  <input type="button" value="+" id="plus" onclick="plus()">
+              </div>
+              <p id="amount"><b>Amount: </b>$<?php echo $price ?></p>
+              <input type="hidden" name="productID" value="<?php echo $productsID; ?>"/>
+              <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button>
+            </form>
+        </div>
+
         <?php
         if (isset($_GET['newPwd'])) {
             if ($_GET['newPwd'] == "success") {
