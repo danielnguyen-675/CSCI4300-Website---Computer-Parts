@@ -5,8 +5,8 @@
     require './phpmailer/SMTP.php';
     session_start();
 
-    $row = NULL;
-    if ( isset($_SESSION['customerID']) ) {
+    $row = null;
+    if (isset($_SESSION['customerID'])) {
         $customerID = $_SESSION['customerID'];
         $query = "SELECT email FROM customer WHERE customerID=$customerID";
         $row = $connection->query($query);
@@ -34,9 +34,9 @@
     </header>
 
     <div class="mainNavigation">
-        <a class="active" href="homepage.php">Home</a>
+        <a href="homepage.php">Home</a>
         <a href="#">About</a>
-        <a href="contact.php">Contact</a>
+        <a href="contact.php" class="active">Contact</a>
         <a href="editaccount.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
@@ -68,19 +68,17 @@
 
         <p>
             <?php
-                if ( !isset($_SESSION['customerID']) ) {
-                    echo "Please login before filling out the form.";
-                    ?> Login <a href="login.php">HERE</a> <?php
-                }
-                else {
+                if (!isset($_SESSION['customerID'])) {
+                    echo "Please login before filling out the form."; ?> Login <a href="login.php">HERE</a> <?php
+                } else {
                     echo "For specific feedback, please contact us with the form below.  Otherwise, you can reach us at (505) 242-7700.  Your feedback is very appreciated!";
                 }
              ?>
         </p>
 
         <form action="contactEmail.php" method="post">
-            <fieldset <?php 
-                if ( !isset($_SESSION['customerID']) ) {
+            <fieldset <?php
+                if (!isset($_SESSION['customerID'])) {
                     echo "disabled";
                 } ?>>
 
@@ -88,7 +86,7 @@
 
                 <label>Email:</label>
                 <input type="text" name="email" value="<?php
-                    if ( $row ) {
+                    if ($row) {
                         foreach ($row as $r) {
                             echo $r['email'];
                         }

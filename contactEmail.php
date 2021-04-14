@@ -5,13 +5,13 @@
     require './phpmailer/SMTP.php';
     session_start();
 
-    if ( isset($_SESSION['customerID']) ) {
+    if (isset($_SESSION['customerID'])) {
         //get email, because it isn't returned through form
         $customerID = $_SESSION['customerID'];
         $query = "SELECT email FROM customer WHERE customerID=$customerID";
         $row = $connection->query($query);
         $email;
-        foreach ( $row as $r ) {
+        foreach ($row as $r) {
             $email = $r['email'];
         }
 
@@ -24,7 +24,7 @@
         //mail this bad boy
         try {
             $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-            
+
             $mail->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
@@ -68,8 +68,7 @@
         } catch (Exception $e) {
             echo $e->getMessage(); //Other error messages
         }
-    }
-    else {
+    } else {
         header("Location: contact.php");
     }
 ?>
@@ -95,9 +94,9 @@
     </header>
 
     <div class="mainNavigation">
-        <a class="active" href="homepage.php">Home</a>
+        <a href="homepage.php">Home</a>
         <a href="#">About</a>
-        <a href="contact.php">Contact</a>
+        <a href="contact.php" class="active">Contact</a>
         <a href="editaccount.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
