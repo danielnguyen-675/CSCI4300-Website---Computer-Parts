@@ -87,7 +87,7 @@
                 <legend>Contact Survey</legend>
 
                 <label>Email:</label>
-                <input type="text" value="<?php
+                <input type="text" name="email" value="<?php
                     if ( $row ) {
                         foreach ($row as $r) {
                             echo $r['email'];
@@ -110,8 +110,8 @@
                 </select><br>
 
                 <p>Would your recommend our website to a friend?</p>
-                <input type="radio" name="recommend" value="yes">Yes
-                <input type="radio" name="recommend" value="no">No<br>
+                <input type="radio" name="recommend" value="Yes">Yes
+                <input type="radio" name="recommend" value="No">No<br>
 
                 <p>What is your reason for contacting us today?</p>
                 <select name="reason">
@@ -122,7 +122,7 @@
                 </select><br>
 
                 <p>Please include any additional feedback below.</p>
-                <textarea></textarea><br>
+                <textarea name="comments"></textarea><br>
 
                 <input type="submit" value="Send Feedback">
             </fieldset>
