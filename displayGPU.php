@@ -52,9 +52,9 @@ $products = $db->query($query);
         </form>
 
         <div class="search-container">
-            <form action="/action_page.php">
+            <form action="searchresults.php" method="post">
                 <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <button name="search-submit" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
     </div>
@@ -99,7 +99,19 @@ $products = $db->query($query);
                   <p><?php echo '$' . $product['prodPrice'] ?></p>
                   <p><?php echo 'Stock: ' . $product['prodStock'] ?></p>
                   <input type="hidden" name="productID" value="<?php echo $product['productID']; ?>" />
-                  <button type="submit" class="addToCart" name="addtocart-submit" onclick="alert('Successfully added to cart!')">Add To Cart</button>
+                  <button type="submit" class="addToCart" name="addtocart-submit"
+                  <?php
+                  if (isset($_SESSION['customerID'])) {
+                      ?>
+                      onclick="alert('Successfully added to cart!')">
+                      <?php
+                  } else {
+                      ?>
+                      onclick="location.href = localhost/computerparts/login.php">
+                      <?php
+                  }
+                  ?>
+                  Add To Cart</button>
                 </form>
             </div>
             <?php } ?>

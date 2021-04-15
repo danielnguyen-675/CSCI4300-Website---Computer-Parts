@@ -7,17 +7,17 @@ html {
 
 .prodImg {
   border-radius: 8px;
-  width: 15em;
-  height: 15em;
+  width: 12em;
+  height: 12em;
   float: left;
   clear: both;
-  margin-bottom: -2em;
+  margin-bottom: 0.5em;
 }
 
 .prodInfo {
   float: left;
   clear: both;
-  width: 12em
+  width: 12em;
 }
 
 .addtocartbtn {
@@ -31,6 +31,15 @@ html {
 .prodContainer {
   width: 33%;
   padding-right: 1px;
+}
+
+.prodInfoLink {
+  font-weight: bold;
+  text-decoration: none;
+  float: left;
+  width: 9em;
+  color: black;
+  text-align: center;
 }
 
 #storeName {
@@ -62,6 +71,12 @@ main {
   padding-left: 3em;
   padding-right: 2em;
   max-width: 622px;
+}
+
+.itemDisplay {
+  width: 15em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 #mainMain {

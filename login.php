@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['customerID'])) {
-    header("Location: editaccount.php");
+    header("Location: account.php");
     exit();
 }
 ?>

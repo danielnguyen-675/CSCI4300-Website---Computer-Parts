@@ -92,20 +92,26 @@ session_start();
                   for ($r = 0; $r < $rowCount; $r++) {
                       echo "<tr>";
                       //second loop for columns
-                      for ($c = 0; $c < 5; $c++) {
+                      for ($c = 0; $c <5; $c++) {
                           //check if there are any more items to iterate through
                           if ($itemsRemaining > 0) {
                               ?>
-                          <td>
+                          <td class="itemDisplay">
                             <?php
                             $row = mysqli_fetch_assoc($result);
                               $img = $row['productImage']; ?>
                             <div class="prodContainer">
                               <form action="includes/addtocart.inc.php" method="post">
-                                <img class="prodImg" src="<?php echo $img ?>" height="500" width="500"/>
-                                <p class="prodInfo"><b>Product: <br></b><?php echo $row['prodName']?></p>
+                                <a href="productView.php?productID=<?php echo $row['productID'] ?>">
+                                  <img
+                                          src="<?php echo $img ?> "
+                                          class="prodImg"
+                                          alt="Picture Unavailable"
+                                  />
+                                </a>
+                                <a href="productView.php?productID=<?php echo $row['productID']?>" class="prodInfoLink"><?php echo $row['prodName']?></a>
                                 <p class="prodInfo"><b>Manufacturer: </b><?php echo $row['manufacturerName'] ?></p>
-                                <p class="prodInfo"><b>Price: </b><?php echo $row['prodPrice'] ?></p>
+                                <p class="prodInfo"><b>Price: </b>$<?php echo $row['prodPrice'] ?></p>
                                 <input type="hidden" name="productID" value="<?php echo $row['productID']; ?>"/>
                                 <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button><br><br><br>
                               </form>

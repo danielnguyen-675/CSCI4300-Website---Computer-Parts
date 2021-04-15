@@ -52,7 +52,7 @@ session_start();
 
     <aside id="leftSide">
         <div class="vertical-menu">
-            <a href="./displayGPU.php" class="active">Graphics Cards</a>
+            <a href="./displayGPU.php" >Graphics Cards</a>
             <a href="./displayCPU.php">CPUs</a>
             <a href="./displayMouseAndKey.php">Mouse & Keyboard</a>
             <a href="./displayRAM.php">RAM</a>
