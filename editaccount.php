@@ -391,7 +391,7 @@
               <span class="required" id="req4b"></span><br>
 
               <input id="pwsubmit" type="submit" name="editaccount-pw-submit" value="Update Password">
-              <input id="pwreset" type="reset" value="Clear Fields"><br><br>
+              <input id="pwreset" type="reset" value="Reset Fields"><br><br>
 
             </form>
 
