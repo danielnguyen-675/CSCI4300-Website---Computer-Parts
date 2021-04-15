@@ -189,7 +189,7 @@ if (isset($_POST['registration-submit'])) {
                     exit();
                 } else {
                     //all successful, redirect to submission message
-                    header("Location: /computerparts/submission.php");
+                    header("Location: ../submission.php");
                     exit();
                 }
             } catch (phpmailerException $e) {

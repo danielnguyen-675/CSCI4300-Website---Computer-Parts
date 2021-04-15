@@ -22,13 +22,13 @@ $products = $db->query($query);
     </style>
 
     <meta charset="UTF-8">
-    <title>INSERT NAME OF SHOP</title>
+    <title>Neweregg</title>
     <link rel="stylesheet" href="stylesheets/homepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
+    <a href="homepage.php" id="toTopPicture"><img src="uga.png" alt="University of Georgia"></a>
     <header>
         <h1 id="storeName">Neweregg</h1>
         <h3>Find exclusive, high-quality products!</h3>
@@ -62,19 +62,23 @@ $products = $db->query($query);
 
     <aside id="leftSide">
         <div class="vertical-menu">
-            <a href="./displayGPU.php">Graphics Cards</a>
-            <a href="./displayCPU.php">CPUs</a>
-            <a href="./displayMouseAndKey.php" class="active">Mouse & Keyboard</a>
-            <a href="./displayRAM.php">RAM</a>
-            <a href="./displayPowerSupplies.php">Power Supplies</a>
-            <a href="./displayStorage.php">Storage</a>
-            <a href="./displayMonitors.php">Monitors</a>
-            <a href="./displayHeadsetsAndSpeakers.php">Headsets & Speakers</a>
+            <h1 id="verticalMenuH1">Shop PC Parts & Accessories</h1>
+            <a href="./displayGPU.php"><button type="button" class="sideMenuButton">Graphics Cards</button></a>
+            <a href="./displayCPU.php"><button type="button" class="sideMenuButton">CPUs</button></a>
+            <a href="./displayMouseAndKey.php" class="active"><button type="button" class="sideMenuButton">Mouse & Keyboard</button></a>
+            <a href="./displayRAM.php"><button type="button" class="sideMenuButton">RAM</button></a>
+            <a href="./displayPowerSupplies.php"><button type="button" class="sideMenuButton">Power Supplies</button></a>
+            <a href="./displayStorage.php"><button type="button" class="sideMenuButton">Storage</button></a>
+            <a href="./displayMonitors.php"><button type="button" class="sideMenuButton">Monitors</button></a>
+            <a href="./displayHeadsetsAndSpeakers.php"><button type="button" class="sideMenuButton">Headsets & Speakers</button></a>
         </div>
+
+
     </aside>
     <main id="mainMain">
 
     <div class="cell">
+        <h2 class="shoppingViewTitlesALL">Our Selection</h2>
         <div class="row">
             <?php foreach ($products as $product) { ?>
             <div class="column">
@@ -94,6 +98,7 @@ $products = $db->query($query);
     </main>
 
     <footer>
+        <a href="#toTopPicture" id="toTop"><button type="button" class="sideMenuButton">Return to Top</button></a>
         <p>&copy; INSERT NAME OF SHOP HERE</p>
     </footer>
 
