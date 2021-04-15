@@ -97,9 +97,59 @@
           }
       }
 
+      //ORDER TABLES
+      //INSERT customerID into orders table which will give an auto-incremented orderID for customerID
+      // $sql = "INSERT INTO orderID (customerID) SELECT customerID FROM customer WHERE customerID=?; ";
+      // $stmt = mysqli_stmt_init($connection);
+      // if (!mysqli_stmt_prepare($stmt, $sql)) {
+      //     header("Location: ../checkout.php?error=customerIDinsert-sqlerror");
+      //     exit();
+      // } else {
+      //     mysqli_stmt_bind_param($stmt, "s", $customerID);
+      //     mysqli_stmt_execute($stmt);
+      // }
+
+      // $sql = "UPDATE orders
+      //               SET street=?,
+      //                   city=?,
+      //                   state=?,
+      //                   zipcode=?,
+      //                   country=?
+      //               WHERE
+      //                   customerID = (SELECT customerID FROM customer WHERE customerID=?);";
+      // $stmt = mysqli_stmt_init($connection);
+      // if (!mysqli_stmt_prepare($stmt, $sql)) {
+      //     header("Location: ../checkout.php?error=customerIDinsert-sqlerror");
+      //     exit();
+      // } else {
+      //     mysqli_stmt_bind_param($stmt, "ssssss", $$customerID);
+      //     mysqli_stmt_execute($stmt);
+      // }
 
 
-      //send order summary email
+
+
+
+
+
+
+
+
+      //select user from db
+      // $sql = "SELECT * FROM customer WHERE customerID = ?";
+      // $stmt = mysqli_stmt_init($connection);
+      // if (!mysqli_stmt_prepare($stmt, $sql)) {
+      //     header("Location: ../checkout.php?error=sqlerror");
+      //     exit();
+      // } else {
+      //     mysqli_stmt_bind_param($stmt, "s", $customerID);
+      //     mysqli_stmt_execute($stmt);
+      //     $result = mysqli_stmt_get_result($stmt);
+      // }
+
+
+
+      //SEND ORDER CONFIRMATION EMAIL
       $message = '<h2> Thank you for your order! </h2><br>
                   <h3>Shipping Details</h3><br>';
       $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>Street Address:   </b></label>";

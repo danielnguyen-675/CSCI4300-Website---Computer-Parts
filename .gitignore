@@ -352,3 +352,7 @@ MigrationBackup/
 #ignore connection files
 dbh.inc.php
 connection.php
+
+#some test files
+TEST.php
+test.php
