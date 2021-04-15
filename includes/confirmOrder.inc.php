@@ -64,7 +64,7 @@
                   mysqli_stmt_bind_param($stmt, "s", $customerID);
                   mysqli_stmt_execute($stmt);
               }
-              //update address record with fields from address form
+              //update paymentinfo record with fields from payment form
               $sql = "UPDATE paymentinfo
                             SET cardholderName=?,
                                 cardNumber=?,
@@ -86,68 +86,12 @@
                   mysqli_stmt_bind_param($stmt, "sssss", $fullName, $hashedCC, $expiry, $hashedCVC, $customerID);
                   mysqli_stmt_execute($stmt);
                   header("Location: ../orderSuccess.php?order=success");
-                  //clear cart and cartQuantity session array variables after order success
-                  // unset($_SESSION['cart']);
-                  // unset($_SESSION['cartQuantity']);
-                  // exit();
               }
           } else {
               header("Location: ../checkout.php?error=sql-user");
               exit();
           }
       }
-
-      //ORDER TABLES
-      //INSERT customerID into orders table which will give an auto-incremented orderID for customerID
-      // $sql = "INSERT INTO orderID (customerID) SELECT customerID FROM customer WHERE customerID=?; ";
-      // $stmt = mysqli_stmt_init($connection);
-      // if (!mysqli_stmt_prepare($stmt, $sql)) {
-      //     header("Location: ../checkout.php?error=customerIDinsert-sqlerror");
-      //     exit();
-      // } else {
-      //     mysqli_stmt_bind_param($stmt, "s", $customerID);
-      //     mysqli_stmt_execute($stmt);
-      // }
-
-      // $sql = "UPDATE orders
-      //               SET street=?,
-      //                   city=?,
-      //                   state=?,
-      //                   zipcode=?,
-      //                   country=?
-      //               WHERE
-      //                   customerID = (SELECT customerID FROM customer WHERE customerID=?);";
-      // $stmt = mysqli_stmt_init($connection);
-      // if (!mysqli_stmt_prepare($stmt, $sql)) {
-      //     header("Location: ../checkout.php?error=customerIDinsert-sqlerror");
-      //     exit();
-      // } else {
-      //     mysqli_stmt_bind_param($stmt, "ssssss", $$customerID);
-      //     mysqli_stmt_execute($stmt);
-      // }
-
-
-
-
-
-
-
-
-
-
-      //select user from db
-      // $sql = "SELECT * FROM customer WHERE customerID = ?";
-      // $stmt = mysqli_stmt_init($connection);
-      // if (!mysqli_stmt_prepare($stmt, $sql)) {
-      //     header("Location: ../checkout.php?error=sqlerror");
-      //     exit();
-      // } else {
-      //     mysqli_stmt_bind_param($stmt, "s", $customerID);
-      //     mysqli_stmt_execute($stmt);
-      //     $result = mysqli_stmt_get_result($stmt);
-      // }
-
-
 
       //SEND ORDER CONFIRMATION EMAIL
       $message = '<h2> Thank you for your order! </h2><br>
@@ -263,6 +207,7 @@
           }
       }
 
+      //unset SESSION arrays to clear cart when order submitted
       unset($_SESSION['cart']);
       unset($_SESSION['cartQuantity']);
       header("Location: ../orderSuccess.php");

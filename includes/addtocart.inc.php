@@ -2,10 +2,15 @@
 session_start();
 
 if (isset($_POST['addtocart-submit'])) {
+    if (!isset($_SESSION['customerID'])) {
+        header("Location: ../login.php");
+        exit();
+    }
     if ($_SESSION['userStatus'] == 0) {
         header("Location: ../homepage.php?user=activationrequired");
         exit();
     }
+
     require "dbh.inc.php";
 
     $productID = trim($_POST['productID']);
