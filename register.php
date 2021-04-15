@@ -26,6 +26,24 @@ if (isset($_SESSION['customerID'])) {
         <h3>Find exclusive, high-quality products!</h3>
     </header>
 
+    <div class="mainNavigation">
+        <a href="homepage.php">Home</a>
+        <a href="#">About</a>
+        <a href="contact.php">Contact</a>
+        <a href="editaccount.php" class="active">Account</a>
+        <a href="cart.php">Cart</a>
+        <form action="includes/logout.inc.php" method="post">
+            <?php
+            if (isset($_SESSION['customerID'])) {
+                echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
+            //echo "<p> You are logged in </p>";
+            } else {
+                //echo "<p> You are logged out </p>";
+            }
+            ?>
+        </form>
+    </div>
+
     <main>
         <h1>Create an Account</h1>
 
@@ -356,7 +374,7 @@ if (isset($_SESSION['customerID'])) {
     </main>
 
     <footer>
-        <p>&copy; INSERT NAME OF SHOP HERE</p>
+        <p>&copy; Neweregg</p>
     </footer>
 </body>
 

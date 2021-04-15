@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3555
--- Generation Time: Apr 09, 2021 at 01:48 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Host: localhost
+-- Generation Time: Apr 13, 2021 at 06:17 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -78,7 +78,7 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`customerID`, `firstName`, `lastName`, `email`, `password`, `phoneNumber`, `userStatus`) VALUES
 (6, 'FIRSTNAME', 'LASTNAME', 'monib53445@684hh.com', '$2y$10$JaTRmkeFbbIasaXPwgjLHO93YZhLxzm6U5jtwpXYNG4qNBlN8OiVa', '(789) 789-7897', 1),
-(7, 'test', 'test', 'test@test.com', '$2y$10$0oBuInPFCktu43GB1O2.mONdAIx4lk2suCZ4pBThOAZgSlHRD8w/e', '(123) 123-1234', 0);
+(7, 'test', 'test', 'test@test.com', 'ApplePie123!', '(123) 123-1234', 0);
 
 -- --------------------------------------------------------
 
@@ -157,7 +157,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manufacturerName`, `categoryName`, `productImage`, `productDescription`) VALUES
-(1001, 'AMD Ryzen 7 3700X', 100, 329.99, 'AMD', 'GPU', 'https://c1.neweggimages.com/ProductImageCompressAll300/19-113-567-V11.jpg', '3rd Gen Ryzen\r\nSocket AM4\r\nMax Boost Frequency 4.4 GHz\r\nDDR4 Support\r\nL2 Cache 4MB\r\nL3 Cache 32MB\r\nThermal Design Power 65W\r\nWith Wraith Prism cooler'),
+(1001, 'AMD Ryzen 7 3700X', 100, 329.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImageCompressAll300/19-113-567-V11.jpg', '3rd Gen Ryzen mysql_real_escape_string\r\nSocket AM4\r\nMax Boost Frequency 4.4 GHz\r\nDDR4 Support\r\nL2 Cache 4MB\r\nL3 Cache 32MB\r\nThermal Design Power 65W\r\nWith Wraith Prism cooler'),
 (1002, 'GIGABYTE Geforce RTX 2060 6GB Graphics Card', 500, 896.88, 'Gigabyte', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-932-115-V07.jpg', 'NVIDIA Turing Architechure & Real Time Ray Tracing\r\nWINDFORCE 2X Cooling System with Alternate Spinning Fans\r\nIntuitive Controls with AORUS Engine\r\nCore Clock 1755 MHz\r\n'),
 (1003, 'ASUS TUF Gaming GeForce GTX 1650, 4GB', 800, 482.99, 'ASUS ', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-126-445-V01.jpg', '4GB 128-Bit GDDR6\r\nCore Clock 1410 MHz\r\nBoost Clock 1755 MHz (Gaming Mode), 1785 MHz (OC Mode)\r\n1 x DVI-D 1 x HDMI 2.0b 1 x DisplayPort 1.4\r\n896 CUDA Cores\r\nPCI Express 3.0'),
 (1004, 'MSI GeForce GTX 1660 6GB', 200, 849.99, 'MSI', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-137-476-V01.jpg', '6GB 192-Bit GDDR6\r\nBoost Clock 1830 MHz\r\n1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1408 CUDA Cores\r\nPCI Express 3.0 x16\r\n'),
@@ -271,6 +271,7 @@ INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manu
 (1112, 'LG ULTRAGEAR 32GK65B-B 32\" 144HZ', 200, 324.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-025-965-S01.jpg', '2560 x 1440 Quad HD 2K Resolution\r\n1ms with Motion Blur Reduction\r\n144Hz Refresh Rate\r\n2 HDMI, DisplayPort (1.2) Video Inputs\r\nRadeon FreeSync Technology\r\nNVIDIA G-SYNC Compatible'),
 (1113, 'LG UltraGear 38GL950G-B 38\"', 50, 1799.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-025-974-V01.jpg', '3840 x 1600 WQHD+ 2K Resolution\r\n1ms Response Time\r\n144Hz (GTG), 175Hz (OC) Refresh Rate\r\nHDMI, DisplayPort Video Input\r\nNVIDIA G-SYNC Technology\r\nFlicker Safe Technology\r\nTilt, Height Adjustable\r\n'),
 (1114, 'SAMSUNG S22E450D 22\" Monitor', 400, 109.99, 'Samsung', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-022-315-09.jpg', '1920 x 1080 Full HD Resolution @ 60Hz\r\nVGA, DVI, DisplayPort Video Inputs\r\nMega Dynamic Contrast Ratio\r\nHeight, Pivot, Swivel, Tilt Adjustable\r\n'),
+(1115, 'BenQ Zowie XL2740 27\" Full HD Gaming Monitor', 200, 549, 'BenQ', 'Monitors', 'https://c1.neweggimages.com/ProductImage/0EP-004Z-00003-V13.jpg', 'G-Sync Compatible & FreeSync eSports Monitor\r\n1920 x 1080 1ms (GTG)\r\nDCR 12,000,000:1 (1,000:1)\r\nDVI-DL, 2 x HDMI, DP 1.2 Headphone & Mic Jack\r\n100 x 100mm VESA Mounting\r\nPivot Swivel Tilt Height Adjustable Stand'),
 (1116, 'LG 29BN650-B 29\" 21:9 UltraWide', 300, 219.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/1B4-008M-001X5-S01.jpg', '2560 x 1080 75 Hz\r\nHDMI DisplayPort\r\n1,000:1\r\n16.7 Million\r\nHeight: 150mm\r\nTilt: -5° to 35°\r\n'),
 (1117, 'LG UltraWide 49WL95C-WE 49\"', 75, 1499.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-026-095-S05.jpg', '5120 x 1440 60 Hz\r\nHDMI DisplayPort USB 3.0\r\n1,000:1'),
 (1118, 'Lenovo ThinkVision P24h-20 23.8\"', 300, 232.99, 'Lenovo', 'Monitors', 'https://c1.neweggimages.com/ProductImage/A6ZPD2005063XUDC.jpg', '23.8\" QHD (2560 x 1440) 3-side Near-edgeless display\r\nFactory calibrated color accuracy with multiple color gamut\r\nUSB Type-C, HDMI, DP, USB hub and daisy chain\r\nErgonomic and sapace-saving design & UE\r\nIPS Panel\r\n'),
@@ -350,7 +351,29 @@ CREATE TABLE `useractivate` (
 --
 
 INSERT INTO `useractivate` (`userActivateID`, `userActivateEmail`, `userActivateSelector`, `userActivateToken`, `userActivateExpires`) VALUES
-(3, 'test@test.com', '73594e2ce6e0c8bd', '$2y$10$Lr4MAp8FfAy9mElfFH1WFuK1s4eIf6NWDxpyHGZc4t1ZAW7zprGgK', '1617972276');
+(3, 'test@test.com', '73594e2ce6e0c8bd', '$2y$10$Lr4MAp8FfAy9mElfFH1WFuK1s4eIf6NWDxpyHGZc4t1ZAW7zprGgK', '1617972276'),
+(4, 'dnmgr27@gmail.com', '361c88e6376fb2d7', '$2y$10$qsSaT/i1Uu5gSnm2lY1tqe0XnV0bku/VE02eFalYU5ADQKCgljmHG', '1618119696'),
+(5, 'dnmgr27@gmail.com', '6f02dcce9a8cd4f0', '$2y$10$magEaYQe.juJOGZ/d7FBauZcvPAv2lrBedOa.fWI/cr/H6pfwMazO', '1618119775'),
+(6, 'dnmgr27@gmail.com', 'fb77420fd6aec01c', '$2y$10$IK2gfRs0ubIn3jX0Z12NVO.8tep50ZRK3ejmA17IPd4FNVcugrAoO', '1618165465'),
+(7, '123@gmail.com', '467eed8515bd18a3', '$2y$10$.8I2HVlOgqQCHvU7JH.QQudylIHBlLAxU.ehCNh64ITYOwG4InrX6', '1618169423'),
+(8, 'dnmgr27@gmail.com', '2179e6f912ea4107', '$2y$10$SDVL/l2O8S0bJA1sv37.z.4jWB69tLdL3guVjPw2wkC5pITNJY0DG', '1618192244'),
+(9, 'dnmgr27@gmail.com', 'ce9c80b4c52e97fa', '$2y$10$.ALPDx5lUGghUie7p9krfup6gPW.1nZs2Hiws84RnjiwL6lkMTON2', '1618192793'),
+(10, 'dnmgr27@gmail.com', '39343b6816c848b9', '$2y$10$FEjtPEQUtx52LpGIT95Ose7UltlPxG7DIsPyjZHLqX436NbpLgqdu', '1618193364'),
+(11, 'dnmgr27@gmail.com', 'b366f992c592c93a', '$2y$10$X8jgujQXp6rzbzS3dFkgc.O1PXkC3ivK5s9aFIwaPQmN58tgWEana', '1618193699'),
+(12, 'dnmgr27@gmail.com', 'bb333c9ba3727cfc', '$2y$10$Wb8sRTRsKG7dFsXs9ef/TuSm0ipZxXY/gjgl/j607V60Xv56xmRTG', '1618193752'),
+(13, 'dnmgr27@gmail.com', '9995cb65acabc7bf', '$2y$10$apadYxJ4nfRWHXIYiQI5cOC2PVEzbRUB6UcfxpJfmtekMmYGfA5Hi', '1618193795'),
+(14, 'dnmgr27@gmail.com', '701a2d2743d245c1', '$2y$10$pFwPMSJ78blOh2mlZy.Tx.MdqvTy3.2KUkJzohF9EdWtN/9thCpW6', '1618194765'),
+(15, 'dnmgr27@gmail.com', '392ee3f6ea270323', '$2y$10$y3rslm8RGoJfqdxcQLyy8OyTj7QYbYsa4Sllue3I6j4ysi3FNU3kS', '1618194808'),
+(16, 'dnmgr27@gmail.com', 'ebb76a79516548d1', '$2y$10$QyInALxLjseoA2.FmU/CS.8B5JG1Pa4GxQrHbmL.SF9vQV4paO9zO', '1618195448'),
+(17, 'dnmgr27@gmail.com', '6c97b3e967662e51', '$2y$10$nU1o1uT0WCIlpogbiq.aROTf8BQfpHte6d2RghXuI19OomLbx47Fu', '1618195529'),
+(18, 'dnmgr27@gmail.com', 'c2b5531fb72751d8', '$2y$10$yLVYVdVdRbXdxBmX/luo7O7T4ZeARvbLc64dokzT7Fj45gldjWMBK', '1618195721'),
+(19, 'dnmgr27@gmail.com', 'a9dc5bf9b5cd8b24', '$2y$10$SVuZitrgAq/t.1OhbKIIGeipSzVAwJLW9kLrjgJhImqosI.X2U5JK', '1618195912'),
+(20, 'dnmgr27@gmail.com', '82b075df7d1448a9', '$2y$10$N/2T0UH.LdpADOphxVWUseJzG/CMOYgpKBLFfpNzdV1hrE0MbXvdq', '1618196099'),
+(21, 'ddn53340@uga.edu', '281baa7c1ecd7b32', '$2y$10$CyHwS93cZdh3ybRJ3pY8xe94/gjqDWvmEqfkwQ2irs1EFhIE/MK4S', '1618196228'),
+(22, 'dnmgr27@gmail.com', '29111f3868720db1', '$2y$10$aoQjCrBXzj7iyYEPVB4CFeiRthnL4LWYFrd3Awx6WvilzlQ3UCXtO', '1618196450'),
+(23, 'dnmgr27@gmail.com', 'da6c6f159b130195', '$2y$10$8rAh96BruVaiuaSw6YWJKOefoGfTF.E2FmzvdhYIw2660pwU8KEn2', '1618197055'),
+(24, 'dnmgr27@gmail.com', '6e40446c93103b8a', '$2y$10$By60yTKyA4.JgZ23Uv1S0OQ.abn6KFCFPyqlVa5PfrgEQMtGO6krm', '1618197378'),
+(25, 'dnmgr27@gmail.com', 'ec8c091329bc5cfc', '$2y$10$fZxurClOHMvZdrens47q0ulZjoYs8KVvk8Q6pVNBxsmKZbTRL6Z.a', '1618198154');
 
 --
 -- Indexes for dumped tables
@@ -481,7 +504,7 @@ ALTER TABLE `paymentinfo`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1036;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1141;
 
 --
 -- AUTO_INCREMENT for table `pwdreset`
@@ -499,7 +522,7 @@ ALTER TABLE `shipments`
 -- AUTO_INCREMENT for table `useractivate`
 --
 ALTER TABLE `useractivate`
-  MODIFY `userActivateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userActivateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables

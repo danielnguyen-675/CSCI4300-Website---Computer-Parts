@@ -83,13 +83,53 @@ input[type="text"], input[type="password"] {
   margin-bottom: 1em;
 }
 
-input[type="submit"], input[type="reset"] {
+select {
+  margin-top: 0.5em;
+}
+
+input[type="submit"] {
   width: 10em;
-  margin: 0;
+  clear: both;
+  margin-left: 13.5em;
+}
+
+input[type="reset"] {
+  width: 10em;
 }
 
 .required {
   color: #ff3333;
   margin-left: .5em;
   width: 300px;
+}
+
+.mainNavigation {
+  overflow: hidden;
+  background-color: black;
+}
+
+.mainNavigation a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.mainNavigation a:hover {
+  color: #ff3333;
+}
+
+.mainNavigation a.active {
+  color: #ff3333;
+}
+
+
+.mainNavigation input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
 }

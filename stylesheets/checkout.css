@@ -10,7 +10,7 @@ html {
   margin-top: 14px;
 }
 
-img {
+#ugalogo {
   float: left;
   object-fit: contain;
   width: 23%;
@@ -42,6 +42,7 @@ footer {
   padding: .5em;
   clear: both;
   border-top: 2px solid #ff3333;
+
 }
 
 footer p {
@@ -53,6 +54,75 @@ body {
   box-shadow: 15px 0 10px 0px black, -15px 0 10px 0px black;
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.tdborder {
+  /*border: 1px solid black;*/
+}
+
+.prodImg {
+  width: 175px;
+  height: 125px;
+}
+
+.productName {
+  margin-bottom: 1em;
+  width: 10em;
+  margin-left: 2em;
+  margin-right: 2em;
+  text-align: center;
+}
+
+.productPrice {
+  text-align: center;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.quantitylabel {
+  width: 4em;
+  margin-top: 1em;
+  float: left;
+}
+
+.quantityinput {
+  margin-top: 1em;
+  float: left;
+}
+
+.updatecartbtn {
+  margin-left: 0.5em;
+  clear:both;
+  margin-top: 1em;
+}
+
+#removebtn {
+  margin-left: 2em;
+  margin-top: .7em;
+}
+
+#totalprice {
+  margin-top: -5em;
+}
+
+#checkoutbtn {
+  text-align: center;
+  width: auto;
+  margin-left: 53em;
+  margin-bottom: 5em;
+}
+
+table, th, td {
+  border-collapse: collapse;
+}
+
+#checkouth1 {
+  margin-left: 1.5em;
+  font-size: 3em;
+}
+
+#shippingh2 {
+  margin-left: 4em;
 }
 
 /* Form Stuff */
@@ -84,21 +154,23 @@ select {
 #country {
   width: 15em;
   margin-left: .5em;
+  margin-bottom: 1em;
 }
 
-#infosubmit, #inforeset {
-  width: 10em;
+#continue {
+  margin-left: 16.5em;
+  clear: both;
   margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: .5em;
+  margin-bottom: 2em;
 }
 
-#pwsubmit, #pwreset {
-  width: 10em;
-  margin-top: .5em;
-  margin-bottom: 1em;
-  margin-left: 16.6em;
-  margin-right: -16.1em;
+#continue, #reset {
+
+}
+
+#country {
+  width: 15em;
+  margin-left: .5em;
 }
 
 .required {

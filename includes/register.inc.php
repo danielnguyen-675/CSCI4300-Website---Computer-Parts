@@ -22,7 +22,7 @@ if (isset($_POST['registration-submit'])) {
     //empty fields check
     if (empty($address) || empty($city) || empty($state) || empty($zipcode) || empty($phone) || empty($country)) {
         //    echo ($username $password $confirmPassword $name $email $address $city $state $zipcode $phone $country);
-        echo "<h2>" . email . "</h2>";
+        echo "<h2>" . $email . "</h2>";
         header("Location: ../register.php?error=emptyfields&email=" . $email . "&firstname=" . $firstName . "&lastname=" . $lastName . "&address=" . $address . "&city=" . $city . "&state=" . $state . "&zipcode=" . $zipcode . "&phone=" . $phone . "&country=" . $country);
         exit();
     //invalid email format
@@ -38,6 +38,7 @@ if (isset($_POST['registration-submit'])) {
         header("Location: ../register.php?error=passwordLength&email=" . $email);
         exit();
     } else {
+        /*DUPLICATE AS BELOW CODE BLOCK
         //field checks passed - begin
         //now check if username is duplicate
         $sql = "SELECT email FROM customer WHERE email=?";
@@ -56,6 +57,7 @@ if (isset($_POST['registration-submit'])) {
                 exit();
             }
         }
+        */
         //check for duplicate email
         $sql = "SELECT * FROM customer WHERE email = ?; ";
         $stmt = mysqli_stmt_init($connection);
@@ -64,7 +66,11 @@ if (isset($_POST['registration-submit'])) {
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $email);
-            mysqli_stmt_execute($stmt);
+            //mysqli_stmt_execute($stmt);
+            if (!mysqli_stmt_execute($stmt)) {
+                header("Location: ../register.php?SQLerror=selectEmailStmtFail");
+                exit();
+            }
             $result = mysqli_stmt_get_result($stmt);
             if ($row = mysqli_fetch_assoc($result)) {
                 //email found in DB - duplicate
@@ -84,7 +90,12 @@ if (isset($_POST['registration-submit'])) {
             $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
             mysqli_stmt_bind_param($stmt, "sssss", $hashedPwd, $firstName, $lastName, $email, $phone);
-            mysqli_stmt_execute($stmt);
+            //mysqli_stmt_execute($stmt);
+            if (!mysqli_stmt_execute($stmt)) {
+                $sqlerror = $stmt->error;
+                header("Location: ../register.php?SQLerror=INSERTINTOcustomerStmtFail&sqlError='$sqlerror'");
+                exit();
+            }
         }
         //insert into address table in DB with customerID foreign key
         $sql = "INSERT INTO address (customerID) SELECT customerID FROM customer WHERE email=?; ";
@@ -94,7 +105,12 @@ if (isset($_POST['registration-submit'])) {
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $email);
-            mysqli_stmt_execute($stmt);
+            //mysqli_stmt_execute($stmt);
+            if (!mysqli_stmt_execute($stmt)) {
+                $sqlerror = $stmt->error;
+                header("Location: ../register.php?SQLerror=INSERTINTOaddressStmtFail&SQLERROR='$sqlerror'");
+                exit();
+            }
         }
         //update address record with fields from registration form
         $sql = "UPDATE address
@@ -111,59 +127,75 @@ if (isset($_POST['registration-submit'])) {
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "ssssss", $address, $city, $state, $zipcode, $country, $email);
-            mysqli_stmt_execute($stmt);
+            //mysqli_stmt_execute($stmt);
+            if (!mysqli_stmt_execute($stmt)) {
+                $sqlerror = $stmt->error;
+                header("Location: ../register.php?SQLerror=UPDATEaddressSQLStmtFail&SQLERROR='$sqlerror'");
+                exit();
+            }
 
             //user account info and user address has been inserted
             //Send user activation email
             //PHPMailer setup
-            $mail = new PHPMailer\PHPMailer\PHPMailer();
-            $mail->isSMTP();
-            $mail->SMTPAuth = true;
-            $mail->SMTPSecure = 'tls';
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = '587';
-            $mail->isHTML(true);
-            $mail->Username = 'txl.workspace@gmail.com';
-            $mail->Password = '#txlwork';
-            $mail->SetFrom('no-reply@sktstore.com');
-            $mail->Subject = 'Activate Your Account';
+            try {
+                $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+                $mail->isSMTP();
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'tls';
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Port = '587';
+                $mail->isHTML(true);
+                $mail->Username = 'txl.workspace@gmail.com';
+                $mail->Password = '#txlwork';
+                $mail->SetFrom('no-reply@neweregg.com');
+                $mail->Subject = 'Activate Your Account';
 
-            //tokens - authentication
-            $selector = bin2hex(random_bytes(8));
-            $token = random_bytes(32);
-            //url for user
-            $url = "localhost/computerparts/account-activate.php?selector=" . $selector . "&validator=" . bin2hex($token);
-            //token expiration
-            $expires = date("U") + 3600;
-            //insert into activation table in db
-            $sql = "INSERT INTO useractivate (userActivateEmail, userActivateSelector, userActivateToken, userActivateExpires) VALUES (?, ?, ?, ?); ";
-            $stmt = mysqli_stmt_init($connection);
-            if (!mysqli_stmt_prepare($stmt, $sql)) {
-                header("Location: ../register.php?mailError=activatemailsqlerror");
-                exit();
-            } else {
-                $hashedToken = password_hash($token, PASSWORD_DEFAULT);
-                mysqli_stmt_bind_param($stmt, "ssss", $email, $selector, $hashedToken, $expires);
-                mysqli_stmt_execute($stmt);
-            }
+                //tokens - authentication
+                $selector = bin2hex(random_bytes(8));
+                $token = random_bytes(32);
+                //url for user
+                $url = "localhost/computerparts/account-activate.php?selector=" . $selector . "&validator=" . bin2hex($token);
+                //token expiration
+                $expires = date("U") + 3600;
+                //insert into activation table in db
+                $sql = "INSERT INTO useractivate (userActivateEmail, userActivateSelector, userActivateToken, userActivateExpires) VALUES (?, ?, ?, ?); ";
+                $stmt = mysqli_stmt_init($connection);
+                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                    header("Location: ../register.php?mailError=activatemailsqlerror");
+                    exit();
+                } else {
+                    $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+                    mysqli_stmt_bind_param($stmt, "ssss", $email, $selector, $hashedToken, $expires);
+                    //mysqli_stmt_execute($stmt);
+                    if (!mysqli_stmt_execute($stmt)) {
+                        $sqlerror = $stmt->error;
+                        header("Location: ../register.php?SQLerror=INSERTINTOuseractivateSQLStmtFail&SQLERROR='$sqlerror'");
+                        exit();
+                    }
+                }
 
-            //PHPMailer continuted...
-            //Email message to user with activation instructions
-            $message = '<p> A new account was created with this email. <br></p>';
-            $message .= '<p> If you did not request this, ignore this message.<br></p>';
-            $message .= '<p> Here is your account activation link: <br></p>';
-            $message .= '<a href="' . $url . '">' . $url . '</a>';
-            $mail->Body = $message;
-            $mail->AddAddress($email);
+                //PHPMailer continuted...
+                //Email message to user with activation instructions
+                $message = '<p> A new account was created with this email. <br></p>';
+                $message .= '<p> If you did not request this, ignore this message.<br></p>';
+                $message .= '<p> Here is your account activation link: <br></p>';
+                $message .= '<a href="' . $url . '">' . $url . '</a>';
+                $mail->Body = $message;
+                $mail->AddAddress($email);
 
-            if (!$mail->Send()) {
-                $msg = "Mailer Error: " . $mail->ErrorInfo;
-                header("Location: ../register.php?mailError=$msg");
-                exit();
-            } else {
-                //all successful, redirect to submission message
-                header("Location: /computerparts/submission.html");
-                exit();
+                if (!$mail->Send()) {
+                    $msg = "Mailer Error: " . $mail->ErrorInfo;
+                    header("Location: ../register.php?mailError=$msg");
+                    exit();
+                } else {
+                    //all successful, redirect to submission message
+                    header("Location: /computerparts/submission.php");
+                    exit();
+                }
+            } catch (phpmailerException $e) {
+                echo $e->errorMessage(); //Error from PHPMailer
+            } catch (Exception $e) {
+                echo $e->getMessage(); //Other error messages
             }
         }
     }

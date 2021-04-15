@@ -1,8 +1,8 @@
 <?php
 
-define('serverName', 'localhost');
+define('serverName', 'localhost:3555');
 define('dbUsername', 'root');
-define('dbPassword', '');
+define('dbPassword', 'root');
 define('dbName', 'pcparts');
 
 $connection = mysqli_connect(serverName, dbUsername, dbPassword, dbName);
