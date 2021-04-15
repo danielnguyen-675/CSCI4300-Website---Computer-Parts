@@ -1,11 +1,49 @@
 <?php
    session_start();
+   require 'includes/dbh.inc.php';
 
    //if user is not logged in, accessing this page redirects to login
    if (!isset($_SESSION['customerID'])) {
        header("Location: login.php");
        exit();
    }
+
+   //fill shipping address form with customer info and address - personal info
+   $customerID = $_SESSION['customerID'];
+
+   $sql = "SELECT * FROM customer WHERE customerID=?";
+   $stmt = $connection->prepare($sql); // prepare
+   if (!mysqli_stmt_prepare($stmt, $sql)) {
+       header("Location: editaccount.php?error=sqlerror1");
+       exit();
+   } else {
+       mysqli_stmt_bind_param($stmt, "s", $customerID);
+       mysqli_stmt_execute($stmt);
+       $result = mysqli_stmt_get_result($stmt);
+       $row = mysqli_fetch_assoc($result);
+   }
+
+   $firstName = trim($row['firstName']);
+   $lastName = trim($row['lastName']);
+   $phoneNumber = trim($row['phoneNumber']);
+
+   //fill shipping address form with customer info and address - address
+   $sql = "SELECT * FROM address WHERE customerID=?";
+   if (!mysqli_stmt_prepare($stmt, $sql)) {
+       header("Location: editaccount.php?error=sqlerror2");
+       exit();
+   } else {
+       mysqli_stmt_bind_param($stmt, "s", $customerID);
+       mysqli_stmt_execute($stmt);
+       $result = mysqli_stmt_get_result($stmt);
+       $row = mysqli_fetch_assoc($result);
+   }
+
+   $street = trim($row['street']);
+   $city = trim($row['city']);
+   $state = trim($row['state']);
+   $zipcode = trim($row['zipcode']);
+   $country = trim($row['country']);
 
    ?>
 
@@ -30,7 +68,7 @@
         <div class="mainNavigation">
             <a href="homepage.php">Home</a>
             <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="contact.php">Contact</a>
             <a href="editaccount.php" class="active">Account</a>
             <a href="cart.php">Cart</a>
             <form action="includes/logout.inc.php" method="post">
@@ -50,11 +88,11 @@
 
             <form id="personalinfo" action="includes/editaccount-info.inc.php" method="post" onsubmit="return checkFields()">
                 <label>First Name:</label>
-                <input id="fName" name="fName" type="text" required>
+                <input id="fName" name="fName" type="text" value="<?php echo $firstName; ?>" required>
                 <span class="required" id="req1"></span><br>
 
                 <label>Last Name:</label>
-                <input id="lName" name="lName" type="text" required>
+                <input id="lName" name="lName" type="text" value="<?php echo $lastName; ?>" required>
                 <span class="required" id="req2"></span><br>
 
                 <label>Email:</label>
@@ -66,27 +104,28 @@
                 <span class="required" id="req3b"></span><br>
 
                 <label>Phone Number:</label>
-                <input id="phone" name="phone" type="text" required>
+                <input id="phone" name="phone" type="text" value="<?php echo $phoneNumber; ?>" required>
                 <span class="required" id="req5"></span><br>
 
                 <label> Street Address: </label>
-                <input type="text" name ="address" placeholder="Street Address" required>
+                <input type="text" name ="address" placeholder="Street Address" value="<?php echo $street; ?>" required>
                 <span class="required" id="req6"></span><br>
 
                 <label> City: </label>
-                <input type="text" name ="city" placeholder="City" required>
+                <input type="text" name ="city" placeholder="City" value="<?php echo $city; ?>" required>
                 <span class="required" id="req7"></span><br>
 
                 <label> State: </label>
-                <input type="text" name ="state" placeholder="State" required>
+                <input type="text" name ="state" placeholder="State" value="<?php echo $state; ?>" required>
                 <span class="required" id="req8"></span><br>
 
                 <label> Postal Code: </label>
-                <input type="text" name ="zipcode" placeholder="Postal Code" required>
+                <input type="text" name ="zipcode" placeholder="Postal Code" value="<?php echo $zipcode; ?>" required>
                 <span class="required" id="req9"></span><br>
 
                 <label for="country">Country: </label>
                 <select name="country" id="country">
+                  <option value="<?php echo $country; ?>" selected><?php echo $country; ?></option>
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
                   <option value="Algeria">Algeria</option>
@@ -332,7 +371,7 @@
                 <span class="required" id="req11"></span><br>
 
                 <input id="infosubmit" type="submit" name="editaccount-info-submit" value="Update Account">
-                <input id="inforeset" type="reset" value="Clear Fields"><br>
+                <input id="inforeset" type="reset" value="Reset Fields"><br>
 
             </form>
             <form id="passwordinfo" action="includes/editaccount-pw.inc.php" method="post" onsubmit="return checkFields()">
@@ -352,7 +391,7 @@
               <span class="required" id="req4b"></span><br>
 
               <input id="pwsubmit" type="submit" name="editaccount-pw-submit" value="Update Password">
-              <input id="pwreset" type="reset" value="Clear Fields"><br><br>
+              <input id="pwreset" type="reset" value="Reset Fields"><br><br>
 
             </form>
 

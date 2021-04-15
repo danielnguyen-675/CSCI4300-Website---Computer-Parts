@@ -88,6 +88,7 @@ body {
 .quantityinput {
   margin-top: 1em;
   float: left;
+  width: 3em;
 }
 
 .updatecartbtn {
@@ -108,7 +109,7 @@ body {
 #checkoutbtn {
   text-align: center;
   width: auto;
-  margin-left: 52.75em;
+  margin-left: 54.0em;
   margin-bottom: 5em;
 }
 

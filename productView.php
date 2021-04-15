@@ -14,7 +14,6 @@ $products = $db->query($query);
 <script src="/scripts/productView.js"></script>
 
 <head>
-
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
     <link rel="stylesheet" href="stylesheets/productView.css">
@@ -33,7 +32,7 @@ $products = $db->query($query);
     <div class="mainNavigation">
         <a class="active" href="homepage.php">Home</a>
         <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="contact.php">Contact</a>
         <a href="editaccount.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
@@ -46,7 +45,6 @@ $products = $db->query($query);
             }
             ?>
         </form>
-
 
         <div class="search-container">
             <form action="searchresults.php" method="post">
@@ -93,9 +91,11 @@ $products = $db->query($query);
             <p id="itemDesc"><b>Item Description: </b><?php echo $description ?></p>
             <form action="includes/addtocart.inc.php" method="post">
               <div id="input_div">
-                  <input type="text" name="productQuantity" size="2" value="1" maxlength="2" id="count">
+                  <input type="number" name="productQuantity" value="1" min="1" max="10" id="count" required>
+                  <!--buttons used for +/- of quantity
                   <input type="button" value="-" id="mins" onclick="minus()">
                   <input type="button" value="+" id="plus" onclick="plus()">
+                  -->
               </div>
               <p id="amount"><b>Amount: </b>$<?php echo $price ?></p>
               <input type="hidden" name="productID" value="<?php echo $productsID; ?>"/>
@@ -129,13 +129,9 @@ $products = $db->query($query);
         <br>
     </main>
 
-
-
     <footer>
         <p>&copy; Neweregg</p>
     </footer>
-
-
 
 </body>
 

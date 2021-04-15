@@ -31,6 +31,10 @@
     float: left;
 }
 
+#count {
+  width: 4em;
+}
+
 #amount {
   float: left;
 }

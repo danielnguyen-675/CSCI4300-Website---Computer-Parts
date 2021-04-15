@@ -44,7 +44,7 @@
         <div class="mainNavigation">
             <a href="homepage.php">Home</a>
             <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="contact.php">Contact</a>
             <a href="editaccount.php">Account</a>
             <a href="cart.php" class="active">Cart</a>
             <form action="includes/logout.inc.php" method="post">
@@ -101,7 +101,7 @@
                       <form action="includes/updatecart.inc.php" method="post">
                         <?php $key = array_search($row['productID'], $_SESSION['cart']); ?>
                         <label class="quantitylabel"> Quantity: </label>
-                        <input class="quantityinput" type="text" name="quantity" value="<?php echo $_SESSION['cartQuantity'][$key]; ?>" size="2" maxlength="2";>
+                        <input class="quantityinput" type="number" name="quantity" value="<?php echo $_SESSION['cartQuantity'][$key]; ?>" width="2em" min="1" max="99">
                         <input type="hidden" name="productID" value="<?php echo $row['productID']; ?>">
                         <button title="Please update one item at a time" class="updatecartbtn" type="submit" name="updatecart-submit"> Update </button>
                       </form>
