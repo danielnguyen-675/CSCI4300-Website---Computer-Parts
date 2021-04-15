@@ -87,12 +87,12 @@ session_start();
                   <?php
                   //get how many rows to render based on amount of products
                   //intdivision of #ofProducts and 5(or products per row) then add 1 row if required (ex: 12 products = 3 rows)
-                  $rowCount = intdiv($queryResult, 5) + 1;
+                  $rowCount = intdiv($queryResult, 4) + 1;
                   //first loop for rows
                   for ($r = 0; $r < $rowCount; $r++) {
                       echo "<tr>";
                       //second loop for columns
-                      for ($c = 0; $c <5; $c++) {
+                      for ($c = 0; $c <4; $c++) {
                           //check if there are any more items to iterate through
                           if ($itemsRemaining > 0) {
                               ?>
