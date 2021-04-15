@@ -37,7 +37,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>INSERT NAME OF SHOP</title>
+        <title>Neweregg</title>
         <link rel="stylesheet" href="stylesheets/confirmOrder.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="scripts/editaccount.js"></script>
