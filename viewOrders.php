@@ -77,7 +77,7 @@
                 View Order <?php //echo $row['orderID']?>
               </a> -->
               <form action="orderView.php" method="post">
-                <input id="viewOrdersSubmitBtn" type="submit" name="viewOrders-submit" value="View Order <?php echo $row['orderID'] ?>">
+                <input id="viewOrdersSubmitBtn" type="submit" name="viewOrders-submit" value="Order # <?php echo $row['orderID'] ?>">
                 <input type="hidden" name="street" value="<?php echo $row['street']; ?>">
                 <input type="hidden" name="city" value="<?php echo $row['city']; ?>">
                 <input type="hidden" name="state" value="<?php echo $row['state']; ?>">
