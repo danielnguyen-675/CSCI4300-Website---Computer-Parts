@@ -371,7 +371,7 @@
                 <span class="required" id="req11"></span><br>
 
                 <input id="infosubmit" type="submit" name="editaccount-info-submit" value="Update Account">
-                <input id="inforeset" type="reset" value="Clear Fields"><br>
+                <input id="inforeset" type="reset" value="Reset Fields"><br>
 
             </form>
             <form id="passwordinfo" action="includes/editaccount-pw.inc.php" method="post" onsubmit="return checkFields()">
