@@ -20,7 +20,7 @@
             <a class="active" href="homepage.php">Home</a>
             <a href="#">About</a>
             <a href="contact.php">Contact</a>
-            <a href="editaccount.php">Account</a>
+            <a href="account.php">Account</a>
             <a href="cart.php">Cart</a>
             <form action="includes/logout.inc.php" method="post">
                 <?php
