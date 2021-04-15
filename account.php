@@ -1,15 +1,26 @@
 <?php
-    session_start();
-  ?>
+   session_start();
+   require 'includes/dbh.inc.php';
+
+   //if user is not logged in, accessing this page redirects to login
+   if (!isset($_SESSION['customerID'])) {
+       header("Location: login.php");
+       exit();
+   }
+
+   //fill shipping address form with customer info and address - personal info
+   $customerID = $_SESSION['customerID'];
+
+   ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>INSERT NAME OF SHOP</title>
-        <link rel="stylesheet" href="stylesheets/submission.css">
+        <link rel="stylesheet" href="stylesheets/account.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="scripts/register.js"></script>
+        <script src="scripts/editaccount.js"></script>
     </head>
 
     <body>
@@ -21,10 +32,10 @@
         </header>
 
         <div class="mainNavigation">
-            <a class="active" href="homepage.php">Home</a>
+            <a href="homepage.php">Home</a>
             <a href="#">About</a>
             <a href="contact.php">Contact</a>
-            <a href="account.php">Account</a>
+            <a href="account.php" class="active">Account</a>
             <a href="cart.php">Cart</a>
             <form action="includes/logout.inc.php" method="post">
                 <?php
@@ -39,7 +50,13 @@
         </div>
 
         <main>
-            <h1>Thank you! Your order has been received.</h1>
+            <h1>Account Features</h1>
+            <form action="editaccount.php">
+              <input class="accountbuttons" type="submit" value="Edit Your Info" />
+            </form>
+            <form action="viewOrders.php">
+              <input class="accountbuttons" type="submit" value="View Orders" />
+            </form>
         </main>
 
         <footer>

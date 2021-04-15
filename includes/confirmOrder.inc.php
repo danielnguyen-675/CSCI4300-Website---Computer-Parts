@@ -197,8 +197,74 @@
           exit();
       }
 
-      // unset($_SESSION['cart']);
-      // unset($_SESSION['cartQuantity']);
+      //INSERT INTO orders the customerID associated with the order and
+      //the checkout shipping info
+      $sql = "INSERT INTO orders (customerID, street, city, state, zipcode, country) VALUES (?, ?, ?, ?, ?, ?); ";
+      $stmt = mysqli_stmt_init($connection);
+      if (!mysqli_stmt_prepare($stmt, $sql)) {
+          header("Location: TEST.php?error=INSERT-sqlerror='$stmt->error'");
+          exit();
+      } else {
+          mysqli_stmt_bind_param($stmt, "ssssss", $customerID, $street, $city, $state, $zipcode, $country);
+          if (!mysqli_stmt_execute($stmt)) {
+              header("Location: TEST.php?error=INSERT-sqlerror='$stmt->error'");
+              exit();
+          }
+      }
+
+      //SELECT latest orderID from above INSERT INTO orders to update
+      //orderdetails with the corresponding orderID
+      $sql = "SELECT orderID FROM orders WHERE customerID=? ORDER BY orderID DESC LIMIT 1";
+      $stmt = mysqli_stmt_init($connection);
+      if (!mysqli_stmt_prepare($stmt, $sql)) {
+          header("Location: TEST.php?error=SELECT-sqlerror='$stmt->error'");
+          exit();
+      } else {
+          mysqli_stmt_bind_param($stmt, "s", $customerID);
+          if (!mysqli_stmt_execute($stmt)) {
+              header("Location: TEST.php?error=SELECT-sqlerror='$stmt->error'");
+              exit();
+          } else {
+              $result = mysqli_stmt_get_result($stmt);
+              $row = mysqli_fetch_assoc($result);
+              $fetchedOrderID = $row['orderID'];
+          }
+      }
+
+      //get SESSION cart products in $result
+      if (!empty($_SESSION['cart'])) {
+          $cartContent = $_SESSION['cart'];
+          $in = str_repeat('?,', count($cartContent) - 1) . '?'; // placeholders
+          $sql = "SELECT * FROM products WHERE productID IN ($in); ";
+          $stmt = $connection->prepare($sql); // prepare
+          $types = str_repeat('s', count($cartContent)); //types
+          $stmt->bind_param($types, ...$cartContent); // bind array at once
+          $stmt->execute();
+          $result = $stmt->get_result(); // get the mysqli result
+      }
+
+      //INSERT INTO orderdetails the contents of shopping cart
+      while ($row = mysqli_fetch_assoc($result)) {
+          $productID = $row['productID'];
+          $key = array_search($row['productID'], $_SESSION['cart']);
+          $productQuantity = $_SESSION['cartQuantity'][$key];
+
+          $sql = "INSERT INTO orderdetails (orderID, productQuantity, productID) VALUES (?, ?, ?); ";
+          $stmt = mysqli_stmt_init($connection);
+          if (!mysqli_stmt_prepare($stmt, $sql)) {
+              header("Location: TEST.php?error=INSERTorderdetails-sqlerror='$stmt->error'");
+              exit();
+          } else {
+              mysqli_stmt_bind_param($stmt, "sss", $fetchedOrderID, $productQuantity, $productID);
+              if (!mysqli_stmt_execute($stmt)) {
+                  header("Location: TEST.php?error=INSERTorderdetails-sqlerror='$stmt->error'");
+                  exit();
+              }
+          }
+      }
+
+      unset($_SESSION['cart']);
+      unset($_SESSION['cartQuantity']);
       header("Location: ../orderSuccess.php");
       exit();
   } else {
