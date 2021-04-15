@@ -44,7 +44,7 @@ $products = $db->query($query);
             <?php
             if (isset($_SESSION['customerID'])) {
                 echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-                //echo "<p> You are logged in </p>";
+            //echo "<p> You are logged in </p>";
             } else {
                 //echo "<p> You are logged out </p>";
             }
@@ -88,17 +88,18 @@ $products = $db->query($query);
 
             <div class="column">
                 <form action="includes/addtocart.inc.php" method="post">
-                <img
-                        src="<?php echo $product['productImage'] ?> "
-                        class="GPUImg"
-                        alt="Picture Unavailable"
-                />
-
-                <a href="productView.php?productID=<?php echo $product['productID']?>" id="productViewLink"><?php echo $product['prodName']?></a>
-                <p><?php echo '$' . $product['prodPrice'] ?></p>
-                <p><?php echo 'Stock: ' . $product['prodStock'] ?></p>
-                <input type="hidden" name="productID" value="<?php echo $product['productID']; ?>" />
-                <button type="submit" class="addToCart" name="addtocart-submit" onclick="alert('Successfully added to cart!')">Add To Cart</button>
+                  <a href="productView.php?productID=<?php echo $product['productID'] ?>">
+                    <img
+                            src="<?php echo $product['productImage'] ?> "
+                            class="GPUImg"
+                            alt="Picture Unavailable"
+                    />
+                  </a>
+                  <a href="productView.php?productID=<?php echo $product['productID']?>" id="productViewLink"><?php echo $product['prodName']?></a>
+                  <p><?php echo '$' . $product['prodPrice'] ?></p>
+                  <p><?php echo 'Stock: ' . $product['prodStock'] ?></p>
+                  <input type="hidden" name="productID" value="<?php echo $product['productID']; ?>" />
+                  <button type="submit" class="addToCart" name="addtocart-submit" onclick="alert('Successfully added to cart!')">Add To Cart</button>
                 </form>
             </div>
             <?php } ?>

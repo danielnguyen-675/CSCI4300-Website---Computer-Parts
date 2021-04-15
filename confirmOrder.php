@@ -109,7 +109,7 @@
             <tr>
               <td>
                 <?php $img = $row['productImage']; ?>
-                <img class="prodImg" src="<?php echo $img ?>"/>
+                <a href="productView.php?productID=<?php echo $row['productID'] ?>"><img class="prodImg" src="<?php echo $img ?>"/></a>
               </td>
               <td class="tdborder" id="tdprodName">
                 <p class="productName"><?php echo $row['prodName']; ?></p>

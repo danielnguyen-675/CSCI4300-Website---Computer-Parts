@@ -11,7 +11,7 @@ $products = $db->query($query);
 <!DOCTYPE html>
 
 <html lang="en">
-<script src="/scripts/productView.js"></script>
+<script src="scripts/productView.js"></script>
 
 <head>
     <meta charset="UTF-8">
