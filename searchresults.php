@@ -92,7 +92,7 @@ session_start();
                   for ($r = 0; $r < $rowCount; $r++) {
                       echo "<tr>";
                       //second loop for columns
-                      for ($c = 0; $c <5; $c++) {
+                      for ($c = 0; $c <4; $c++) {
                           //check if there are any more items to iterate through
                           if ($itemsRemaining > 0) {
                               ?>
