@@ -10,7 +10,7 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <title>INSERT NAME OF SHOP</title>
+    <title>Neweregg</title>
     <link rel="stylesheet" href="stylesheets/homepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -26,7 +26,6 @@ session_start();
 
     <div class="mainNavigation">
         <a class="active" href="homepage.php">Home</a>
-        <a href="#">About</a>
         <a href="contact.php">Contact</a>
         <a href="account.php">Account</a>
         <a href="cart.php">Cart</a>
@@ -65,11 +64,15 @@ session_start();
 
     <main id="mainMain">
 
-        <h2>HOMEPAGE
-        </h2>
-        <h3>
-            DISPLAY FEATURED ITEMS & DISCOUNTED ITEMS
-        </h3>
+        <div id="welcome">
+            <br><br>
+            <h1>Welcome to Neweregg!</h1>
+
+            <p>Neweregg is the only place to buy computer parts for the best price.<br>
+            For prices like these, you'll never set foot outside again!</p>
+            <br><br>
+        </div>
+
         <?php
         if (isset($_GET['newPwd'])) {
             if ($_GET['newPwd'] == "success") {
@@ -90,10 +93,9 @@ session_start();
 
         ?>
 
-        <br>
-        <br>
-        <br>
-        <br>
+        <h2>Have a look at our current deals!</h2>
+
+        //
     </main>
 
 
