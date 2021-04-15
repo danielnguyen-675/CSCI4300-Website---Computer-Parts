@@ -81,7 +81,6 @@
 
         <div class="mainNavigation">
             <a href="homepage.php">Home</a>
-            <a href="#">About</a>
             <a href="contact.php">Contact</a>
             <a href="account.php">Account</a>
             <a href="cart.php" class="active">Cart</a>

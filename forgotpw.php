@@ -27,7 +27,6 @@ if (isset($_SESSION['customerID'])) {
 
         <div class="mainNavigation">
             <a class="active" href="homepage.php">Home</a>
-            <a href="#">About</a>
             <a href="contact.php">Contact</a>
             <a href="account.php">Account</a>
             <a href="cart.php">Cart</a>
