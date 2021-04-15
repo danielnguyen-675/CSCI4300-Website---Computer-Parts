@@ -1,10 +1,9 @@
 <?php
-require("includes/dbh.inc.php");
+require("./includes/connection.php");
+session_start();
 
-$sql = "SELECT * FROM products WHERE categoryName='GPU'";
-$result = mysqli_query($connection, $sql);
-$queryResult = mysqli_num_rows($result);
-
+$query = "SELECT * FROM products WHERE categoryName='GPU'";
+$products = $db->query($query);
 
 ?>
 
@@ -36,9 +35,9 @@ $queryResult = mysqli_num_rows($result);
     </header>
 
     <div class="mainNavigation">
-        <a class="active" href="homepage.php">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="homepage.php">Home</a>
+        <a href="about.php">About</a>
+        <a href="contact.php">Contact</a>
         <a href="editaccount.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
@@ -94,9 +93,11 @@ $queryResult = mysqli_num_rows($result);
                         class="GPUImg"
                         alt="Picture Unavailable"
                 />
-                <h4><?php echo $product['prodName'] ?></h4>
+
+                <a href="productView.php?productID=<?php echo $product['productID']?>" id="productViewLink"><?php echo $product['prodName']?></a>
                 <p><?php echo '$' . $product['prodPrice'] ?></p>
                 <p><?php echo 'Stock: ' . $product['prodStock'] ?></p>
+                <input type="hidden" name="productID" value="<?php echo $product['productID']; ?>" />
                 <button type="submit" class="addToCart" name="addtocart-submit" onclick="alert('Successfully added to cart!')">Add To Cart</button>
                 </form>
             </div>
@@ -110,7 +111,6 @@ $queryResult = mysqli_num_rows($result);
 
     <footer>
         <a href="#toTopPicture" id="toTop"><button type="button" class="sideMenuButton">Return to Top</button></a>
-
         <p>&copy; Neweregg</p>
     </footer>
 

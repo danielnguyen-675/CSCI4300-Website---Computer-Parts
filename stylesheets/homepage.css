@@ -250,6 +250,7 @@ body {
 
 .column img {
   width: 100%;
+  margin-bottom: 1em;
 }
 
 .column img:hover {
@@ -280,11 +281,11 @@ body {
   transform: translateX(-221%);
 }
 
-h4 {
-  color: #555;
-  padding-top: 9em;
+#productViewLink {
+  color: black;
   font-weight: bold;
-  margin: 0.3em;
+  text-decoration: none;
+  text-align: left;
 }
 
 .column p {

@@ -35,11 +35,11 @@ $products = $db->query($query);
     </header>
 
     <div class="mainNavigation">
-        <a class="active" href="homepage.php">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="homepage.php">Home</a>
+        <a href="about.php">About</a>
+        <a href="contact.php">Contact</a>
         <a href="editaccount.php">Account</a>
-        <a href="#">Cart</a>
+        <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
             if (isset($_SESSION['customerID'])) {
@@ -82,15 +82,18 @@ $products = $db->query($query);
         <div class="row">
             <?php foreach ($products as $product) { ?>
             <div class="column">
+                <form action="includes/addtocart.inc.php" method="post">
                 <img
                         src="<?php echo $product['productImage'] ?> "
                         class="GPUImg"
                         alt="Picture Unavaiable"
                 />
-                <h4><?php echo $product['prodName'] ?></h4>
+                <a href="productView.php?productID=<?php echo $product['productID']?>" id="productViewLink"><?php echo $product['prodName']?></a>
                 <p><?php echo '$' . $product['prodPrice'] ?></p>
                 <p><?php echo 'Stock: ' . $product['prodStock'] ?></p>
-                <button type="button" class="addToCart" onclick="alert('Successully added to cart!')">Add To Cart</button>
+                <input type="hidden" name="productID" value="<?php echo $product['productID']; ?>" />
+                <button type="submit" class="addToCart" name="addtocart-submit" onclick="alert('Successfully added to cart!')">Add To Cart</button>
+                </form>
             </div>
             <?php } ?>
     </div>
@@ -99,7 +102,7 @@ $products = $db->query($query);
 
     <footer>
         <a href="#toTopPicture" id="toTop"><button type="button" class="sideMenuButton">Return to Top</button></a>
-        <p>&copy; INSERT NAME OF SHOP HERE</p>
+        <p>&copy; Neweregg</p>
     </footer>
 
 </body>
