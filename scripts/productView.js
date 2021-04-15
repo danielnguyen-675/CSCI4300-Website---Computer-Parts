@@ -1,1 +1,8 @@
-//Need to make the +/- button functional where the amount price is changed and the quantity being purchased is passed to
+
+function increment() {
+    document.getElementById('count').stepUp();
+}
+
+function decrement() {
+    document.getElementById('count').stepDown();
+}

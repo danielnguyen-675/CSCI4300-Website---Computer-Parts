@@ -13,18 +13,7 @@ $queryResult = mysqli_num_rows($result);
 <html lang="en">
 
 <head>
-    <style>
-        .prodImg {
-            width: 120%;
-        }
 
-        .prodContainer {
-            padding-left: 5px;
-            padding-bottom: 25px;
-            padding-right: 40px;
-            padding-top: 10px;
-        }
-    </style>
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
     <link rel="stylesheet" href="stylesheets/display.css">
@@ -48,7 +37,7 @@ $queryResult = mysqli_num_rows($result);
             <?php
             if (isset($_SESSION['customerID'])) {
                 echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-            //echo "<p> You are logged in </p>";
+                //echo "<p> You are logged in </p>";
             } else {
                 //echo "<p> You are logged out </p>";
             }
@@ -86,13 +75,13 @@ $queryResult = mysqli_num_rows($result);
                 echo "<tr>";
                 for ($c = 0; $c < 5; $c++) {
                     if ($itemsRemaining > 0) {
-                        ?>
+            ?>
                         <td>
                             <?php
                             $row = mysqli_fetch_assoc($result);
-                        $img = $row['productImage'];
-                        $prodName = $row['prodName'];
-                        $prodID = $row['productID']; ?>
+                            $img = $row['productImage'];
+                            $prodName = $row['prodName'];
+                            $prodID = $row['productID']; ?>
                             <div class="prodContainer">
                                 <form action="includes/addtocart.inc.php" method="post">
                                     <img src="<?php echo $img ?>" class="prodImg" />

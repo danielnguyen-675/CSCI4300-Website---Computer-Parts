@@ -11,9 +11,11 @@ $products = $db->query($query);
 <!DOCTYPE html>
 
 <html lang="en">
-<script src="/scripts/productView.js"></script>
+<script src="./scripts/productView.js"></script>
 
 <head>
+    <script>
+    </script>
 
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
@@ -40,7 +42,7 @@ $products = $db->query($query);
             <?php
             if (isset($_SESSION['customerID'])) {
                 echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-            //echo "<p> You are logged in </p>";
+                //echo "<p> You are logged in </p>";
             } else {
                 //echo "<p> You are logged out </p>";
             }
@@ -92,14 +94,15 @@ $products = $db->query($query);
             <p><b>Manufacturer: </b><?php echo $manufacturer ?> </p>
             <p id="itemDesc"><b>Item Description: </b><?php echo $description ?></p>
             <form action="includes/addtocart.inc.php" method="post">
-              <div id="input_div">
-                  <input type="text" name="productQuantity" size="2" value="1" maxlength="2" id="count">
-                  <input type="button" value="-" id="mins" onclick="minus()">
-                  <input type="button" value="+" id="plus" onclick="plus()">
-              </div>
-              <p id="amount"><b>Amount: </b>$<?php echo $price ?></p>
-              <input type="hidden" name="productID" value="<?php echo $productsID; ?>"/>
-              <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button>
+                <div id="input_div">
+                    <input type="number" name="productQuantity" size="2" value="1" maxlength="2" id="count" min="1" max="99">
+                    <input type="button" value="-" id="mins" onclick="decrement()">
+                    <input type="button" value="+" id="plus" onclick="increment()">
+                </div>
+                <p id="amount"><b>Amount: $<?php echo $price ?></b>
+                </p>
+                <input type="hidden" name="productID" value="<?php echo $productsID; ?>" />
+                <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button>
             </form>
         </div>
 
@@ -140,8 +143,4 @@ $products = $db->query($query);
 </body>
 
 
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> main
