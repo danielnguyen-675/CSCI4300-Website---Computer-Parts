@@ -14,9 +14,6 @@ $products = $db->query($query);
 <script src="./scripts/productView.js"></script>
 
 <head>
-    <script>
-    </script>
-
     <meta charset="UTF-8">
     <title>INSERT NAME OF SHOP</title>
     <link rel="stylesheet" href="stylesheets/productView.css">
@@ -35,7 +32,7 @@ $products = $db->query($query);
     <div class="mainNavigation">
         <a class="active" href="homepage.php">Home</a>
         <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="contact.php">Contact</a>
         <a href="editaccount.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
@@ -48,7 +45,6 @@ $products = $db->query($query);
             }
             ?>
         </form>
-
 
         <div class="search-container">
             <form action="searchresults.php" method="post">
@@ -132,13 +128,9 @@ $products = $db->query($query);
         <br>
     </main>
 
-
-
     <footer>
         <p>&copy; Neweregg</p>
     </footer>
-
-
 
 </body>
 

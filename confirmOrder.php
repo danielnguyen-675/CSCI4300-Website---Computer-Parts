@@ -54,7 +54,7 @@
         <div class="mainNavigation">
             <a href="homepage.php">Home</a>
             <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="contact.php">Contact</a>
             <a href="editaccount.php">Account</a>
             <a href="cart.php" class="active">Cart</a>
             <form action="includes/logout.inc.php" method="post">
@@ -152,6 +152,15 @@
               <label>CVC:</label>
               <input id="cvc" name="cvc" type="text" required>
               <span class="required" id="">*</span><br>
+
+              <input type="hidden" name="firstName" value="<?php echo $firstName; ?>"/>
+              <input type="hidden" name="lastName" value="<?php echo $lastName; ?>"/>
+              <input type="hidden" name="phoneNumber" value="<?php echo $phoneNumber; ?>"/>
+              <input type="hidden" name="street" value="<?php echo $street; ?>"/>
+              <input type="hidden" name="city" value="<?php echo $city; ?>"/>
+              <input type="hidden" name="state" value="<?php echo $state; ?>"/>
+              <input type="hidden" name="zipcode" value="<?php echo $zipcode; ?>"/>
+              <input type="hidden" name="country" value="<?php echo $country; ?>"/>
 
               <input id="confirm" type="submit" value="Confirm and Pay" name="confirmorder-submit">
               <input id="reset" type="reset" value="Clear Fields"><br>

@@ -147,7 +147,7 @@ if (isset($_POST['registration-submit'])) {
                 $mail->isHTML(true);
                 $mail->Username = 'txl.workspace@gmail.com';
                 $mail->Password = '#txlwork';
-                $mail->SetFrom('no-reply@sktstore.com');
+                $mail->SetFrom('no-reply@neweregg.com');
                 $mail->Subject = 'Activate Your Account';
 
                 //tokens - authentication
@@ -189,7 +189,7 @@ if (isset($_POST['registration-submit'])) {
                     exit();
                 } else {
                     //all successful, redirect to submission message
-                    header("Location: /computerparts/submission.php");
+                    header("Location: ../submission.php");
                     exit();
                 }
             } catch (phpmailerException $e) {
