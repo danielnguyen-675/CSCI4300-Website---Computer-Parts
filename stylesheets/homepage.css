@@ -32,9 +32,8 @@ header h3 {
 
 #mainMain {
   float: right;
-  padding-left: 3em;
-  padding-right: 2em;
-  max-width: 82%;
+  width: 75%;
+  overflow: auto;
 }
 
 
@@ -65,8 +64,9 @@ body {
 
 #leftSide{
   float: left;
-  max-width: 18%;
+  width: 25%;
   height: 1800px;
+  background-color: black;
 }
 
 
@@ -131,6 +131,8 @@ body {
   display: block;
   padding-left: 20px;
   padding-right: 15px;
+  padding-bottom: 10px;
+  font-size: 110%;
   text-decoration: none;
 }
 
@@ -317,3 +319,46 @@ body {
   color: #ff3333;
 }
 
+/* Jack's homepage Stuff */
+
+main {
+  text-align: center;
+}
+
+#welcome {
+  background-image: linear-gradient(to right, black, red);
+  color: white;
+  margin: 0;
+}
+
+#welcome p {
+  font-size: 150%;
+}
+
+.productRow {
+  display: inline-block;
+  width: 250px;
+}
+
+.productTile {
+  padding: 1em;
+  overflow: auto;
+}
+
+.productTile:hover {
+  border: 2px solid red;
+}
+
+.productTile img {
+  width: 200px;
+  display: block;
+}
+
+.productRow a:link, .productRow a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.cf {
+  clear: both;
+}
