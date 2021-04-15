@@ -337,10 +337,12 @@ main {
 
 .productRow {
   display: inline-block;
+  width: 250px;
 }
 
 .productTile {
-  float: left;
+  padding: 1em;
+  overflow: auto;
 }
 
 .productTile:hover {
@@ -349,4 +351,14 @@ main {
 
 .productTile img {
   width: 200px;
+  display: block;
+}
+
+.productRow a:link, .productRow a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.cf {
+  clear: both;
 }

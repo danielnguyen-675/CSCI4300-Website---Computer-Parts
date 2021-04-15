@@ -1,6 +1,22 @@
 <?php
-require("./includes/dbh.inc.php");
-session_start();
+    require("./includes/dbh.inc.php");
+    session_start();
+
+    //do some queries rather than display products statically
+    $ids = array(1002, 1003, 1004, 1016);
+    $names = array();
+    $prices = array();
+    $images = array();
+    foreach ( $ids as $i ) {
+        $query = "SELECT prodName, prodPrice, productImage FROM products WHERE productID=$i";
+
+        $row = $connection->query($query);
+        foreach ( $row as $r ) {
+            array_push($names, $r['prodName']);
+            array_push($prices, $r['prodPrice']);
+            array_push($images, $r['productImage']);
+        }
+    }
 
 ?>
 
@@ -95,7 +111,26 @@ session_start();
 
         <h2>Have a look at our current deals!</h2>
 
-        //
+        <?php 
+            for( $i = 0; $i < count($ids); $i++ ) {
+                $id = $ids[$i];
+                $name = $names[$i];
+                $price = $prices[$i];
+                $img = $images[$i];
+
+                echo '<div class="productRow">';
+                    echo '<a href="productView.php?productID='.$id.'">';
+                        echo '<div class="productTile">';
+                            echo '<img src="'.$img.'"><br>';
+                            echo $name.'<br><br>';
+                            echo '$'.$price;
+                        echo '</div>';
+                    echo '</a>';
+                echo '</div>';
+
+                echo '<div class="cf"><br></div>';
+            }
+        ?>
     </main>
 
 
