@@ -32,9 +32,9 @@
       $mail = new PHPMailer\PHPMailer\PHPMailer();
       $mail->isSMTP();
       $mail->SMTPAuth = true;
-      $mail->SMTPSecure = 'ssl';
-      $mail->Host = 'ssl://smtp.gmail.com';
-      $mail->Port = '465';
+      $mail->SMTPSecure = 'tls';
+      $mail->Host = 'smtp.gmail.com';
+      $mail->Port = '587';
       $mail->Username = 'txl.workspace@gmail.com';
       $mail->Password = '#txlwork';
       $mail->SetFrom('no-reply@neweregg.com');
@@ -136,7 +136,7 @@
 
           $message .= "<p><b>Quantity:</b>  ".$_SESSION['cartQuantity'][$key]."</p><br>";
       }
-      
+
       $mail->Body = $message;
       $mail->isHTML(true);
       $mail->AddAddress($email);
