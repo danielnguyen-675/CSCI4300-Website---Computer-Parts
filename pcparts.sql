@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 13, 2021 at 06:17 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Host: 127.0.0.1:3555
+-- Generation Time: Apr 16, 2021 at 05:46 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `address` (
   `addressID` int(11) NOT NULL,
-  `customerID` int(11) NOT NULL,
-  `street` varchar(45) NOT NULL,
-  `city` varchar(45) NOT NULL,
-  `state` varchar(45) NOT NULL,
-  `zipcode` varchar(45) NOT NULL,
-  `country` varchar(45) NOT NULL
+  `customerID` int(11) DEFAULT NULL,
+  `street` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `zipcode` varchar(45) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -42,8 +42,9 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`addressID`, `customerID`, `street`, `city`, `state`, `zipcode`, `country`) VALUES
-(2, 6, 'STREET', 'CITY', 'STATE', 'ZIPCODE', 'Afghanistan'),
-(3, 7, 'asd', 'asd', 'asd', 'asd', 'Afghanistan');
+(9, 13, 'asd', 'asd', 'asd', 'asd', 'Afghanistan'),
+(12, 16, 'street', 'city', 'state', 'zip', 'Barbados'),
+(13, 17, 'street', 'city', 'state', 'zipcode', 'Afghanistan');
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,7 @@ CREATE TABLE `customer` (
   `email` varchar(45) NOT NULL,
   `password` longtext NOT NULL,
   `phoneNumber` varchar(45) NOT NULL,
-  `userStatus` int(11) NOT NULL
+  `userStatus` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -77,8 +78,9 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerID`, `firstName`, `lastName`, `email`, `password`, `phoneNumber`, `userStatus`) VALUES
-(6, 'FIRSTNAME', 'LASTNAME', 'monib53445@684hh.com', '$2y$10$JaTRmkeFbbIasaXPwgjLHO93YZhLxzm6U5jtwpXYNG4qNBlN8OiVa', '(789) 789-7897', 1),
-(7, 'test', 'test', 'test@test.com', 'ApplePie123!', '(123) 123-1234', 0);
+(13, 'test', 'test', 'xawowo7081@art2427.com', '$2y$10$hQ8BdwLsZapndtZMDtbmruoE5YEOuB2J1Ju5J0l2jY6k48gLk7zUm', '(123) 123-1234', 1),
+(16, 'First', 'Last', 'tamibi9206@tripaco.com', '$2y$10$aljwwf/NSGCeWWxn/bL/LeKVGxPv.BWhlP3u3z8a9bYIdhFH27Hdy', '(123) 123-1234', 1),
+(17, 'John', 'Smith', 'vaname1875@zcai55.com', '$2y$10$9Knk2DwNkWVE1q.xz2cy6e2.OsVbXO3aWkMxK0IeQFeSBxREudKfi', '(123) 123-1234', 1);
 
 -- --------------------------------------------------------
 
@@ -100,12 +102,33 @@ CREATE TABLE `manufacturer` (
 --
 
 CREATE TABLE `orderdetails` (
+  `orderDetailsID` int(11) NOT NULL,
   `orderID` int(11) NOT NULL,
-  `orderQuantity` int(11) NOT NULL,
+  `productQuantity` int(11) NOT NULL,
   `prodTotalPrice` int(11) NOT NULL,
-  `productID` int(11) NOT NULL,
-  `orderStatus` varchar(45) NOT NULL
+  `productID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orderdetails`
+--
+
+INSERT INTO `orderdetails` (`orderDetailsID`, `orderID`, `productQuantity`, `prodTotalPrice`, `productID`) VALUES
+(4, 95, 2, 0, 1001),
+(5, 95, 1, 0, 1082),
+(6, 95, 4, 0, 1121),
+(7, 95, 3, 0, 1122),
+(8, 96, 3, 0, 1081),
+(9, 96, 4, 0, 1121),
+(10, 96, 3, 0, 1122),
+(11, 97, 9, 0, 1002),
+(12, 97, 1, 0, 1081),
+(13, 97, 5, 0, 1108),
+(14, 98, 3, 0, 1004),
+(15, 98, 1, 0, 1121),
+(16, 99, 4, 0, 1002),
+(17, 100, 1, 0, 1002),
+(18, 100, 1, 0, 1121);
 
 -- --------------------------------------------------------
 
@@ -116,9 +139,27 @@ CREATE TABLE `orderdetails` (
 CREATE TABLE `orders` (
   `orderID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
-  `orderStatus` varchar(45) NOT NULL,
-  `shipmentStatus` varchar(45) NOT NULL
+  `street` varchar(55) NOT NULL,
+  `city` varchar(55) NOT NULL,
+  `state` varchar(55) NOT NULL,
+  `zipcode` varchar(55) NOT NULL,
+  `country` varchar(55) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `phoneNumber` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `customerID`, `street`, `city`, `state`, `zipcode`, `country`, `firstName`, `lastName`, `phoneNumber`) VALUES
+(95, 16, 'TESTORDERDETAILS', 'TESTORDERDETAILS', 'TESTORDERDETAILS', 'TESTORDERDETAILS', 'Aruba', '', '', ''),
+(96, 16, 'CHANGEDSTREET', 'CHANGEDCITY', 'CHANGEDSTATE', 'CHANGEDZIP', 'Bulgaria', '', '', ''),
+(97, 17, 'street123', 'city123', 'state123', 'zipcode123', 'Belize', '', '', ''),
+(98, 17, 'street5324', 'city32453324', 'state5324534', 'zipcode35253324', 'Bahrain', '', '', ''),
+(99, 17, 'street123', 'city123', 'state123', 'zipcode123', 'Bangladesh', 'Adam', 'Brown', '(333) 333-3333'),
+(100, 17, 'street435324', 'city345324', 'state324', 'zipcode3245324', 'Brunei Darussalam', 'Adam', 'Johnson', '(444) 444-4444');
 
 -- --------------------------------------------------------
 
@@ -130,10 +171,24 @@ CREATE TABLE `paymentinfo` (
   `payInfoID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
   `cardholderName` varchar(45) NOT NULL,
-  `cardNumber` varchar(45) NOT NULL,
+  `cardNumber` text NOT NULL,
   `expiryDate` date NOT NULL,
-  `cvc` int(11) NOT NULL
+  `cvc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `paymentinfo`
+--
+
+INSERT INTO `paymentinfo` (`payInfoID`, `customerID`, `cardholderName`, `cardNumber`, `expiryDate`, `cvc`) VALUES
+(32, 16, 'TESTING555', '$2y$10$3xq6jwXFEV3drCXkqZA.9euGs13L5u1pdkyVa4jp6Cnrrmjub.6KW', '2021-04-30', '$2y$10$h8ttIcN2Ecyp483i4H46I.DDrdgm3TePO589A.TTDf/NpsHRvxyjG'),
+(33, 16, 'TESTING555', '$2y$10$3xq6jwXFEV3drCXkqZA.9euGs13L5u1pdkyVa4jp6Cnrrmjub.6KW', '2021-04-30', '$2y$10$h8ttIcN2Ecyp483i4H46I.DDrdgm3TePO589A.TTDf/NpsHRvxyjG'),
+(34, 16, 'TESTING555', '$2y$10$3xq6jwXFEV3drCXkqZA.9euGs13L5u1pdkyVa4jp6Cnrrmjub.6KW', '2021-04-30', '$2y$10$h8ttIcN2Ecyp483i4H46I.DDrdgm3TePO589A.TTDf/NpsHRvxyjG'),
+(35, 16, 'TESTING555', '$2y$10$3xq6jwXFEV3drCXkqZA.9euGs13L5u1pdkyVa4jp6Cnrrmjub.6KW', '2021-04-30', '$2y$10$h8ttIcN2Ecyp483i4H46I.DDrdgm3TePO589A.TTDf/NpsHRvxyjG'),
+(36, 17, 'ASDASDSA', '$2y$10$NZ0rz4k7BuEYhl3Nym7L/eQwWT12An27sqznCkjAJfRKaThCS/BV2', '2021-04-15', '$2y$10$mjRYTr3g6UuuwK0UYSAwPu0iwohslUh9ZN9p567gf4BFTaxdMvv4u'),
+(37, 17, 'ASDASDSA', '$2y$10$NZ0rz4k7BuEYhl3Nym7L/eQwWT12An27sqznCkjAJfRKaThCS/BV2', '2021-04-15', '$2y$10$mjRYTr3g6UuuwK0UYSAwPu0iwohslUh9ZN9p567gf4BFTaxdMvv4u'),
+(38, 17, 'ASDASDSA', '$2y$10$NZ0rz4k7BuEYhl3Nym7L/eQwWT12An27sqznCkjAJfRKaThCS/BV2', '2021-04-15', '$2y$10$mjRYTr3g6UuuwK0UYSAwPu0iwohslUh9ZN9p567gf4BFTaxdMvv4u'),
+(39, 17, 'ASDASDSA', '$2y$10$NZ0rz4k7BuEYhl3Nym7L/eQwWT12An27sqznCkjAJfRKaThCS/BV2', '2021-04-15', '$2y$10$mjRYTr3g6UuuwK0UYSAwPu0iwohslUh9ZN9p567gf4BFTaxdMvv4u');
 
 -- --------------------------------------------------------
 
@@ -157,7 +212,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manufacturerName`, `categoryName`, `productImage`, `productDescription`) VALUES
-(1001, 'AMD Ryzen 7 3700X', 100, 329.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImageCompressAll300/19-113-567-V11.jpg', '3rd Gen Ryzen mysql_real_escape_string\r\nSocket AM4\r\nMax Boost Frequency 4.4 GHz\r\nDDR4 Support\r\nL2 Cache 4MB\r\nL3 Cache 32MB\r\nThermal Design Power 65W\r\nWith Wraith Prism cooler'),
+(1001, 'AMD Ryzen 7 3700X', 100, 329.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImageCompressAll300/19-113-567-V11.jpg', '3rd Gen Ryzen\r\nSocket AM4\r\nMax Boost Frequency 4.4 GHz\r\nDDR4 Support\r\nL2 Cache 4MB\r\nL3 Cache 32MB\r\nThermal Design Power 65W\r\nWith Wraith Prism cooler'),
 (1002, 'GIGABYTE Geforce RTX 2060 6GB Graphics Card', 500, 896.88, 'Gigabyte', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-932-115-V07.jpg', 'NVIDIA Turing Architechure & Real Time Ray Tracing\r\nWINDFORCE 2X Cooling System with Alternate Spinning Fans\r\nIntuitive Controls with AORUS Engine\r\nCore Clock 1755 MHz\r\n'),
 (1003, 'ASUS TUF Gaming GeForce GTX 1650, 4GB', 800, 482.99, 'ASUS ', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-126-445-V01.jpg', '4GB 128-Bit GDDR6\r\nCore Clock 1410 MHz\r\nBoost Clock 1755 MHz (Gaming Mode), 1785 MHz (OC Mode)\r\n1 x DVI-D 1 x HDMI 2.0b 1 x DisplayPort 1.4\r\n896 CUDA Cores\r\nPCI Express 3.0'),
 (1004, 'MSI GeForce GTX 1660 6GB', 200, 849.99, 'MSI', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-137-476-V01.jpg', '6GB 192-Bit GDDR6\r\nBoost Clock 1830 MHz\r\n1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1408 CUDA Cores\r\nPCI Express 3.0 x16\r\n'),
@@ -271,7 +326,7 @@ INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manu
 (1112, 'LG ULTRAGEAR 32GK65B-B 32\" 144HZ', 200, 324.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-025-965-S01.jpg', '2560 x 1440 Quad HD 2K Resolution\r\n1ms with Motion Blur Reduction\r\n144Hz Refresh Rate\r\n2 HDMI, DisplayPort (1.2) Video Inputs\r\nRadeon FreeSync Technology\r\nNVIDIA G-SYNC Compatible'),
 (1113, 'LG UltraGear 38GL950G-B 38\"', 50, 1799.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-025-974-V01.jpg', '3840 x 1600 WQHD+ 2K Resolution\r\n1ms Response Time\r\n144Hz (GTG), 175Hz (OC) Refresh Rate\r\nHDMI, DisplayPort Video Input\r\nNVIDIA G-SYNC Technology\r\nFlicker Safe Technology\r\nTilt, Height Adjustable\r\n'),
 (1114, 'SAMSUNG S22E450D 22\" Monitor', 400, 109.99, 'Samsung', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-022-315-09.jpg', '1920 x 1080 Full HD Resolution @ 60Hz\r\nVGA, DVI, DisplayPort Video Inputs\r\nMega Dynamic Contrast Ratio\r\nHeight, Pivot, Swivel, Tilt Adjustable\r\n'),
-(1115, 'BenQ Zowie XL2740 27\" Full HD Gaming Monitor', 200, 549, 'BenQ', 'Monitors', 'https://c1.neweggimages.com/ProductImage/0EP-004Z-00003-V13.jpg', 'G-Sync Compatible & FreeSync eSports Monitor\r\n1920 x 1080 1ms (GTG)\r\nDCR 12,000,000:1 (1,000:1)\r\nDVI-DL, 2 x HDMI, DP 1.2 Headphone & Mic Jack\r\n100 x 100mm VESA Mounting\r\nPivot Swivel Tilt Height Adjustable Stand'),
+(1115, 'BenQ Zowie XL2740 27\" Full HD Gaming Monitor', 200, 549, 'BenQ', 'Monitors', 'https://c1.neweggimages.com/ProductImage/0EP-004Z-00003-V13.jpg', 'G-Sync Compatible & FreeSync eSports Monitor\\r\\n1920 x 1080 1ms (GTG)\\r\\nDCR 12,000,000:1 (1,000:1)\\r\\nDVI-DL, 2 x HDMI, DP 1.2 Headphone & Mic Jack\\r\\n100 x 100mm VESA Mounting\\r\\nPivot Swivel Tilt Height Adjustable Stand'),
 (1116, 'LG 29BN650-B 29\" 21:9 UltraWide', 300, 219.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/1B4-008M-001X5-S01.jpg', '2560 x 1080 75 Hz\r\nHDMI DisplayPort\r\n1,000:1\r\n16.7 Million\r\nHeight: 150mm\r\nTilt: -5° to 35°\r\n'),
 (1117, 'LG UltraWide 49WL95C-WE 49\"', 75, 1499.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-026-095-S05.jpg', '5120 x 1440 60 Hz\r\nHDMI DisplayPort USB 3.0\r\n1,000:1'),
 (1118, 'Lenovo ThinkVision P24h-20 23.8\"', 300, 232.99, 'Lenovo', 'Monitors', 'https://c1.neweggimages.com/ProductImage/A6ZPD2005063XUDC.jpg', '23.8\" QHD (2560 x 1440) 3-side Near-edgeless display\r\nFactory calibrated color accuracy with multiple color gamut\r\nUSB Type-C, HDMI, DP, USB hub and daisy chain\r\nErgonomic and sapace-saving design & UE\r\nIPS Panel\r\n'),
@@ -347,35 +402,6 @@ CREATE TABLE `useractivate` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `useractivate`
---
-
-INSERT INTO `useractivate` (`userActivateID`, `userActivateEmail`, `userActivateSelector`, `userActivateToken`, `userActivateExpires`) VALUES
-(3, 'test@test.com', '73594e2ce6e0c8bd', '$2y$10$Lr4MAp8FfAy9mElfFH1WFuK1s4eIf6NWDxpyHGZc4t1ZAW7zprGgK', '1617972276'),
-(4, 'dnmgr27@gmail.com', '361c88e6376fb2d7', '$2y$10$qsSaT/i1Uu5gSnm2lY1tqe0XnV0bku/VE02eFalYU5ADQKCgljmHG', '1618119696'),
-(5, 'dnmgr27@gmail.com', '6f02dcce9a8cd4f0', '$2y$10$magEaYQe.juJOGZ/d7FBauZcvPAv2lrBedOa.fWI/cr/H6pfwMazO', '1618119775'),
-(6, 'dnmgr27@gmail.com', 'fb77420fd6aec01c', '$2y$10$IK2gfRs0ubIn3jX0Z12NVO.8tep50ZRK3ejmA17IPd4FNVcugrAoO', '1618165465'),
-(7, '123@gmail.com', '467eed8515bd18a3', '$2y$10$.8I2HVlOgqQCHvU7JH.QQudylIHBlLAxU.ehCNh64ITYOwG4InrX6', '1618169423'),
-(8, 'dnmgr27@gmail.com', '2179e6f912ea4107', '$2y$10$SDVL/l2O8S0bJA1sv37.z.4jWB69tLdL3guVjPw2wkC5pITNJY0DG', '1618192244'),
-(9, 'dnmgr27@gmail.com', 'ce9c80b4c52e97fa', '$2y$10$.ALPDx5lUGghUie7p9krfup6gPW.1nZs2Hiws84RnjiwL6lkMTON2', '1618192793'),
-(10, 'dnmgr27@gmail.com', '39343b6816c848b9', '$2y$10$FEjtPEQUtx52LpGIT95Ose7UltlPxG7DIsPyjZHLqX436NbpLgqdu', '1618193364'),
-(11, 'dnmgr27@gmail.com', 'b366f992c592c93a', '$2y$10$X8jgujQXp6rzbzS3dFkgc.O1PXkC3ivK5s9aFIwaPQmN58tgWEana', '1618193699'),
-(12, 'dnmgr27@gmail.com', 'bb333c9ba3727cfc', '$2y$10$Wb8sRTRsKG7dFsXs9ef/TuSm0ipZxXY/gjgl/j607V60Xv56xmRTG', '1618193752'),
-(13, 'dnmgr27@gmail.com', '9995cb65acabc7bf', '$2y$10$apadYxJ4nfRWHXIYiQI5cOC2PVEzbRUB6UcfxpJfmtekMmYGfA5Hi', '1618193795'),
-(14, 'dnmgr27@gmail.com', '701a2d2743d245c1', '$2y$10$pFwPMSJ78blOh2mlZy.Tx.MdqvTy3.2KUkJzohF9EdWtN/9thCpW6', '1618194765'),
-(15, 'dnmgr27@gmail.com', '392ee3f6ea270323', '$2y$10$y3rslm8RGoJfqdxcQLyy8OyTj7QYbYsa4Sllue3I6j4ysi3FNU3kS', '1618194808'),
-(16, 'dnmgr27@gmail.com', 'ebb76a79516548d1', '$2y$10$QyInALxLjseoA2.FmU/CS.8B5JG1Pa4GxQrHbmL.SF9vQV4paO9zO', '1618195448'),
-(17, 'dnmgr27@gmail.com', '6c97b3e967662e51', '$2y$10$nU1o1uT0WCIlpogbiq.aROTf8BQfpHte6d2RghXuI19OomLbx47Fu', '1618195529'),
-(18, 'dnmgr27@gmail.com', 'c2b5531fb72751d8', '$2y$10$yLVYVdVdRbXdxBmX/luo7O7T4ZeARvbLc64dokzT7Fj45gldjWMBK', '1618195721'),
-(19, 'dnmgr27@gmail.com', 'a9dc5bf9b5cd8b24', '$2y$10$SVuZitrgAq/t.1OhbKIIGeipSzVAwJLW9kLrjgJhImqosI.X2U5JK', '1618195912'),
-(20, 'dnmgr27@gmail.com', '82b075df7d1448a9', '$2y$10$N/2T0UH.LdpADOphxVWUseJzG/CMOYgpKBLFfpNzdV1hrE0MbXvdq', '1618196099'),
-(21, 'ddn53340@uga.edu', '281baa7c1ecd7b32', '$2y$10$CyHwS93cZdh3ybRJ3pY8xe94/gjqDWvmEqfkwQ2irs1EFhIE/MK4S', '1618196228'),
-(22, 'dnmgr27@gmail.com', '29111f3868720db1', '$2y$10$aoQjCrBXzj7iyYEPVB4CFeiRthnL4LWYFrd3Awx6WvilzlQ3UCXtO', '1618196450'),
-(23, 'dnmgr27@gmail.com', 'da6c6f159b130195', '$2y$10$8rAh96BruVaiuaSw6YWJKOefoGfTF.E2FmzvdhYIw2660pwU8KEn2', '1618197055'),
-(24, 'dnmgr27@gmail.com', '6e40446c93103b8a', '$2y$10$By60yTKyA4.JgZ23Uv1S0OQ.abn6KFCFPyqlVa5PfrgEQMtGO6krm', '1618197378'),
-(25, 'dnmgr27@gmail.com', 'ec8c091329bc5cfc', '$2y$10$fZxurClOHMvZdrens47q0ulZjoYs8KVvk8Q6pVNBxsmKZbTRL6Z.a', '1618198154');
-
---
 -- Indexes for dumped tables
 --
 
@@ -411,7 +437,7 @@ ALTER TABLE `manufacturer`
 -- Indexes for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  ADD PRIMARY KEY (`orderStatus`),
+  ADD PRIMARY KEY (`orderDetailsID`),
   ADD KEY `orderID` (`orderID`),
   ADD KEY `productID` (`productID`);
 
@@ -420,9 +446,7 @@ ALTER TABLE `orderdetails`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderID`),
-  ADD KEY `customerID` (`customerID`),
-  ADD KEY `orderStatus` (`orderStatus`),
-  ADD KEY `shipmentStatus` (`shipmentStatus`);
+  ADD KEY `customerID` (`customerID`);
 
 --
 -- Indexes for table `paymentinfo`
@@ -468,7 +492,7 @@ ALTER TABLE `useractivate`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -480,7 +504,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `manufacturer`
@@ -489,16 +513,22 @@ ALTER TABLE `manufacturer`
   MODIFY `manufacturerID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `orderdetails`
+--
+ALTER TABLE `orderdetails`
+  MODIFY `orderDetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `paymentinfo`
 --
 ALTER TABLE `paymentinfo`
-  MODIFY `payInfoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `payInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -510,7 +540,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `pwdreset`
 --
 ALTER TABLE `pwdreset`
-  MODIFY `pwdResetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `pwdResetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `shipments`
@@ -522,7 +552,7 @@ ALTER TABLE `shipments`
 -- AUTO_INCREMENT for table `useractivate`
 --
 ALTER TABLE `useractivate`
-  MODIFY `userActivateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `userActivateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -558,9 +588,7 @@ ALTER TABLE `orderdetails`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`orderStatus`) REFERENCES `orderdetails` (`orderStatus`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`shipmentStatus`) REFERENCES `shipments` (`shipmentStatus`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`);
 
 --
 -- Constraints for table `paymentinfo`
