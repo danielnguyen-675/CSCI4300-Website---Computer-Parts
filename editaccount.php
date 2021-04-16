@@ -45,6 +45,21 @@
    $zipcode = trim($row['zipcode']);
    $country = trim($row['country']);
 
+   //display error message if invalid inputs given
+   $errmsg = "";
+   if ( isset($_GET['error']) ) {
+       $error = $_GET['error'];
+       if ( $error == "wrongpass" ) {
+           $errmsg = "Current password is incorrect.";
+       }
+   }
+
+   //display message if password is successfully changed
+   $succmsg = "";
+   if ( isset($_GET['edit']) ) {
+       $succmsg = "Your password has been changed!";
+   }
+
    ?>
 
 <!DOCTYPE html>
@@ -372,11 +387,14 @@
                 <input id="infosubmit" type="submit" name="editaccount-info-submit" value="Update Account">
                 <input id="inforeset" type="reset" value="Reset Fields"><br>
 
+            <p><?php echo $succmsg ?></p>
+
             </form>
             <form id="passwordinfo" action="includes/editaccount-pw.inc.php" method="post" onsubmit="return checkFields()">
 
               <label> Current: </label>
-              <input type="password" name ="currentPassword" placeholder="" required><br>
+              <input type="password" name ="currentPassword" placeholder="" required>
+              <span class="required"><?php echo $errmsg ?></span><br>
 
               <!-- keeps label and input together when error message displayed -->
               <div id="anchor">
