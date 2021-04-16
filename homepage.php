@@ -67,14 +67,14 @@
 
     <aside id="leftSide">
         <div class="vertical-menu">
-            <a href="./displayGPU.php" >Graphics Cards</a>
-            <a href="./displayCPU.php">CPUs</a>
-            <a href="./displayMouseAndKey.php">Mouse & Keyboard</a>
-            <a href="./displayRAM.php">RAM</a>
-            <a href="./displayPowerSupplies.php">Power Supplies</a>
-            <a href="./displayStorage.php">Storage</a>
-            <a href="./displayMonitors.php">Monitors</a>
-            <a href="./displayHeadsetsAndSpeakers.php">Headsets & Speakers</a>
+            <a href="./displayCategories.php?categoryName=GPU" class="active">Graphics Cards</a>
+            <a href="./displayCategories.php?categoryName=CPU">CPUs</a>
+            <a href="./displayCategories.php?categoryName=Keyboard and Mouse">Mouse & Keyboard</a>
+            <a href="./displayCategories.php?categoryName=RAM">RAM</a>
+            <a href="./displayCategories.php?categoryName=Power Supply">Power Supplies</a>
+            <a href="./displayCategories.php?categoryName=Storage">Storage</a>
+            <a href="./displayCategories.php?categoryName=Monitors">Monitors</a>
+            <a href="./displayCategories.php?categoryName=Headsets and Speakers">Headsets & Speakers</a>
         </div>
     </aside>
 
