@@ -157,6 +157,8 @@ if (isset($_POST['registration-submit'])) {
                 $mail->Username = 'txl.workspace@gmail.com';
                 $mail->Password = '#txlwork';
                 $mail->SetFrom('no-reply@neweregg.com');
+                $mail->From = ('no-reply@neweregg.com');
+                $mail->FromName = ('no-reply@neweregg.com');
                 $mail->Subject = 'Activate Your Account';
 
                 //tokens - authentication
