@@ -19,14 +19,14 @@
    $country = $_POST['country'];
    $orderID = $_POST['orderID'];
 
-   //fill shipping address form with customer info and address - personal info
-   $sql = "SELECT * FROM customer WHERE customerID=?";
+   //fill shipping address details with address from order
+   $sql = "SELECT * FROM orders WHERE customerID=? AND orderID=?";
    $stmt = $connection->prepare($sql); // prepare
    if (!mysqli_stmt_prepare($stmt, $sql)) {
        header("Location: checkout.php?error=sqlerror1");
        exit();
    } else {
-       mysqli_stmt_bind_param($stmt, "s", $customerID);
+       mysqli_stmt_bind_param($stmt, "ss", $customerID, $orderID);
        mysqli_stmt_execute($stmt);
        $result = mysqli_stmt_get_result($stmt);
        $row = mysqli_fetch_assoc($result);
@@ -101,7 +101,7 @@
 
             <?php
 
-              //SELECT all orderIDs from orderdetails
+              //SELECT all rows from orderdetails matching orderID
               $sql = "SELECT * FROM orderdetails WHERE orderID=?";
               $stmt = mysqli_stmt_init($connection);
               if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -126,7 +126,7 @@
                   $productID = $row['productID'];
                   $productQuantity = $row['productQuantity'];
 
-                  //SELECT product from products table to get product info
+                  //SELECT product from products table to get product info for showing ordered items
                   $sql2 = "SELECT * FROM products WHERE productID=?";
                   $stmt2 = mysqli_stmt_init($connection);
                   if (!mysqli_stmt_prepare($stmt2, $sql2)) {

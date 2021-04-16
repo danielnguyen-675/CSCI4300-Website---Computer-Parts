@@ -96,6 +96,10 @@
       //SEND ORDER CONFIRMATION EMAIL
       $message = '<h2> Thank you for your order! </h2><br>
                   <h3>Shipping Details</h3><br>';
+      $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>First Name:   </b></label>";
+      $message .= "<p style='margin-left: 2em; float: left;'>".$firstName."</p><br>";
+      $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>Last Name:   </b></label>";
+      $message .= "<p style='margin-left: 2em; float: left;'>".$lastName."</p><br>";
       $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>Street Address:   </b></label>";
       $message .= "<p style='margin-left: 2em; float: left;'>".$street."</p><br>";
       $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>City:   </b></label>";
@@ -143,13 +147,13 @@
 
       //INSERT INTO orders the customerID associated with the order and
       //the checkout shipping info
-      $sql = "INSERT INTO orders (customerID, street, city, state, zipcode, country) VALUES (?, ?, ?, ?, ?, ?); ";
+      $sql = "INSERT INTO orders (customerID, street, city, state, zipcode, country, firstName, lastName, phoneNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
           header("Location: TEST.php?error=INSERT-sqlerror='$stmt->error'");
           exit();
       } else {
-          mysqli_stmt_bind_param($stmt, "ssssss", $customerID, $street, $city, $state, $zipcode, $country);
+          mysqli_stmt_bind_param($stmt, "sssssssss", $customerID, $street, $city, $state, $zipcode, $country, $firstName, $lastName, $phoneNumber);
           if (!mysqli_stmt_execute($stmt)) {
               header("Location: TEST.php?error=INSERT-sqlerror='$stmt->error'");
               exit();
