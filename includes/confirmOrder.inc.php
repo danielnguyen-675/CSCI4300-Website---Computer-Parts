@@ -100,6 +100,8 @@
       $message .= "<p style='margin-left: 2em; float: left;'>".$firstName."</p><br>";
       $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>Last Name:   </b></label>";
       $message .= "<p style='margin-left: 2em; float: left;'>".$lastName."</p><br>";
+      $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>Phone Number:   </b></label>";
+      $message .= "<p style='margin-left: 2em; float: left;'>".$phoneNumber."</p><br>";
       $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>Street Address:   </b></label>";
       $message .= "<p style='margin-left: 2em; float: left;'>".$street."</p><br>";
       $message .= "<label style='text-align:right; float:left; clear: both; width: 10em; margin-left: -3em'><b>City:   </b></label>";

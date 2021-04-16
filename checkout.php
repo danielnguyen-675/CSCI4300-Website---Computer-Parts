@@ -395,7 +395,7 @@
               <span class="required" id="">*</span><br>
               -->
               <input id="continue" type="submit" value="Continue" name="continuecheckout-submit">
-              <input id="reset" type="reset" value="Clear Fields"><br>
+              <input id="reset" type="reset" value="Reset Fields"><br>
 
           </form>
         </main>
