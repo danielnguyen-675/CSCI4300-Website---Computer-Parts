@@ -25,75 +25,42 @@ if (!empty($_SESSION['cart'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-=======
-    <head>
-        <meta charset="utf-8">
-        <title>Neweregg</title>
-        <link rel="stylesheet" href="stylesheets/cart.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="scripts/editaccount.js"></script>
-    </head>
->>>>>>> main
-
-<head>
+<<<<<<< HEAD=======<head>
   <meta charset="utf-8">
-  <title>INSERT NAME OF SHOP</title>
-  <link rel="stylesheet" href="./stylesheets/cart.css">
+  <title>Neweregg</title>
+  <link rel="stylesheet" href="stylesheets/cart.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="scripts/editaccount.js"></script>
-</head>
+  </head>
+  >>>>>>> main
 
-<body>
-  <a href="homepage.php"><img id="ugalogo" src="uga.png" alt="University of Georgia"></a>
+  <head>
+    <meta charset="utf-8">
+    <title>INSERT NAME OF SHOP</title>
+    <link rel="stylesheet" href="./stylesheets/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="scripts/editaccount.js"></script>
+  </head>
 
-<<<<<<< HEAD
-  <header>
-    <h1 id="storeName">Neweregg</h1>
-    <h3>Find exclusive, high-quality products!</h3>
-  </header>
+  <body>
+    <a href="homepage.php"><img id="ugalogo" src="uga.png" alt="University of Georgia"></a>
 
-  <div class="mainNavigation">
-    <a href="homepage.php">Home</a>
-    <a href="#">About</a>
-    <a href="contact.php">Contact</a>
-    <a href="editaccount.php">Account</a>
-    <a href="cart.php" class="active">Cart</a>
-    <form action="includes/logout.inc.php" method="post">
-      <?php
-      if (isset($_SESSION['customerID'])) {
-        echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-        //echo "<p> You are logged in </p>";
-      } else {
-        //echo "<p> You are logged out </p>";
-      }
-      ?>
-    </form>
-  </div>
-
-  <main>
-
-    <?php
-    echo "<a href=\"javascript:history.go(-1)\" class='backbutton'>GO BACK</a>";
-    ?>
-=======
-        <div class="mainNavigation">
-            <a href="homepage.php">Home</a>
-            <a href="contact.php">Contact</a>
-            <a href="account.php">Account</a>
-            <a href="cart.php" class="active">Cart</a>
-            <form action="includes/logout.inc.php" method="post">
-                <?php
-                if (isset($_SESSION['customerID'])) {
-                    echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
-                //echo "<p> You are logged in </p>";
-                } else {
-                    //echo "<p> You are logged out </p>";
-                }
-                ?>
-            </form>
-        </div>
->>>>>>> main
+    <div class="mainNavigation">
+      <a href="homepage.php">Home</a>
+      <a href="contact.php">Contact</a>
+      <a href="account.php">Account</a>
+      <a href="cart.php" class="active">Cart</a>
+      <form action="includes/logout.inc.php" method="post">
+        <?php
+        if (isset($_SESSION['customerID'])) {
+          echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
+          //echo "<p> You are logged in </p>";
+        } else {
+          //echo "<p> You are logged out </p>";
+        }
+        ?>
+      </form>
+    </div>
 
     <h1>Shopping Cart</h1>
     <?php
@@ -119,12 +86,11 @@ if (!empty($_SESSION['cart'])) {
             <th>Price</th>
             <th></th>
 
-<<<<<<< HEAD
         </tr>
         <tr>
           <td>
             <?php $img = $row['productImage']; ?>
-            <img class="prodImg" src="<?php echo $img ?>" />
+            <a href="productView.php?productID=<?php echo $row['productID'] ?>"><img class="prodImg" src="<?php echo $img ?>" /></a>
           </td>
           <td class="tdborder" id="tdprodName">
             <p class="productName"><?php echo $row['prodName']; ?></p>
@@ -163,51 +129,6 @@ if (!empty($_SESSION['cart'])) {
       </table>
       <form method="post" action="checkout.php">
         <!-- not needed rn
-=======
-                  </tr>
-                  <tr>
-                    <td>
-                      <?php $img = $row['productImage']; ?>
-                      <a href="productView.php?productID=<?php echo $row['productID'] ?>"><img class="prodImg" src="<?php echo $img ?>"/></a>
-                    </td>
-                    <td class="tdborder" id="tdprodName">
-                      <p class="productName"><?php echo $row['prodName']; ?></p>
-                    </td>
-                    <td class="tdborder">
-                      <p class="productPrice">$<?php echo $row['prodPrice']; ?></p>
-                    </td>
-                    <td class="tdborder">
-                      <!--UPDATE CART-->
-                      <form action="includes/updatecart.inc.php" method="post">
-                        <?php $key = array_search($row['productID'], $_SESSION['cart']); ?>
-                        <label class="quantitylabel"> Quantity: </label>
-                        <input class="quantityinput" type="number" name="quantity" value="<?php echo $_SESSION['cartQuantity'][$key]; ?>" width="2em" min="1" max="99">
-                        <input type="hidden" name="productID" value="<?php echo $row['productID']; ?>">
-                        <button title="Please update one item at a time" class="updatecartbtn" type="submit" name="updatecart-submit"> Update </button>
-                      </form>
-                      <!--UPDATE CART-->
-                    </td>
-                    <td class="tdborder">
-                      <!--REMOVE FROM CART-->
-                      <form action="includes/removefromcart.inc.php" method="post">
-                        <input type="hidden" name="productID" value="<?php echo $row['productID']; ?>">
-                        <button id="removebtn" type="submit" name="removeitem-cart-submit"> Remove </button>
-                      </form>
-                      <!--REMOVE FROM CART-->
-                    </td>
-                  </tr>
-                  <?php $totalprice += $row['prodPrice'] * $_SESSION['cartQuantity'][$key];
-                  } ?>
-                  <tr>
-                    <td></td>
-                    <td>
-                      <p><b>Total Price: $<?php echo $totalprice; ?> </b></p>
-                    </td>
-                  </tr>
-                </table>
-                <form method="post" action="checkout.php">
-                  <!-- not needed rn
->>>>>>> main
                   <input type="hidden">
                   <input type="hidden">
                   -->
@@ -220,11 +141,11 @@ if (!empty($_SESSION['cart'])) {
     ?>
     <?php
     ?>
-  </main>
+    </main>
 
-  <footer>
-    <p>&copy; Neweregg</p>
-  </footer>
-</body>
+    <footer>
+      <p>&copy; Neweregg</p>
+    </footer>
+  </body>
 
 </html>
