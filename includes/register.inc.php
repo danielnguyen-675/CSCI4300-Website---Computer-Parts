@@ -139,6 +139,15 @@ if (isset($_POST['registration-submit'])) {
             //PHPMailer setup
             try {
                 $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
+
                 $mail->isSMTP();
                 $mail->SMTPAuth = true;
                 $mail->SMTPSecure = 'tls';
@@ -148,6 +157,8 @@ if (isset($_POST['registration-submit'])) {
                 $mail->Username = 'txl.workspace@gmail.com';
                 $mail->Password = '#txlwork';
                 $mail->SetFrom('no-reply@neweregg.com');
+                $mail->From = ('no-reply@neweregg.com');
+                $mail->FromName = ('no-reply@neweregg.com');
                 $mail->Subject = 'Activate Your Account';
 
                 //tokens - authentication

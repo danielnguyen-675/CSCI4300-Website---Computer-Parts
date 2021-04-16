@@ -1,10 +1,9 @@
 <?php
-require("includes/dbh.inc.php");
+require("./includes/connection.php");
+session_start();
 
-$sql = "SELECT * FROM products WHERE categoryName='GPU'";
-$result = mysqli_query($connection, $sql);
-$queryResult = mysqli_num_rows($result);
-
+$query = "SELECT * FROM products WHERE categoryName='GPU'";
+$products = $db->query($query);
 
 ?>
 
@@ -14,24 +13,34 @@ $queryResult = mysqli_num_rows($result);
 
 <head>
 
+<<<<<<< HEAD
+=======
+    <style>
+        .GPUImg {
+            max-width: 1000%;
+            max-height: 1000%;
+            display: block;
+        }
+    </style>
+
+>>>>>>> main
     <meta charset="UTF-8">
-    <title>INSERT NAME OF SHOP</title>
-    <link rel="stylesheet" href="stylesheets/display.css">
+    <title>Neweregg</title>
+    <link rel="stylesheet" href="stylesheets/homepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
+    <a href="homepage.php" id="toTopPicture"><img src="uga.png" alt="University of Georgia"></a>
     <header>
         <h1 id="storeName">Neweregg</h1>
         <h3>Find exclusive, high-quality products!</h3>
     </header>
 
     <div class="mainNavigation">
-        <a class="active" href="homepage.php">Home</a>
-        <a href="#">About</a>
+        <a href="homepage.php">Home</a>
         <a href="contact.php">Contact</a>
-        <a href="editaccount.php">Account</a>
+        <a href="account.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
@@ -44,7 +53,6 @@ $queryResult = mysqli_num_rows($result);
             ?>
         </form>
 
-
         <div class="search-container">
             <form action="searchresults.php" method="post">
                 <input type="text" placeholder="Search.." name="search">
@@ -55,18 +63,23 @@ $queryResult = mysqli_num_rows($result);
 
     <aside id="leftSide">
         <div class="vertical-menu">
-            <a href="./displayGPU.php" class="active">Graphics Cards</a>
-            <a href="./displayCPU.php">CPUs</a>
-            <a href="./displayMouseAndKey.php">Mouse & Keyboard</a>
-            <a href="./displayRAM.php">RAM</a>
-            <a href="./displayPowerSupplies.php">Power Supplies</a>
-            <a href="./displayStorage.php">Storage</a>
-            <a href="./displayMonitors.php">Monitors</a>
-            <a href="./displayHeadsetsAndSpeakers.php">Headsets & Speakers</a>
+            <h1 id="verticalMenuH1">Shop PC Parts & Accessories</h1>
+            <a href="./displayGPU.php" class="active"><button type="button" class="sideMenuButton">Graphics Cards</button></a>
+            <a href="./displayCPU.php"><button type="button" class="sideMenuButton">CPUs</button></a>
+            <a href="./displayMouseAndKey.php"><button type="button" class="sideMenuButton">Mouse & Keyboard</button></a>
+            <a href="./displayRAM.php"><button type="button" class="sideMenuButton">RAM</button></a>
+            <a href="./displayPowerSupplies.php"><button type="button" class="sideMenuButton">Power Supplies</button></a>
+            <a href="./displayStorage.php"><button type="button" class="sideMenuButton">Storage</button></a>
+            <a href="./displayMonitors.php"><button type="button" class="sideMenuButton">Monitors</button></a>
+            <a href="./displayHeadsetsAndSpeakers.php"><button type="button" class="sideMenuButton">Headsets & Speakers</button></a>
+
         </div>
+
+
     </aside>
     <main id="mainMain">
 
+<<<<<<< HEAD
         <table>
             <?php
             $itemsRemaining = $queryResult;
@@ -101,10 +114,55 @@ $queryResult = mysqli_num_rows($result);
                 echo "</tr>";
             } ?>
         </table>
+=======
+
+
+
+    <div class="cell">
+        <h2 class="shoppingViewTitlesALL">Our Selection</h2>
+        <div class="row">
+
+            <?php foreach ($products as $product) { ?>
+
+            <div class="column">
+                <form action="includes/addtocart.inc.php" method="post">
+                  <a href="productView.php?productID=<?php echo $product['productID'] ?>">
+                    <img
+                            src="<?php echo $product['productImage'] ?> "
+                            class="GPUImg"
+                            alt="Picture Unavailable"
+                    />
+                  </a>
+                  <a href="productView.php?productID=<?php echo $product['productID']?>" id="productViewLink"><?php echo $product['prodName']?></a>
+                  <p><?php echo '$' . $product['prodPrice'] ?></p>
+                  <p><?php echo 'Stock: ' . $product['prodStock'] ?></p>
+                  <input type="hidden" name="productID" value="<?php echo $product['productID']; ?>" />
+                  <button type="submit" class="addToCart" name="addtocart-submit"
+                  <?php
+                  if (isset($_SESSION['customerID'])) {
+                      ?>
+                      onclick="alert('Successfully added to cart!')">
+                      <?php
+                  } else {
+                      ?>
+                      onclick="location.href = localhost/computerparts/login.php">
+                      <?php
+                  }
+                  ?>
+                  Add To Cart</button>
+                </form>
+            </div>
+            <?php } ?>
+    </div>
+
+
+>>>>>>> main
 
     </main>
 
+
     <footer>
+        <a href="#toTopPicture" id="toTop"><button type="button" class="sideMenuButton">Return to Top</button></a>
         <p>&copy; Neweregg</p>
     </footer>
 

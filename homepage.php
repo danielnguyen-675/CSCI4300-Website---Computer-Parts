@@ -1,6 +1,22 @@
 <?php
-require("./includes/dbh.inc.php");
-session_start();
+    require("./includes/dbh.inc.php");
+    session_start();
+
+    //do some queries rather than display products statically
+    $ids = array(1002, 1003, 1004, 1016);
+    $names = array();
+    $prices = array();
+    $images = array();
+    foreach ( $ids as $i ) {
+        $query = "SELECT prodName, prodPrice, productImage FROM products WHERE productID=$i";
+
+        $row = $connection->query($query);
+        foreach ( $row as $r ) {
+            array_push($names, $r['prodName']);
+            array_push($prices, $r['prodPrice']);
+            array_push($images, $r['productImage']);
+        }
+    }
 
 ?>
 
@@ -10,7 +26,7 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <title>INSERT NAME OF SHOP</title>
+    <title>Neweregg</title>
     <link rel="stylesheet" href="stylesheets/homepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -26,9 +42,8 @@ session_start();
 
     <div class="mainNavigation">
         <a class="active" href="homepage.php">Home</a>
-        <a href="#">About</a>
         <a href="contact.php">Contact</a>
-        <a href="editaccount.php">Account</a>
+        <a href="account.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
@@ -65,11 +80,15 @@ session_start();
 
     <main id="mainMain">
 
-        <h2>HOMEPAGE
-        </h2>
-        <h3>
-            DISPLAY FEATURED ITEMS & DISCOUNTED ITEMS
-        </h3>
+        <div id="welcome">
+            <br><br>
+            <h1>Welcome to Neweregg!</h1>
+
+            <p>Neweregg is the only place to buy computer parts for the best price.<br>
+            For prices like these, you'll never set foot outside again!</p>
+            <br><br>
+        </div>
+
         <?php
         if (isset($_GET['newPwd'])) {
             if ($_GET['newPwd'] == "success") {
@@ -90,10 +109,28 @@ session_start();
 
         ?>
 
-        <br>
-        <br>
-        <br>
-        <br>
+        <h2>Have a look at our current deals!</h2>
+
+        <?php 
+            for( $i = 0; $i < count($ids); $i++ ) {
+                $id = $ids[$i];
+                $name = $names[$i];
+                $price = $prices[$i];
+                $img = $images[$i];
+
+                echo '<div class="productRow">';
+                    echo '<a href="productView.php?productID='.$id.'">';
+                        echo '<div class="productTile">';
+                            echo '<img src="'.$img.'"><br>';
+                            echo $name.'<br><br>';
+                            echo '$'.$price;
+                        echo '</div>';
+                    echo '</a>';
+                echo '</div>';
+
+                echo '<div class="cf"><br></div>';
+            }
+        ?>
     </main>
 
 

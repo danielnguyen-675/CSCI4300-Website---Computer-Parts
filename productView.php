@@ -11,11 +11,15 @@ $products = $db->query($query);
 <!DOCTYPE html>
 
 <html lang="en">
+<<<<<<< HEAD
 <script src="./scripts/productView.js"></script>
+=======
+<script src="scripts/productView.js"></script>
+>>>>>>> main
 
 <head>
     <meta charset="UTF-8">
-    <title>INSERT NAME OF SHOP</title>
+    <title>Neweregg</title>
     <link rel="stylesheet" href="stylesheets/productView.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -31,9 +35,8 @@ $products = $db->query($query);
 
     <div class="mainNavigation">
         <a class="active" href="homepage.php">Home</a>
-        <a href="#">About</a>
         <a href="contact.php">Contact</a>
-        <a href="editaccount.php">Account</a>
+        <a href="account.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
@@ -72,7 +75,7 @@ $products = $db->query($query);
         echo "<a href=\"javascript:history.go(-1)\" class='backbutton'>GO BACK</a>";
         ?>
 
-        <div class="productView">
+            <div class="productView">
             <?php
             while ($row = $products->fetch(PDO::FETCH_ASSOC)) {
                 $name = $row['prodName'];
@@ -101,7 +104,6 @@ $products = $db->query($query);
                 <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button>
             </form>
         </div>
-
         <?php
         if (isset($_GET['newPwd'])) {
             if ($_GET['newPwd'] == "success") {

@@ -35,6 +35,16 @@ $country = $_POST['country'];
 
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+    <head>
+        <meta charset="utf-8">
+        <title>Neweregg</title>
+        <link rel="stylesheet" href="stylesheets/confirmOrder.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="scripts/editaccount.js"></script>
+    </head>
+>>>>>>> main
 
 <head>
   <meta charset="utf-8">
@@ -48,6 +58,7 @@ $country = $_POST['country'];
 <body>
   <a href="homepage.php"><img id="ugalogo" src="uga.png" alt="University of Georgia"></a>
 
+<<<<<<< HEAD
   <header>
     <h1 id="storeName">Neweregg</h1>
     <h3>Find exclusive, high-quality products!</h3>
@@ -70,6 +81,96 @@ $country = $_POST['country'];
       ?>
     </form>
   </div>
+=======
+        <div class="mainNavigation">
+            <a href="homepage.php">Home</a>
+            <a href="contact.php">Contact</a>
+            <a href="account.php">Account</a>
+            <a href="cart.php" class="active">Cart</a>
+            <form action="includes/logout.inc.php" method="post">
+                <?php
+                if (isset($_SESSION['customerID'])) {
+                    echo '<a id="logoutbutton" href="includes/logout.inc.php" name="logout-submit"> Logout </a>';
+                //echo "<p> You are logged in </p>";
+                } else {
+                    //echo "<p> You are logged out </p>";
+                }
+                ?>
+            </form>
+        </div>
+
+        <main>
+          <h1 id="checkouth1">Checkout </h1>
+          <h2 id="confirmh2"> Confirm Your Order</h2>
+          <?php
+            //this echo prints out all SESSION variables for debug
+            //echo '<pre>' . print_r($_SESSION, true) . '</pre>';
+           ?>
+          <div id="shippingDetails">
+            <h2 id="shippingh2">Shipping Details</h2>
+            <label class="shippinginfolabel">First Name: </label>
+            <p class="shippinginfop"><?php echo $firstName; ?></p>
+            <label class="shippinginfolabel">Last Name: </label>
+            <p class="shippinginfop"><?php echo $lastName; ?></p>
+            <label class="shippinginfolabel">Phone Number: </label>
+            <p class="shippinginfop"><?php echo $phoneNumber; ?></p>
+            <label class="shippinginfolabel">Street Address: </label>
+            <p class="shippinginfop"><?php echo $street; ?></p>
+            <label class="shippinginfolabel">City: </label>
+            <p class="shippinginfop"><?php echo $city; ?></p>
+            <label class="shippinginfolabel">State: </label>
+            <p class="shippinginfop"><?php echo $state; ?></p>
+            <label class="shippinginfolabel">Postal Code: </label>
+            <p class="shippinginfop"><?php echo $zipcode; ?></p>
+            <label class="shippinginfolabel" id="countryLabel">Country: </label>
+            <p class="shippinginfop"><?php echo $country; ?></p>
+          </div>
+          <table>
+            <tr>
+            <?php
+              $totalprice = 0;
+            while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+              <th></th>
+              <th>Product</th>
+              <th>Price</th>
+              <th id="thQuantity">Quantity</th>
+              </tr>
+            <tr>
+              <td>
+                <?php $img = $row['productImage']; ?>
+                <a href="productView.php?productID=<?php echo $row['productID'] ?>"><img class="prodImg" src="<?php echo $img ?>"/></a>
+              </td>
+              <td class="tdborder" id="tdprodName">
+                <p class="productName"><?php echo $row['prodName']; ?></p>
+              </td>
+              <td class="tdborder">
+                <p class="productPrice">$<?php echo $row['prodPrice']; ?></p>
+              </td>
+              <td class="tdborder" id="tdQuantity">
+                <?php $key = array_search($row['productID'], $_SESSION['cart']); ?>
+                <p id="quantity"><?php echo $_SESSION['cartQuantity'][$key]; ?></p>
+              </td>
+              <td class="tdborder">
+              </td>
+            </tr>
+            <?php $totalprice += $row['prodPrice'] * $_SESSION['cartQuantity'][$key];
+            } ?>
+            <tr>
+              <td></td>
+              <td>
+                <p id="totalPrice"><b>Total Price: $<?php echo $totalprice; ?> </b></p>
+              </td>
+            </tr>
+          </table>
+          <div>
+            <h2>Payment Information</h2>
+            <p>Enter your payment information to complete your order</p>
+            <form action="includes/confirmOrder.inc.php" method="post">
+              <label>Full Name:</label>
+              <input id="fullName" name="fullName" type="text" required>
+              <span class="required" id="req1">*</span><br>
+>>>>>>> main
 
   <main>
     <h1 id="checkouth1">Checkout </h1>
