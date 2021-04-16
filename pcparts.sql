@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 13, 2021 at 06:17 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Host: 127.0.0.1:3555
+-- Generation Time: Apr 16, 2021 at 06:13 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `address` (
   `addressID` int(11) NOT NULL,
-  `customerID` int(11) NOT NULL,
-  `street` varchar(45) NOT NULL,
-  `city` varchar(45) NOT NULL,
-  `state` varchar(45) NOT NULL,
-  `zipcode` varchar(45) NOT NULL,
-  `country` varchar(45) NOT NULL
+  `customerID` int(11) DEFAULT NULL,
+  `street` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `zipcode` varchar(45) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -42,8 +42,9 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`addressID`, `customerID`, `street`, `city`, `state`, `zipcode`, `country`) VALUES
-(2, 6, 'STREET', 'CITY', 'STATE', 'ZIPCODE', 'Afghanistan'),
-(3, 7, 'asd', 'asd', 'asd', 'asd', 'Afghanistan');
+(9, 13, 'asd', 'asd', 'asd', 'asd', 'Afghanistan'),
+(12, 16, 'street', 'city', 'state', 'zip', 'Barbados'),
+(13, 17, 'street', 'city', 'state', 'zipcode', 'Afghanistan');
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,7 @@ CREATE TABLE `customer` (
   `email` varchar(45) NOT NULL,
   `password` longtext NOT NULL,
   `phoneNumber` varchar(45) NOT NULL,
-  `userStatus` int(11) NOT NULL
+  `userStatus` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -77,8 +78,9 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerID`, `firstName`, `lastName`, `email`, `password`, `phoneNumber`, `userStatus`) VALUES
-(6, 'FIRSTNAME', 'LASTNAME', 'monib53445@684hh.com', '$2y$10$JaTRmkeFbbIasaXPwgjLHO93YZhLxzm6U5jtwpXYNG4qNBlN8OiVa', '(789) 789-7897', 1),
-(7, 'test', 'test', 'test@test.com', 'ApplePie123!', '(123) 123-1234', 0);
+(13, 'test', 'test', 'xawowo7081@art2427.com', '$2y$10$hQ8BdwLsZapndtZMDtbmruoE5YEOuB2J1Ju5J0l2jY6k48gLk7zUm', '(123) 123-1234', 1),
+(16, 'First', 'Last', 'tamibi9206@tripaco.com', '$2y$10$aljwwf/NSGCeWWxn/bL/LeKVGxPv.BWhlP3u3z8a9bYIdhFH27Hdy', '(123) 123-1234', 1),
+(17, 'John', 'Smith', 'vaname1875@zcai55.com', '$2y$10$/bNPKMY.aUeSscNfTaFrSe3YaxwY/Hlc/JPibpJ74y4iA2pbDxynS', '(123) 123-1234', 1);
 
 -- --------------------------------------------------------
 
@@ -100,12 +102,36 @@ CREATE TABLE `manufacturer` (
 --
 
 CREATE TABLE `orderdetails` (
+  `orderDetailsID` int(11) NOT NULL,
   `orderID` int(11) NOT NULL,
-  `orderQuantity` int(11) NOT NULL,
+  `productQuantity` int(11) NOT NULL,
   `prodTotalPrice` int(11) NOT NULL,
-  `productID` int(11) NOT NULL,
-  `orderStatus` varchar(45) NOT NULL
+  `productID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orderdetails`
+--
+
+INSERT INTO `orderdetails` (`orderDetailsID`, `orderID`, `productQuantity`, `prodTotalPrice`, `productID`) VALUES
+(4, 95, 2, 0, 1001),
+(5, 95, 1, 0, 1082),
+(6, 95, 4, 0, 1121),
+(7, 95, 3, 0, 1122),
+(8, 96, 3, 0, 1081),
+(9, 96, 4, 0, 1121),
+(10, 96, 3, 0, 1122),
+(11, 97, 9, 0, 1002),
+(12, 97, 1, 0, 1081),
+(13, 97, 5, 0, 1108),
+(14, 98, 3, 0, 1004),
+(15, 98, 1, 0, 1121),
+(16, 99, 4, 0, 1002),
+(17, 100, 1, 0, 1002),
+(18, 100, 1, 0, 1121),
+(19, 101, 2, 0, 1081),
+(20, 101, 1, 0, 1121),
+(21, 102, 5, 0, 1068);
 
 -- --------------------------------------------------------
 
@@ -116,9 +142,29 @@ CREATE TABLE `orderdetails` (
 CREATE TABLE `orders` (
   `orderID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
-  `orderStatus` varchar(45) NOT NULL,
-  `shipmentStatus` varchar(45) NOT NULL
+  `street` varchar(55) NOT NULL,
+  `city` varchar(55) NOT NULL,
+  `state` varchar(55) NOT NULL,
+  `zipcode` varchar(55) NOT NULL,
+  `country` varchar(55) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `phoneNumber` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `customerID`, `street`, `city`, `state`, `zipcode`, `country`, `firstName`, `lastName`, `phoneNumber`) VALUES
+(95, 16, 'TESTORDERDETAILS', 'TESTORDERDETAILS', 'TESTORDERDETAILS', 'TESTORDERDETAILS', 'Aruba', '', '', ''),
+(96, 16, 'CHANGEDSTREET', 'CHANGEDCITY', 'CHANGEDSTATE', 'CHANGEDZIP', 'Bulgaria', '', '', ''),
+(97, 17, 'street123', 'city123', 'state123', 'zipcode123', 'Belize', '', '', ''),
+(98, 17, 'street5324', 'city32453324', 'state5324534', 'zipcode35253324', 'Bahrain', '', '', ''),
+(99, 17, 'street123', 'city123', 'state123', 'zipcode123', 'Bangladesh', 'Adam', 'Brown', '(333) 333-3333'),
+(100, 17, 'street435324', 'city345324', 'state324', 'zipcode3245324', 'Brunei Darussalam', 'Adam', 'Johnson', '(444) 444-4444'),
+(101, 17, 'street6786', 'city678', 'state678', 'zipcode67867', 'Cameroon', 'Hector', 'Jones', '(555) 555-5555'),
+(102, 17, 'street', 'city', 'state', 'zipcode', 'Syrian Arab Republic', 'Dexter', 'Lemon', '(123) 123-1234');
 
 -- --------------------------------------------------------
 
@@ -130,10 +176,26 @@ CREATE TABLE `paymentinfo` (
   `payInfoID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
   `cardholderName` varchar(45) NOT NULL,
-  `cardNumber` varchar(45) NOT NULL,
+  `cardNumber` text NOT NULL,
   `expiryDate` date NOT NULL,
-  `cvc` int(11) NOT NULL
+  `cvc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `paymentinfo`
+--
+
+INSERT INTO `paymentinfo` (`payInfoID`, `customerID`, `cardholderName`, `cardNumber`, `expiryDate`, `cvc`) VALUES
+(32, 16, 'TESTING555', '$2y$10$3xq6jwXFEV3drCXkqZA.9euGs13L5u1pdkyVa4jp6Cnrrmjub.6KW', '2021-04-30', '$2y$10$h8ttIcN2Ecyp483i4H46I.DDrdgm3TePO589A.TTDf/NpsHRvxyjG'),
+(33, 16, 'TESTING555', '$2y$10$3xq6jwXFEV3drCXkqZA.9euGs13L5u1pdkyVa4jp6Cnrrmjub.6KW', '2021-04-30', '$2y$10$h8ttIcN2Ecyp483i4H46I.DDrdgm3TePO589A.TTDf/NpsHRvxyjG'),
+(34, 16, 'TESTING555', '$2y$10$3xq6jwXFEV3drCXkqZA.9euGs13L5u1pdkyVa4jp6Cnrrmjub.6KW', '2021-04-30', '$2y$10$h8ttIcN2Ecyp483i4H46I.DDrdgm3TePO589A.TTDf/NpsHRvxyjG'),
+(35, 16, 'TESTING555', '$2y$10$3xq6jwXFEV3drCXkqZA.9euGs13L5u1pdkyVa4jp6Cnrrmjub.6KW', '2021-04-30', '$2y$10$h8ttIcN2Ecyp483i4H46I.DDrdgm3TePO589A.TTDf/NpsHRvxyjG'),
+(36, 17, 'Derick Lemon', '$2y$10$qy/hdSowFv8vuyxz54epM.OZieY.RL86bLmHlv64td5V/dz1YbxF6', '2021-04-30', '$2y$10$07tAD0xeyXK8Hlv6g9DM5e6ch4PYqhsYqrSr2RurFO5n/FWoebdM6'),
+(37, 17, 'Derick Lemon', '$2y$10$qy/hdSowFv8vuyxz54epM.OZieY.RL86bLmHlv64td5V/dz1YbxF6', '2021-04-30', '$2y$10$07tAD0xeyXK8Hlv6g9DM5e6ch4PYqhsYqrSr2RurFO5n/FWoebdM6'),
+(38, 17, 'Derick Lemon', '$2y$10$qy/hdSowFv8vuyxz54epM.OZieY.RL86bLmHlv64td5V/dz1YbxF6', '2021-04-30', '$2y$10$07tAD0xeyXK8Hlv6g9DM5e6ch4PYqhsYqrSr2RurFO5n/FWoebdM6'),
+(39, 17, 'Derick Lemon', '$2y$10$qy/hdSowFv8vuyxz54epM.OZieY.RL86bLmHlv64td5V/dz1YbxF6', '2021-04-30', '$2y$10$07tAD0xeyXK8Hlv6g9DM5e6ch4PYqhsYqrSr2RurFO5n/FWoebdM6'),
+(40, 17, 'Derick Lemon', '$2y$10$qy/hdSowFv8vuyxz54epM.OZieY.RL86bLmHlv64td5V/dz1YbxF6', '2021-04-30', '$2y$10$07tAD0xeyXK8Hlv6g9DM5e6ch4PYqhsYqrSr2RurFO5n/FWoebdM6'),
+(41, 17, 'Derick Lemon', '$2y$10$qy/hdSowFv8vuyxz54epM.OZieY.RL86bLmHlv64td5V/dz1YbxF6', '2021-04-30', '$2y$10$07tAD0xeyXK8Hlv6g9DM5e6ch4PYqhsYqrSr2RurFO5n/FWoebdM6');
 
 -- --------------------------------------------------------
 
@@ -157,7 +219,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manufacturerName`, `categoryName`, `productImage`, `productDescription`) VALUES
-(1001, 'AMD Ryzen 7 3700X', 100, 329.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImageCompressAll300/19-113-567-V11.jpg', '3rd Gen Ryzen mysql_real_escape_string\r\nSocket AM4\r\nMax Boost Frequency 4.4 GHz\r\nDDR4 Support\r\nL2 Cache 4MB\r\nL3 Cache 32MB\r\nThermal Design Power 65W\r\nWith Wraith Prism cooler'),
+(1001, 'AMD Ryzen 7 3700X', 100, 329.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImageCompressAll300/19-113-567-V11.jpg', '3rd Gen Ryzen\r\nSocket AM4\r\nMax Boost Frequency 4.4 GHz\r\nDDR4 Support\r\nL2 Cache 4MB\r\nL3 Cache 32MB\r\nThermal Design Power 65W\r\nWith Wraith Prism cooler'),
 (1002, 'GIGABYTE Geforce RTX 2060 6GB Graphics Card', 500, 896.88, 'Gigabyte', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-932-115-V07.jpg', 'NVIDIA Turing Architechure & Real Time Ray Tracing\r\nWINDFORCE 2X Cooling System with Alternate Spinning Fans\r\nIntuitive Controls with AORUS Engine\r\nCore Clock 1755 MHz\r\n'),
 (1003, 'ASUS TUF Gaming GeForce GTX 1650, 4GB', 800, 482.99, 'ASUS ', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-126-445-V01.jpg', '4GB 128-Bit GDDR6\r\nCore Clock 1410 MHz\r\nBoost Clock 1755 MHz (Gaming Mode), 1785 MHz (OC Mode)\r\n1 x DVI-D 1 x HDMI 2.0b 1 x DisplayPort 1.4\r\n896 CUDA Cores\r\nPCI Express 3.0'),
 (1004, 'MSI GeForce GTX 1660 6GB', 200, 849.99, 'MSI', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-137-476-V01.jpg', '6GB 192-Bit GDDR6\r\nBoost Clock 1830 MHz\r\n1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1408 CUDA Cores\r\nPCI Express 3.0 x16\r\n'),
@@ -165,44 +227,44 @@ INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manu
 (1006, ' PowerColor RED DEVIL Radeon RX 580 8GB', 100, 1174.02, 'PowerColor', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-131-712-Z01.jpg', '8GB 256-Bit GDDR5\r\nBoost Clock 1425 MHz\r\n1 x DL-DVI-D 1 x HDMI 3 x DisplayPort\r\n2304 Stream Processors\r\nPCI Express 3.0'),
 (1007, ' ASUS CERBERUS -GTX1050TI 4GB ', 500, 339.99, 'ASUS', 'GPU', 'https://c1.neweggimages.com/ProductImage/ADWF_1_201901072049018990.jpg', '4GB GDDR5\r\n'),
 (1008, 'MSI GeForce TRIO RTX 2070 8GB x16', 50, 1649.59, 'MSI', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-137-439-V05.jpg', '8GB 256-Bit GDDR6\r\nBoost Clock 1800 MHz\r\n1 x HDMI 2.0b 3 x DisplayPort\r\n2560 CUDA Cores\r\nPCI Express 3.0 x16'),
-(1009, 'GIGABYTE AORUS GeForce RTX 2060 8GB', 50, 1795, 'Gigabyte', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-932-172-V09.jpg', 'Powered by GeForce RTX 2060 SUPER\r\nNVIDIA Turing Architechure & Real Time Ray Tracing\r\nAORUS Exclusive Halo Fan RGB\r\nWINDFORCE Stack 3 X 100mm Fan Cooling System\r\nIntuitive Controls with AORUS Engine\r\nCore Clock 1845 MHz\r\n8GB 256-Bit GDDR6\r\n3 x HDMI, 3 x DisplayPort, 1 x USB Type-C\r\nPCI Express 3.0 x16\r\n'),
+(1009, 'GIGABYTE AORUS GeForce RTX 2060 8GB', 50, 1795.99, 'Gigabyte', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-932-172-V09.jpg', 'Powered by GeForce RTX 2060 SUPER\r\nNVIDIA Turing Architechure & Real Time Ray Tracing\r\nAORUS Exclusive Halo Fan RGB\r\nWINDFORCE Stack 3 X 100mm Fan Cooling System\r\nIntuitive Controls with AORUS Engine\r\nCore Clock 1845 MHz\r\n8GB 256-Bit GDDR6\r\n3 x HDMI, 3 x DisplayPort, 1 x USB Type-C\r\nPCI Express 3.0 x16\r\n'),
 (1010, 'EVGA GeForce GTX 1060 GAMING 6GB', 150, 924.95, 'EVGA', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-487-260-S99.jpg', '6GB 192-Bit GDDR5\r\nCore Clock 1506 MHz\r\nBoost Clock 1708 MHz\r\n1 x Dual-Link DVI-D 1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1280 CUDA Cores\r\nPCI Express 3.0\r\n'),
 (1011, 'XFX THICC II Pro Radeon RX5500 8GB', 175, 1299.97, 'XFX', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-150-840-S01.jpg', '8GB 128-Bit GDDR6\r\nCore Clock 1607 MHz\r\nBoost Clock 1845 MHz\r\n1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1408 Stream Processors\r\nPCI Express 4.0'),
-(1012, ' EVGA GeForce GTX 1060 6GB SSC GAMING ACX 3.0', 150, 919, 'EVGA', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-487-275-01.jpg', '6GB 192-Bit GDDR5\r\nCore Clock 1607 MHz\r\nBoost Clock 1835 MHz\r\n1 x Dual-Link DVI-D 1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1280 CUDA Cores\r\nPCI Express 3.0'),
-(1013, ' ZOTAC GeForce GTX 1060 AMP, 6GB', 300, 925, 'ZOTAC', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-500-403-S99.jpg', 'New Pascal Architecture\r\n6GB 192-bit GDDR5\r\nVirtual Reality Ready\r\n1 x Dual-link DVI, 3 x DisplayPort (version 1.4), 1 x HDMI\r\nBoost Clock 1771 MHz\r\nExtended warranty included with every graphics card purchase. User registration required on ZOTAC website.\r\n'),
+(1012, ' EVGA GeForce GTX 1060 6GB SSC GAMING ACX 3.0', 150, 919.99, 'EVGA', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-487-275-01.jpg', '6GB 192-Bit GDDR5\r\nCore Clock 1607 MHz\r\nBoost Clock 1835 MHz\r\n1 x Dual-Link DVI-D 1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1280 CUDA Cores\r\nPCI Express 3.0'),
+(1013, ' ZOTAC GeForce GTX 1060 AMP, 6GB', 300, 925.99, 'ZOTAC', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-500-403-S99.jpg', 'New Pascal Architecture\r\n6GB 192-bit GDDR5\r\nVirtual Reality Ready\r\n1 x Dual-link DVI, 3 x DisplayPort (version 1.4), 1 x HDMI\r\nBoost Clock 1771 MHz\r\nExtended warranty included with every graphics card purchase. User registration required on ZOTAC website.\r\n'),
 (1014, 'ASUS GeForce RTX 2060 Overclocked 6GB ', 50, 959.99, 'ASUS', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-126-349-V01.jpg', 'Auto-Extreme Technology uses automation to enhance reliability\r\n6GB 192-Bit GDDR6\r\nCore Clock OC Mode: 1395 MHz\r\nGaming Mode (Default): 1365 MHz\r\nBoost Clock OC Mode: 1785 MHz\r\nGaming Mode (Default): 1755 MHz\r\n1 x DVI-D 2 x HDMI 2.0b 1 x DisplayPort 1.4\r\n1920 CUDA Cores\r\nPCI Express 3.0 x16\r\n'),
 (1015, 'MSI GeForce GTX 1650 4GB Super Gaming', 300, 699.99, 'MSI', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-137-484-V01.jpg', '4GB 128-Bit GDDR6\r\nBoost Clock 1755 MHz\r\n1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n1280 CUDA Cores\r\nPCI Express 3.0 x16'),
-(1016, ' ASUS Phoenix GeForce GTX 1650 4GB', 125, 489, 'ASUS', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-126-449-V06.jpg', '4GB 128-Bit GDDR6\r\nCore Clock 1410 MHz\r\nBoost Clock OC Mode: 1665 MHz\r\nGaming Mode: 1635 MHz\r\n1 x DVI-D 1 x HDMI 2.0b 1 x DisplayPort 1.4\r\n896 CUDA Cores\r\nPCI Express 3.0\r\n'),
+(1016, ' ASUS Phoenix GeForce GTX 1650 4GB', 125, 489.99, 'ASUS', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-126-449-V06.jpg', '4GB 128-Bit GDDR6\r\nCore Clock 1410 MHz\r\nBoost Clock OC Mode: 1665 MHz\r\nGaming Mode: 1635 MHz\r\n1 x DVI-D 1 x HDMI 2.0b 1 x DisplayPort 1.4\r\n896 CUDA Cores\r\nPCI Express 3.0\r\n'),
 (1017, 'MSI GeForce GTX 1060 DirectX 12 GTX 1060 6GB', 300, 699.99, 'MSI', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-127-963-S99.jpg', '6GB 192-Bit GDDR5\r\nCore Clock 1594 MHz (OC Mode)\r\n1569 MHz (Gaming Mode)\r\n1506 MHz (Silent Mode)\r\nBoost Clock 1809 MHz (OC Mode)\r\n1784 MHz (Gaming Mode)\r\n1708 MHz (Silent Mode)\r\n1 x DL-DVI-D 1 x HDMI 2.0 3 x DisplayPort 1.4\r\n1280 CUDA Cores\r\nPCI Express 3.0 x16'),
-(1018, ' EVGA GeForce GTX 1070 Ti GAMING 8GB ', 200, 1150, 'EVGA', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-487-390-V01.jpg', '8GB 256-Bit GDDR5\r\nCore Clock 1607+ MHz\r\nBoost Clock 1683+ MHz\r\n1 x DL-DVI-D 1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n2432 CUDA Cores\r\nPCI Express 3.0\r\n'),
+(1018, ' EVGA GeForce GTX 1070 Ti GAMING 8GB ', 200, 1150.99, 'EVGA', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-487-390-V01.jpg', '8GB 256-Bit GDDR5\r\nCore Clock 1607+ MHz\r\nBoost Clock 1683+ MHz\r\n1 x DL-DVI-D 1 x HDMI 2.0b 3 x DisplayPort 1.4\r\n2432 CUDA Cores\r\nPCI Express 3.0\r\n'),
 (1019, 'Asus ROG Strix ROG-STRIX-RTX2060S 8GB', 50, 1399.99, 'ASUS ', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-126-355-V01.jpg', '8GB 256-Bit GDDR6\r\nBoost Clock OC Mode - 1710 MHz\r\nGaming Mode - 1680 MHz\r\n2 x HDMI 2.0b 2 x DisplayPort 1.4\r\n2176 CUDA Cores\r\nPCI Express 3.0'),
 (1020, 'SAPPHIRE NITRO+ Radeon RX 5700 8GB', 20, 2299.99, 'SAPPHIRE', 'GPU', 'https://c1.neweggimages.com/ProductImage/14-202-351-V04.jpg', '8GB 256-Bit GDDR6\r\nCore Clock 1770 MHz\r\nBoost Clock 2010 MHz\r\n2 x HDMI 2 x DisplayPort 1.4\r\n2560 Stream Processors\r\nPCI Express 4.0 x16'),
-(1021, 'AMD A10-5700 Trinity Quad-Core 3.4GHz ', 500, 58, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-113-289-02.jpg', '32nm Trinity 65W\r\n4MB L2 Cache\r\nAMD Radeon HD 7660D'),
+(1021, 'AMD A10-5700 Trinity Quad-Core 3.4GHz ', 500, 58.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-113-289-02.jpg', '32nm Trinity 65W\r\n4MB L2 Cache\r\nAMD Radeon HD 7660D'),
 (1022, ' AMD Ryzen 3 3300X Quad-Core 3.8 GHz ', 200, 177.97, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-113-648-S01.jpg', '3rd Gen Ryzen\r\nSocket AM4\r\nMax Boost Frequency 4.3 GHz\r\nDDR4 Support 3200MHz\r\nCMOS TSMC 7nm FinFET\r\nL2 Cache 2MB\r\nL3 Cache 16MB\r\nThermal Design Power 65W\r\nWith Wraith Stealth cooler\r\nAMD Zen Core Architecture\r\nAMD Ryzen Master Utility\r\nAMD Ryzen VR-Ready Premium'),
 (1023, ' Intel Core i7-980X Gulftown 6-Core 3.33GHz', 100, 550.19, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-115-226-03.jpg', '32nm Gulftown 130W\r\n12MB L3 Cache\r\n6 x 256KB L2 Cache'),
-(1024, 'Intel Core i3-3220T IvyBridgeDual-Core 2.8GHz', 200, 390, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-116-776-02.jpg', '22nm Ivy Bridge 35W\r\n3MB L3 Cache\r\nIntel HD Graphics 2500'),
+(1024, 'Intel Core i3-3220T IvyBridgeDual-Core 2.8GHz', 200, 390.99, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-116-776-02.jpg', '22nm Ivy Bridge 35W\r\n3MB L3 Cache\r\nIntel HD Graphics 2500'),
 (1025, 'Intel Core i5-2450P Quad-Core 3.2GHz', 200, 180.99, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-115-231-02.jpg', '32nm Sandy Bridge\r\n6MB L3 Cache\r\n4 x 256KB L2 Cache'),
-(1026, 'Intel Core i7-4790 Haswell Quad-Core 3.6 GHz', 150, 476, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/A1N8_1_201607181110292677.jpg', '22nm Haswell 84W\r\n8MB L3 Cache\r\n4 x 256KB L2 Cache\r\nIntel HD Graphics 4600'),
+(1026, 'Intel Core i7-4790 Haswell Quad-Core 3.6 GHz', 150, 476.99, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/A1N8_1_201607181110292677.jpg', '22nm Haswell 84W\r\n8MB L3 Cache\r\n4 x 256KB L2 Cache\r\nIntel HD Graphics 4600'),
 (1027, 'Intel Pentium G2140 Dual-Core 3.3GHz', 150, 110.19, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-116-963-03.jpg', '22nm Ivy Bridge 55W\r\n3MB L3 Cache\r\nIntel HD Graphics'),
-(1028, 'AMD Ryzen 9 3900 12-Core 3.1 GHz Socket', 225, 591, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-113-662-S01.jpg', '7nm 65W\r\n64MB L3 Cache\r\n6MB L2 Cache\r\nTray/OEM'),
+(1028, 'AMD Ryzen 9 3900 12-Core 3.1 GHz Socket', 225, 591.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-113-662-S01.jpg', '7nm 65W\r\n64MB L3 Cache\r\n6MB L2 Cache\r\nTray/OEM'),
 (1029, 'Intel Core i5-6600KSkylake Quad-Core 3.5 GHz', 200, 199.29, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/A1N8_1_20170504342593354.jpg', '14nm Skylake 91W\r\n6MB L3 Cache\r\n4 x 256KB L2 Cache\r\nIntel HD Graphics 530'),
 (1030, 'Intel OEM Core i5-8600K 6-Core 3.6 GHz', 400, 259.99, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-117-840-S01.jpg', 'OEM Processor\r\nONLY Compatible with Intel 300 Series Motherboard\r\nFor A Great VR Experience\r\nMax Turbo Frequency 4.3 GHz\r\nIntel UHD Graphics 630\r\nUnlocked Processor\r\nDDR4 Support\r\nSocket LGA 1151 (300 Series)\r\nCooler / thermal paste not included'),
 (1031, 'Intel Core i7-7700T Quad-Core 2.9 GHz', 150, 390.98, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/A1N8_1_20170504296341316.jpg', '14nm Kaby Lake 35W\r\n8MB L3 Cache\r\n4 x 256KB L2 Cache\r\nTray ONLY\r\n'),
-(1032, 'Intel Xeon EM64T 3.4 Single-Core 3.4 GHz', 200, 301, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-117-032-01.jpg', '800MHz FSB\r\n90 nm Irwindale\r\n2MB L2 Cache'),
-(1033, 'AMD Phenom II X6 1090T 6-Core 3.2 GHz ', 400, 97, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-103-849-02.jpg', '4000 MHz\r\n45nm Thuban 125W\r\n6MB L3 Cache\r\n6 x 512KB L2 Cache'),
-(1034, 'Intel Core 2 QX6700 Quad-Core 2.66 GHz', 50, 870, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-115-011-02.jpg', '1066 MHz FSB\r\n65nm Kentsfield 130W\r\n2 x 4MB L2 Cache'),
+(1032, 'Intel Xeon EM64T 3.4 Single-Core 3.4 GHz', 200, 301.99, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-117-032-01.jpg', '800MHz FSB\r\n90 nm Irwindale\r\n2MB L2 Cache'),
+(1033, 'AMD Phenom II X6 1090T 6-Core 3.2 GHz ', 400, 97.99, 'AMD', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-103-849-02.jpg', '4000 MHz\r\n45nm Thuban 125W\r\n6MB L3 Cache\r\n6 x 512KB L2 Cache'),
+(1034, 'Intel Core 2 QX6700 Quad-Core 2.66 GHz', 50, 870.99, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-115-011-02.jpg', '1066 MHz FSB\r\n65nm Kentsfield 130W\r\n2 x 4MB L2 Cache'),
 (1035, 'Intel Core i7-980 Gulftown 6-Core 3.33 GHz', 20, 1500.19, 'Intel', 'CPU', 'https://c1.neweggimages.com/ProductImage/19-116-402-03.jpg', '32nm Gulftown 130W\r\n12MB L3 Cache\r\n6 x 256KB L2 Cache'),
-(1036, 'Microsoft Wireless Sculpt Ergonomic Desktop', 100, 117, 'Microsoft', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/23-109-349-03.jpg', '104 Normal Keys\r\nUSB RF Wireless\r\nMicrosoft\r\nBlack'),
-(1037, 'Razer Chroma Keyboard, DeathAdder Mouse', 100, 148, 'Razer', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/A6ZPS200615J3n16.jpg', 'Razer Cynosa Chroma Gaming Keyboard: Individually Backlit RGB Keys - Spill-Resistant Design - Programmable Macro Functionality - Quiet & Cushioned\r\nRazer DeathAdder Essential Gaming Mouse: 6400 DPI Optical Sensor - 5 Programmable Buttons\r\nRazer Goliathus Speed Cosmic (Medium) Gaming Mouse Pad: Smooth Gaming Mat - Anti-Slip Rubber Base - Portable Cloth Design - Anti-Fraying Stitched Frame'),
+(1036, 'Microsoft Wireless Sculpt Ergonomic Desktop', 100, 117.99, 'Microsoft', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/23-109-349-03.jpg', '104 Normal Keys\r\nUSB RF Wireless\r\nMicrosoft\r\nBlack'),
+(1037, 'Razer Chroma Keyboard, DeathAdder Mouse', 100, 148.99, 'Razer', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/A6ZPS200615J3n16.jpg', 'Razer Cynosa Chroma Gaming Keyboard: Individually Backlit RGB Keys - Spill-Resistant Design - Programmable Macro Functionality - Quiet & Cushioned\r\nRazer DeathAdder Essential Gaming Mouse: 6400 DPI Optical Sensor - 5 Programmable Buttons\r\nRazer Goliathus Speed Cosmic (Medium) Gaming Mouse Pad: Smooth Gaming Mat - Anti-Slip Rubber Base - Portable Cloth Design - Anti-Fraying Stitched Frame'),
 (1038, 'CORN GLK 350 Keyboard And 1800DPI Mouse', 250, 44.99, 'CORN', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/A4RES200618RUaqw.jpg', '1800 DPI Mouse\r\nSpill-resistant design\r\nSilent Typing\r\nErgonomic Design\r\nCool Orange Backlit\r\nConvenient USB Chargeable Keyboard\r\nUltra-thin Panel\r\nAuto -sleep and Power-saving( Last for 3 Months after Fully Charged--Lab Data)\r\nPlug and Use, No Driver Needed'),
 (1039, 'Apple Wireless Keyboard And Mouse Combo', 500, 49.99, 'Apple', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/AKJ7S200528aY76c.jpg', 'Keyboard Type: Wireless Connection\r\nOptical Resolution: 1200 DPI\r\nItem Type: Slim, Wireless, Full Size with Keypad\r\nMouse Type: Wireless Connection\r\nWireless Specification: 2.4GHz\r\nInterface Port: USB\r\nMultimedia Function Keys: Yes\r\nWaterproof: Yes\r\nWorking Distance: 10m'),
 (1040, 'MEETION C510 Keyboard and Mouse ', 300, 21.99, 'MEETION', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/AFJZS201105QGEKh.jpg', '104 Normal Keys\r\nUSB Wired\r\nMeetion\r\nBlack'),
 (1041, 'Logitech Wireless Combo MK260 920-002950', 300, 39.99, 'Logitech', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/23-126-197-06.jpg', '8 Hot Keys\r\nUSB RF Wireless\r\nSleek All-in-one Setup'),
 (1042, 'HP CS10 Ergonomic Design', 400, 51.99, 'HP', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/A4RE_132010698233293560k0ggq4OIYm.jpg', '1200 DPI Mouse\r\nErgonomic Design\r\n2.4GHz Stable Wireless Connectivity\r\nWaterdrop-shape Keycaps\r\nPlug and Use, No Driver Needed\r\nSilent Typing\r\nPower-saving and Auto-sleep Function\r\nWide Compatability-Support Window 98/ME/NT/XP/Vista/7/8/10'),
-(1043, 'Logitech MK520 ', 500, 64, 'Logitech', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/A73M_132123196405574162bR3FwANTet.jpg', 'Logitech Incurve keys\r\nHand-friendly full size mouse\r\nFull-size layout keyboard\r\nLogitech Unifying receiver'),
+(1043, 'Logitech MK520 ', 500, 64.99, 'Logitech', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/A73M_132123196405574162bR3FwANTet.jpg', 'Logitech Incurve keys\r\nHand-friendly full size mouse\r\nFull-size layout keyboard\r\nLogitech Unifying receiver'),
 (1044, 'Microsoft Desktop 3050 PP3-00001', 500, 49.95, 'Microsoft', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/23-109-384-01.jpg', 'Office Products\r\nMicrosoft\r\nBlack'),
 (1045, 'APEVIA KI-COMBO-BL Blue & Black', 700, 14.95, 'APEVIA', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/23-165-015-07.jpg', '104 Normal Keys\r\n22 Function Keys\r\nPS/2\r\nAPEVIA\r\nBlue & Black'),
-(1046, 'Dell KM636 Keyboard and Mouse', 500, 54, 'Dell', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/V1BH_1_20190123336970324.jpg', 'Contemporary Design\r\n. -Designed For Sheer Comfort\r\nLong, Efficient Battery Life\r\nUSB Wireless Receiver\r\nInterface: 2.4 GHz\r\nHot Keys Function:\r\n. -Mute\r\n. -Play / Pause'),
+(1046, 'Dell KM636 Keyboard and Mouse', 500, 54.99, 'Dell', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/V1BH_1_20190123336970324.jpg', 'Contemporary Design\r\n. -Designed For Sheer Comfort\r\nLong, Efficient Battery Life\r\nUSB Wireless Receiver\r\nInterface: 2.4 GHz\r\nHot Keys Function:\r\n. -Mute\r\n. -Play / Pause'),
 (1047, 'Perixx 11578 Mechanical Keyboard and Mouse', 250, 119.99, 'Perixx', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/A2J2_1318045655094517495JBCMovTa7.jpg', 'The glossy surface offers smooth movement, perfect for fast moving and multiple screens control work\r\n9 advanced function keys with multimedia and keyboard lock function\r\nEasy to removed and clean the trackball by taping it from the bottom hole of the keyboard\r\nSystem requirements: Windows 7, 8, 10; wired USB connection\r\nMechanical keyboard with built-in 2.17 Inch (55mm) large trackball and tilting scroll wheel; Easily adjust the sensitivity of the trackball movement by FN+F9\r\nBacklit version: PERIBOARD-322 (NE#9SIA2J27N12715); Non-backlit version: ERIBOARD-522 (NE#9SIA2J27N13234)'),
 (1048, 'FirstPower Gaming RGB Keyboard and Mouse', 500, 19.99, 'FirstPower', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/AP4DS200630KFXzJ.jpg', 'keyboard: Suspension style key caps, waterproof and dustproof, and easy to take down to clean thoroughly for longer work time.\r\nAmphitheatre style and Curve key design provides super cool mechanical feeling.\r\nThe transmission line is equipped with anti-interference magnet ring for better operation.\r\nRainbow Color Backlight effects: bringing cool gaming experience\r\nMouse: DPI adjustment provides 800/1200/1600 gear shift control for different games.\r\nThe smooth 3D roller with anti-skid scale grain ensures you to operate comfortably.\r\nThe buttons structure adopt precursor type streamline design provides excellent click sense.'),
 (1049, 'Logitech MK550 Wireless Keyboard and Mouse', 250, 84.99, 'Logitech', 'Keyboard and Mouse', 'https://c1.neweggimages.com/ProductImage/AKN5_132187847768382335fG89fRd7Qt.jpg', 'New Logitech MK550 Wireless Keyboard and Mouse Combo\r\nErgonomic Wave Design\r\nLong Battery Life\r\nlower wrist fatigue\r\nThree options for leg height\r\nUnifying receiver\r\n'),
@@ -218,11 +280,11 @@ INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manu
 (1059, 'G.SKILL Trident Z Royal 64GB 288-Pin DDR4', 75, 459.99, 'G.SKILL', 'RAM', 'https://c1.neweggimages.com/ProductImage/20-374-051-V02.jpg', 'DDR4 4000 (PC4 32000)\r\nTiming 18-22-22-42\r\nCAS Latency 18\r\nVoltage 1.40V'),
 (1060, 'XPG SPECTRIX D60G RGB16GB DDR4', 350, 153.43, 'XPG', 'RAM', 'https://c1.neweggimages.com/ProductImage/1B4-010T-00145-S07.jpg', 'DDR4 3200 (PC4 25600)\r\nTiming 16-20-20\r\nVoltage 1.35V\r\n'),
 (1061, 'PNY Anarchy 16GB 288-Pin DDR4 SDRAM', 350, 157.16, 'PNY', 'RAM', 'https://c1.neweggimages.com/ProductImage/20-178-874-02.jpg', 'DDR4 2400 (PC4 19200)\r\nTiming 15-15-15\r\nCAS Latency 15\r\nVoltage 1.20V\r\n'),
-(1062, 'Team Elite 16GB DDR4 2400 (PC4 19200)', 400, 115, 'TEAMGROUP', 'RAM', 'https://c1.neweggimages.com/ProductImage/20-313-810-S01.jpg', 'DDR4 2400 (PC4 19200)\r\nTiming 16-16-16-39\r\nCAS Latency 16\r\nVoltage 1.20V'),
+(1062, 'Team Elite 16GB DDR4 2400 (PC4 19200)', 400, 115.55, 'TEAMGROUP', 'RAM', 'https://c1.neweggimages.com/ProductImage/20-313-810-S01.jpg', 'DDR4 2400 (PC4 19200)\r\nTiming 16-16-16-39\r\nCAS Latency 16\r\nVoltage 1.20V'),
 (1063, 'GeIL EVO SPEAR Phantom Gaming Edition 16GB', 475, 82.99, 'GeIL', 'RAM', 'https://c1.neweggimages.com/ProductImage/20-158-821-V01.jpg', 'DDR4 3000 (PC4 24000)\r\nTiming 16-18-18-36\r\nCAS Latency 16\r\nVoltage 1.35V'),
 (1064, 'G.SKILL Ripjaws V Series 32GB 288-Pin DDR4', 225, 352.23, 'G.SKILL', 'RAM', 'https://c1.neweggimages.com/ProductImage/20-374-090-V01.jpg', 'DDR4 3600 (PC4 28800)\r\nTiming 14-15-15-35\r\nCAS Latency 14\r\nVoltage 1.45V'),
 (1065, 'CORSAIR Dominator Platinum RGB 16GB DDR4 3000', 250, 144.99, 'CORSAIR', 'RAM', 'https://c1.neweggimages.com/ProductImage/20-236-503-01.jpg', 'DDR4 3000 (PC4 24000)\r\nTiming 15-17-17-35\r\nCAS Latency 15\r\nVoltage 1.35V\r\nPremium RGB RAM'),
-(1066, 'Thermaltake TR2 W0070 430W Power Supply', 500, 99.9, 'Thermaltake', 'Power Supply', 'https://c1.neweggimages.com/ProductImageCompressAll300/17-153-023-58.jpg?ex=2', 'ATX 12V 2.2\r\n115 - 230 VAC 50 - 60 Hz\r\n+3.3V@20A, +5V@24A, +12V1@14A, +12V2@15A, -12V@0.3A, +5VSB@2A'),
+(1066, 'Thermaltake TR2 W0070 430W Power Supply', 500, 99.99, 'Thermaltake', 'Power Supply', 'https://c1.neweggimages.com/ProductImageCompressAll300/17-153-023-58.jpg?ex=2', 'ATX 12V 2.2\r\n115 - 230 VAC 50 - 60 Hz\r\n+3.3V@20A, +5V@24A, +12V1@14A, +12V2@15A, -12V@0.3A, +5VSB@2A'),
 (1067, 'RAIDMAX HYBRID 2 RX-530SS 530W Power Supply', 500, 54.98, 'RAIDMAX', 'Power Supply', 'https://c1.neweggimages.com/ProductImage/17-152-028-35.jpg', 'ATX 12V v2.3/EPS 12V\r\nModular\r\n80 PLUS BRONZE Certified\r\n115 / 230 V, 47 - 63 Hz\r\n+3.3V@20A, +5V@20A, +12V@38A, -12V@0.4A ,5VSB@2.5A\r\nActive PFC'),
 (1068, 'Seasonic FOCUS GX-750, 750W Power Supply', 300, 129.99, 'Seasonic', 'Power Supply', 'https://c1.neweggimages.com/ProductImage/17-151-187-V15.jpg', 'COMPACT SIZE: 140 MM deep fits ALL ATX systems.\r\nFULL MODULAR: Use only the cables you need to reduce clutter to maximize airflow for a better ventilated system.\r\n80 PLUS GOLD: Less energy gets wasted during power conversion; Cut down your electricity usage and be Eco-Friendly.\r\nPREMIUM HYBRID FAN CONTROL: Unsurpassed silent performance in Fanless Mode. The fan control button at the back of the power supply allows users to customize cooling needs by selecting between Seasonic S2FC (fan control without Fanless Mode) and S3FC (fan control including Fanless Mode).\r\n10 YEAR WORRY-FREE WARRANTY: Our commitment to superior quality.\r\n'),
 (1069, 'EVGA 500 W1 80+ Power Supply', 500, 54.99, 'EVGA', 'Power Supply', 'https://c1.neweggimages.com/ProductImage/17-438-016-17.jpg', 'ATX12V / EPS12V\r\n80 PLUS Certified\r\nUp to 40A +12V\r\nActive PFC\r\nIntel Haswell Compatible'),
@@ -239,15 +301,15 @@ INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manu
 (1080, 'Seasonic FOCUS SGX-650, 650W Power Supply', 400, 135.99, 'Seasonic', 'Power Supply', 'https://c1.neweggimages.com/ProductImage/17-151-224-V22.jpg', 'COMPACT SIZE: 125 mm (L) x 125 mm (W) x 63.5 mm (H).\r\nFULL MODULAR: Use only the cables you need to reduce clutter to maximize airflow for a better ventilated system.\r\n80 PLUS GOLD: Less energy gets wasted during power conversion; Cut down your electricity usage and be Eco-Friendly.\r\nPREMIUM HYBRID FAN CONTROL: Unsurpassed silent performance in Fanless Mode. Functions in three operational stages: Fanless Mode, Silent Mode, and Cooling Mode.'),
 (1081, 'WD Blue 3D NAND 2TB Internal SSD', 300, 189.99, 'Western Digital', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-250-089-V02.jpg', 'Award Winning WD Blue 3D NAND SATA SSD.\r\nCapacities up to 4TB with enhanced reliability.\r\nAn active power draw up to 25% lower than previous generations of WD Blue SSD.\r\nSequential read speeds up to 560 MB/s and sequential write speeds up to 530 MB/s.\r\nAn industry-leading 1.75M hours mean time to failure (MTTF) and up to 500 terabytes written (TBW) for enhanced reliability.'),
 (1082, 'SAMSUNG 860 EVO Series 2.5\" 1TB SATA SSD', 400, 109.99, 'Samsung', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-147-673-V01.jpg', '2.5\"\r\n1TB\r\nSATA III'),
-(1083, 'Crucial M4 2.5\" 128GB SATA III SSD', 450, 156.5, 'Crucial', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-148-442-12.jpg', '2.5\"\r\n128GB\r\nSATA III\r\n'),
-(1084, 'SAMSUNG 850 EVO 2.5\" 4TB SATA III 3D SSD', 100, 1188, 'Samsung', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-147-566-12.jpg', 'Innovation V-NAND Technology\r\nIncredible Read/Write Performance\r\nEnhanced Endurance and Reliability\r\n2.5\" Form Factor Ideal for most current Laptops and Desktop PCs'),
+(1083, 'Crucial M4 2.5\" 128GB SATA III SSD', 450, 156.55, 'Crucial', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-148-442-12.jpg', '2.5\"\r\n128GB\r\nSATA III\r\n'),
+(1084, 'SAMSUNG 850 EVO 2.5\" 4TB SATA III 3D SSD', 100, 1188.99, 'Samsung', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-147-566-12.jpg', 'Innovation V-NAND Technology\r\nIncredible Read/Write Performance\r\nEnhanced Endurance and Reliability\r\n2.5\" Form Factor Ideal for most current Laptops and Desktop PCs'),
 (1085, 'SAMSUNG 840 EVO 2.5\" 500GB SATA III SSD', 250, 349.99, 'Samsung', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-147-249-11.jpg', '2.5\"\r\n500GB\r\nSATA III\r\n'),
 (1086, 'SAMSUNG 840 Pro Series 2.5\" 128GB SSD', 500, 199.95, 'Samsung', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-147-192-11.jpg', '2.5\"\r\n128GB\r\nSATA III\r\n'),
 (1087, 'Western Digital BLACK SN750 NVMe M.2 2280 4TB', 125, 799.99, 'Western Digital', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-250-180-01.jpg', 'Read speeds up to 3,400 MB/s for improved load times.\r\nAvailable in capacities ranging from 250GB to 4TB.\r\nSleek design to customize and intensify your gaming rig while helping to maintain peak performance.'),
 (1088, 'Kingston SSDNow V300 Series 2.5\" 240GB SSD', 450, 124.75, 'Kingston', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-721-108-02.jpg', '2.5\"\r\n240GB\r\nSATA III\r\n'),
 (1089, 'Intel 660p Series M.2 2280 1TB PCIe SSD', 450, 109.99, 'Intel', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-167-462-V01.jpg', 'Form Factor: M.2 22 x 80mm\r\nInterface: PCI Express NVMe 3.0 x4\r\nPerformance: Sequential Read (up to) 1800 MB/s, Random Read (8GB Span): Up to 150,000 IOPS. Sequential Write (up to) 1800 MB/s, Random Write (8GB Span): Up to 220,000 IOPS'),
 (1090, 'HyperX 3K 120GB SATA III MLC Internal SSD', 375, 149.99, 'HyperX', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-239-045-02.jpg', '2.5\"\r\n120GB\r\nSATA III\r\n'),
-(1091, 'SAMSUNG 970 EVO M.2 2280 2TB SSD', 150, 888, 'Samsung', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-147-692-V21.jpg', 'M.2 2280\r\n2TB\r\nPCIe Gen3. X4, NVMe 1.3'),
+(1091, 'SAMSUNG 970 EVO M.2 2280 2TB SSD', 150, 888.99, 'Samsung', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-147-692-V21.jpg', 'M.2 2280\r\n2TB\r\nPCIe Gen3. X4, NVMe 1.3'),
 (1092, 'Crucial MX500 1TB 3D NAND SATA SSD', 250, 104.99, 'Crucial', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-156-174-V09.jpg', 'Sequential reads/writes up to 560/510 MB/s and random reads/writes up to 95k/90k on all file types\r\nAccelerated by Micron 3D NAND technology\r\nIntegrated Power Loss Immunity preserves all your saved work'),
 (1093, 'SAMSUNG 860 Pro Series 512GB SATA III SSD', 425, 99.99, 'Samsung', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-147-684-V21.jpg', '2.5\"\r\n512GB\r\nSATA III'),
 (1094, 'Seagate Storage Xbox Series X 1TB SSD NVME', 250, 219.99, 'Seagate', 'Storage', 'https://c1.neweggimages.com/ProductImage/20-248-142-04.jpg', 'SEAMLESS GAMEPLAY Designed in partnership with Xbox to seamlessly play Xbox Series X|S games from the internal SSD or the expansion card without sacrificing graphics, latency, load times, or framerates\r\nHIGH CAPACITY 1TB of storage increases the overall capacity of the Xbox Series X|S - collect thousands of games across four generations of Xbox without sacrificing performance\r\nEXCLUSIVE TO XBOX The only available expansion card that replicates the Xbox Velocity Architecture - providing faster load times, richer environments, and more immersive gameplay'),
@@ -271,7 +333,7 @@ INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manu
 (1112, 'LG ULTRAGEAR 32GK65B-B 32\" 144HZ', 200, 324.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-025-965-S01.jpg', '2560 x 1440 Quad HD 2K Resolution\r\n1ms with Motion Blur Reduction\r\n144Hz Refresh Rate\r\n2 HDMI, DisplayPort (1.2) Video Inputs\r\nRadeon FreeSync Technology\r\nNVIDIA G-SYNC Compatible'),
 (1113, 'LG UltraGear 38GL950G-B 38\"', 50, 1799.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-025-974-V01.jpg', '3840 x 1600 WQHD+ 2K Resolution\r\n1ms Response Time\r\n144Hz (GTG), 175Hz (OC) Refresh Rate\r\nHDMI, DisplayPort Video Input\r\nNVIDIA G-SYNC Technology\r\nFlicker Safe Technology\r\nTilt, Height Adjustable\r\n'),
 (1114, 'SAMSUNG S22E450D 22\" Monitor', 400, 109.99, 'Samsung', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-022-315-09.jpg', '1920 x 1080 Full HD Resolution @ 60Hz\r\nVGA, DVI, DisplayPort Video Inputs\r\nMega Dynamic Contrast Ratio\r\nHeight, Pivot, Swivel, Tilt Adjustable\r\n'),
-(1115, 'BenQ Zowie XL2740 27\" Full HD Gaming Monitor', 200, 549, 'BenQ', 'Monitors', 'https://c1.neweggimages.com/ProductImage/0EP-004Z-00003-V13.jpg', 'G-Sync Compatible & FreeSync eSports Monitor\r\n1920 x 1080 1ms (GTG)\r\nDCR 12,000,000:1 (1,000:1)\r\nDVI-DL, 2 x HDMI, DP 1.2 Headphone & Mic Jack\r\n100 x 100mm VESA Mounting\r\nPivot Swivel Tilt Height Adjustable Stand'),
+(1115, 'BenQ Zowie XL2740 27\" Full HD Gaming Monitor', 200, 549.99, 'BenQ', 'Monitors', 'https://c1.neweggimages.com/ProductImage/0EP-004Z-00003-V13.jpg', 'G-Sync Compatible & FreeSync eSports Monitor\\r\\n1920 x 1080 1ms (GTG)\\r\\nDCR 12,000,000:1 (1,000:1)\\r\\nDVI-DL, 2 x HDMI, DP 1.2 Headphone & Mic Jack\\r\\n100 x 100mm VESA Mounting\\r\\nPivot Swivel Tilt Height Adjustable Stand'),
 (1116, 'LG 29BN650-B 29\" 21:9 UltraWide', 300, 219.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/1B4-008M-001X5-S01.jpg', '2560 x 1080 75 Hz\r\nHDMI DisplayPort\r\n1,000:1\r\n16.7 Million\r\nHeight: 150mm\r\nTilt: -5° to 35°\r\n'),
 (1117, 'LG UltraWide 49WL95C-WE 49\"', 75, 1499.99, 'LG', 'Monitors', 'https://c1.neweggimages.com/ProductImage/24-026-095-S05.jpg', '5120 x 1440 60 Hz\r\nHDMI DisplayPort USB 3.0\r\n1,000:1'),
 (1118, 'Lenovo ThinkVision P24h-20 23.8\"', 300, 232.99, 'Lenovo', 'Monitors', 'https://c1.neweggimages.com/ProductImage/A6ZPD2005063XUDC.jpg', '23.8\" QHD (2560 x 1440) 3-side Near-edgeless display\r\nFactory calibrated color accuracy with multiple color gamut\r\nUSB Type-C, HDMI, DP, USB hub and daisy chain\r\nErgonomic and sapace-saving design & UE\r\nIPS Panel\r\n'),
@@ -283,14 +345,14 @@ INSERT INTO `products` (`productID`, `prodName`, `prodStock`, `prodPrice`, `manu
 (1124, 'Razer BlackShark V2 - Wired Gaming Headset', 300, 99.99, 'Razer', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/A4RES200803XqsXY.jpg', 'Razer™ Triforce Titanium 50 mm Drivers\r\nRazer™ HyperClear Cardioid Mic With USB Sound Card\r\nFlowKnit Memory Foam Ear Cushions\r\nADVANCED PASSIVE NOISE CANCELLATION'),
 (1125, 'HyperX CLOUD FLIGHT S USB Connector', 400, 154.98, 'HyperX', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/AATCS2007083hYDI.jpg', '100Hz-20KHz\r\nUSB Connector\r\nUSB charge cable (1m) Cord Length'),
 (1126, 'Razer NARI Wireless USB Transceiver', 250, 159.99, 'Razer', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/26-153-278-S01.jpg', '20Hz-20KHz\r\nWireless USB Transceiver / 3.5mm analog Connector'),
-(1127, 'Corsair VIRTUOSO RGB Wireless', 300, 213.7, 'CORSAIR', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/V1DSD200618AEZJN.jpg', 'SLIPSTREAM WIRELESS\r\nHyper-fast wireless connection with up to 60ft of range, using Intelligent Frequency Shift (IFS) to ensure the strongest signal.\r\nUSB WIRED\r\nHigh-fidelity, 24bit/96kHz audio for the ultimate listening experience with compatible recordings.\r\n3.5MM WIRED\r\nUniversal connection for listening to a wide variety of devices, from DACs and audio players to consoles and mobile devices.\r\n\r\n'),
-(1128, 'HyperX Cloud Flight S Wireless Gaming Headset', 200, 323.9, 'HyperX', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/A4RED201105CEOCQ.jpg', 'Gaming-grade 2.4GHz wireless connectivity\r\nLong lasting battery life - up to 30 hours\r\nQi Certified for wireless charging\r\nHyperX custom-tuned 7.1 surround sound\r\nGame and chat audio balance\r\nSignature HyperX comfort and durability\r\nDetachable microphone with LED mute indicator'),
-(1129, 'Logitech G430 Gaming Headset', 300, 200, 'Logitech', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/26-104-847-19.jpg', 'DTS Headphone: X and Dolby 7. 1 surround Sound: experience an immersive 360-degree sound field that lets you hear what you can\'t see\r\nBuilt for comfort: lightweight design and soft sport cloth ear cups with 90-degree swivel for maximum comfort and a personalized fit\r\nFolding, noise-cancelling boom mic: reduces background noise for clear voice pick up and rotates up and out of the way'),
+(1127, 'Corsair VIRTUOSO RGB Wireless', 300, 213.79, 'CORSAIR', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/V1DSD200618AEZJN.jpg', 'SLIPSTREAM WIRELESS\r\nHyper-fast wireless connection with up to 60ft of range, using Intelligent Frequency Shift (IFS) to ensure the strongest signal.\r\nUSB WIRED\r\nHigh-fidelity, 24bit/96kHz audio for the ultimate listening experience with compatible recordings.\r\n3.5MM WIRED\r\nUniversal connection for listening to a wide variety of devices, from DACs and audio players to consoles and mobile devices.\r\n\r\n'),
+(1128, 'HyperX Cloud Flight S Wireless Gaming Headset', 200, 323.99, 'HyperX', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/A4RED201105CEOCQ.jpg', 'Gaming-grade 2.4GHz wireless connectivity\r\nLong lasting battery life - up to 30 hours\r\nQi Certified for wireless charging\r\nHyperX custom-tuned 7.1 surround sound\r\nGame and chat audio balance\r\nSignature HyperX comfort and durability\r\nDetachable microphone with LED mute indicator'),
+(1129, 'Logitech G430 Gaming Headset', 300, 200.99, 'Logitech', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/26-104-847-19.jpg', 'DTS Headphone: X and Dolby 7. 1 surround Sound: experience an immersive 360-degree sound field that lets you hear what you can\'t see\r\nBuilt for comfort: lightweight design and soft sport cloth ear cups with 90-degree swivel for maximum comfort and a personalized fit\r\nFolding, noise-cancelling boom mic: reduces background noise for clear voice pick up and rotates up and out of the way'),
 (1130, 'Razer Kraken Gaming Headset 2019', 200, 122.66, 'Razer', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/AKVH_1_201912071020072566.jpg', 'Sound Built for Immersive Gaming: Outfitted with custom tuned 50 mm drivers\r\nAll Day Comfort: Oval, cooling gel infused cushions with indents for glasses prevent overheating and pressure build up\r\nRetractable Noise Cancelling Microphone: An improved cardioid mic reduces background and ambient noises for crystal clear communication'),
 (1131, 'Sound BlasterX Katana Multi-channel Soundbar', 250, 237.34, 'Creative', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/1B4-00BN-00012-Z13.jpg', 'UNDER-MONITOR AUDIO SYSTEM - Perfect for your PC Gaming setup, the Katana fits right under your wide screen unobtrusively, featuring the programmable Aurora Reactive lighting system with 16.8 million colors\r\n5-DRIVER DESIGN & TRI-AMPLIFICATION SYSTEM - 2 up-firing midbass driver, 2 high-excursion tweeters, 1 long-throw subwoofer in a dedicated external subwoofer unit - each individually driven by DSPs ; Total output of 75RMS/150 Peak Power'),
 (1132, 'Cyber Acoustics CA-3602 30 Watts', 300, 51.99, 'Cyber Acoustics', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/36-150-086-02.jpg', '30 Watts\r\nmp3 cradle included\r\nConvenient desktop controls\r\n'),
 (1133, 'Logitech Z337 Bold Sound Bluetooth Speaker', 400, 79.99, 'Logitech', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/0S6-003U-00067-Z01.jpg', 'WIRELESS AUDIO VIA BLUETOOTH: Stream audio wirelessly from any Bluetooth device by connecting your computer, smartphone or tablet via the pairing button conveniently located on the control pod\r\nBOLD SOUND: 80 Watts Peak/40 Watts RMS power delivers maximum loudness via two satellite speakers and a large subwoofer. Enjoy rich, clear, bold sound'),
-(1134, 'Logitech - Z407 2.1 Bluetooth Speaker System', 250, 120, 'Logitech', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/AKVHD210103B39QL.jpg', 'Sleek appearance Dual-position oval-shaped satellite speakers can be laid vertically or horizontally.\r\nFull range drivers Designed to move sound throughout the entire room. Enjoy a powerful, room-filling audio experience in any room.\r\nCompatible with most Bluetooth-enabled smartphones, computers, and tablets Perfect for a variety of audio sources.'),
+(1134, 'Logitech - Z407 2.1 Bluetooth Speaker System', 250, 120.99, 'Logitech', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/AKVHD210103B39QL.jpg', 'Sleek appearance Dual-position oval-shaped satellite speakers can be laid vertically or horizontally.\r\nFull range drivers Designed to move sound throughout the entire room. Enjoy a powerful, room-filling audio experience in any room.\r\nCompatible with most Bluetooth-enabled smartphones, computers, and tablets Perfect for a variety of audio sources.'),
 (1135, 'Kanto YU2 100W Powered Speakers', 175, 259.99, 'Kanto', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/A4F7S201009EUEzv.jpg', '3\" drivers and 3/4” silk dome tweeters provide detailed mid-range and crisp highs\r\nBuilt-in soundcard lets you listen to high-quality audio via your computer’s USB port\r\nIncludes AUX input and SUB OUT'),
 (1136, 'Kanto YU2 Powered Desktop Speakers - Pair', 225, 239.99, 'Kanto', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/AMF7_1_202003201679486678.jpg', '3\" drivers and 3/4” silk dome tweeters provide detailed mid-range and crisp highs\r\nBuilt-in soundcard lets you listen to high-quality audio via your computer’s USB port\r\nIncludes AUX input and SUB OU'),
 (1137, 'HP DHE-6000 Eagle Eyes RGB Backlit', 300, 34.99, 'HP', 'Headsets and Speakers', 'https://c1.neweggimages.com/ProductImage/A4RES200904bTWyQ.jpg', 'Mini and Portable Speaker\r\nEagle Eyes RGB Backlit\r\nStereo Sound Effect\r\nUSB Power Supply and 3.5mm Audio Cable\r\nWide Compatability\r\nLine Control-Volume Adjustment'),
@@ -347,35 +409,6 @@ CREATE TABLE `useractivate` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `useractivate`
---
-
-INSERT INTO `useractivate` (`userActivateID`, `userActivateEmail`, `userActivateSelector`, `userActivateToken`, `userActivateExpires`) VALUES
-(3, 'test@test.com', '73594e2ce6e0c8bd', '$2y$10$Lr4MAp8FfAy9mElfFH1WFuK1s4eIf6NWDxpyHGZc4t1ZAW7zprGgK', '1617972276'),
-(4, 'dnmgr27@gmail.com', '361c88e6376fb2d7', '$2y$10$qsSaT/i1Uu5gSnm2lY1tqe0XnV0bku/VE02eFalYU5ADQKCgljmHG', '1618119696'),
-(5, 'dnmgr27@gmail.com', '6f02dcce9a8cd4f0', '$2y$10$magEaYQe.juJOGZ/d7FBauZcvPAv2lrBedOa.fWI/cr/H6pfwMazO', '1618119775'),
-(6, 'dnmgr27@gmail.com', 'fb77420fd6aec01c', '$2y$10$IK2gfRs0ubIn3jX0Z12NVO.8tep50ZRK3ejmA17IPd4FNVcugrAoO', '1618165465'),
-(7, '123@gmail.com', '467eed8515bd18a3', '$2y$10$.8I2HVlOgqQCHvU7JH.QQudylIHBlLAxU.ehCNh64ITYOwG4InrX6', '1618169423'),
-(8, 'dnmgr27@gmail.com', '2179e6f912ea4107', '$2y$10$SDVL/l2O8S0bJA1sv37.z.4jWB69tLdL3guVjPw2wkC5pITNJY0DG', '1618192244'),
-(9, 'dnmgr27@gmail.com', 'ce9c80b4c52e97fa', '$2y$10$.ALPDx5lUGghUie7p9krfup6gPW.1nZs2Hiws84RnjiwL6lkMTON2', '1618192793'),
-(10, 'dnmgr27@gmail.com', '39343b6816c848b9', '$2y$10$FEjtPEQUtx52LpGIT95Ose7UltlPxG7DIsPyjZHLqX436NbpLgqdu', '1618193364'),
-(11, 'dnmgr27@gmail.com', 'b366f992c592c93a', '$2y$10$X8jgujQXp6rzbzS3dFkgc.O1PXkC3ivK5s9aFIwaPQmN58tgWEana', '1618193699'),
-(12, 'dnmgr27@gmail.com', 'bb333c9ba3727cfc', '$2y$10$Wb8sRTRsKG7dFsXs9ef/TuSm0ipZxXY/gjgl/j607V60Xv56xmRTG', '1618193752'),
-(13, 'dnmgr27@gmail.com', '9995cb65acabc7bf', '$2y$10$apadYxJ4nfRWHXIYiQI5cOC2PVEzbRUB6UcfxpJfmtekMmYGfA5Hi', '1618193795'),
-(14, 'dnmgr27@gmail.com', '701a2d2743d245c1', '$2y$10$pFwPMSJ78blOh2mlZy.Tx.MdqvTy3.2KUkJzohF9EdWtN/9thCpW6', '1618194765'),
-(15, 'dnmgr27@gmail.com', '392ee3f6ea270323', '$2y$10$y3rslm8RGoJfqdxcQLyy8OyTj7QYbYsa4Sllue3I6j4ysi3FNU3kS', '1618194808'),
-(16, 'dnmgr27@gmail.com', 'ebb76a79516548d1', '$2y$10$QyInALxLjseoA2.FmU/CS.8B5JG1Pa4GxQrHbmL.SF9vQV4paO9zO', '1618195448'),
-(17, 'dnmgr27@gmail.com', '6c97b3e967662e51', '$2y$10$nU1o1uT0WCIlpogbiq.aROTf8BQfpHte6d2RghXuI19OomLbx47Fu', '1618195529'),
-(18, 'dnmgr27@gmail.com', 'c2b5531fb72751d8', '$2y$10$yLVYVdVdRbXdxBmX/luo7O7T4ZeARvbLc64dokzT7Fj45gldjWMBK', '1618195721'),
-(19, 'dnmgr27@gmail.com', 'a9dc5bf9b5cd8b24', '$2y$10$SVuZitrgAq/t.1OhbKIIGeipSzVAwJLW9kLrjgJhImqosI.X2U5JK', '1618195912'),
-(20, 'dnmgr27@gmail.com', '82b075df7d1448a9', '$2y$10$N/2T0UH.LdpADOphxVWUseJzG/CMOYgpKBLFfpNzdV1hrE0MbXvdq', '1618196099'),
-(21, 'ddn53340@uga.edu', '281baa7c1ecd7b32', '$2y$10$CyHwS93cZdh3ybRJ3pY8xe94/gjqDWvmEqfkwQ2irs1EFhIE/MK4S', '1618196228'),
-(22, 'dnmgr27@gmail.com', '29111f3868720db1', '$2y$10$aoQjCrBXzj7iyYEPVB4CFeiRthnL4LWYFrd3Awx6WvilzlQ3UCXtO', '1618196450'),
-(23, 'dnmgr27@gmail.com', 'da6c6f159b130195', '$2y$10$8rAh96BruVaiuaSw6YWJKOefoGfTF.E2FmzvdhYIw2660pwU8KEn2', '1618197055'),
-(24, 'dnmgr27@gmail.com', '6e40446c93103b8a', '$2y$10$By60yTKyA4.JgZ23Uv1S0OQ.abn6KFCFPyqlVa5PfrgEQMtGO6krm', '1618197378'),
-(25, 'dnmgr27@gmail.com', 'ec8c091329bc5cfc', '$2y$10$fZxurClOHMvZdrens47q0ulZjoYs8KVvk8Q6pVNBxsmKZbTRL6Z.a', '1618198154');
-
---
 -- Indexes for dumped tables
 --
 
@@ -411,7 +444,7 @@ ALTER TABLE `manufacturer`
 -- Indexes for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  ADD PRIMARY KEY (`orderStatus`),
+  ADD PRIMARY KEY (`orderDetailsID`),
   ADD KEY `orderID` (`orderID`),
   ADD KEY `productID` (`productID`);
 
@@ -420,9 +453,7 @@ ALTER TABLE `orderdetails`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderID`),
-  ADD KEY `customerID` (`customerID`),
-  ADD KEY `orderStatus` (`orderStatus`),
-  ADD KEY `shipmentStatus` (`shipmentStatus`);
+  ADD KEY `customerID` (`customerID`);
 
 --
 -- Indexes for table `paymentinfo`
@@ -468,7 +499,7 @@ ALTER TABLE `useractivate`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -480,7 +511,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `manufacturer`
@@ -489,16 +520,22 @@ ALTER TABLE `manufacturer`
   MODIFY `manufacturerID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `orderdetails`
+--
+ALTER TABLE `orderdetails`
+  MODIFY `orderDetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `paymentinfo`
 --
 ALTER TABLE `paymentinfo`
-  MODIFY `payInfoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `payInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -510,7 +547,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `pwdreset`
 --
 ALTER TABLE `pwdreset`
-  MODIFY `pwdResetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `pwdResetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `shipments`
@@ -522,7 +559,7 @@ ALTER TABLE `shipments`
 -- AUTO_INCREMENT for table `useractivate`
 --
 ALTER TABLE `useractivate`
-  MODIFY `userActivateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `userActivateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -558,9 +595,7 @@ ALTER TABLE `orderdetails`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`orderStatus`) REFERENCES `orderdetails` (`orderStatus`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`shipmentStatus`) REFERENCES `shipments` (`shipmentStatus`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customer` (`customerID`);
 
 --
 -- Constraints for table `paymentinfo`

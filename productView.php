@@ -11,11 +11,11 @@ $products = $db->query($query);
 <!DOCTYPE html>
 
 <html lang="en">
-<script src="/scripts/productView.js"></script>
+<script src="scripts/productView.js"></script>
 
 <head>
     <meta charset="UTF-8">
-    <title>INSERT NAME OF SHOP</title>
+    <title>Neweregg</title>
     <link rel="stylesheet" href="stylesheets/productView.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -31,9 +31,8 @@ $products = $db->query($query);
 
     <div class="mainNavigation">
         <a class="active" href="homepage.php">Home</a>
-        <a href="#">About</a>
         <a href="contact.php">Contact</a>
-        <a href="editaccount.php">Account</a>
+        <a href="account.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
@@ -72,7 +71,7 @@ $products = $db->query($query);
         echo "<a href=\"javascript:history.go(-1)\" class='backbutton'>GO BACK</a>";
         ?>
 
-        <div class="productView">
+            <div class="productView">
             <?php
             while ($row = $products->fetch(PDO::FETCH_ASSOC)) {
                 $name = $row['prodName'];
@@ -90,19 +89,17 @@ $products = $db->query($query);
             <p><b>Manufacturer: </b><?php echo $manufacturer ?> </p>
             <p id="itemDesc"><b>Item Description: </b><?php echo $description ?></p>
             <form action="includes/addtocart.inc.php" method="post">
-              <div id="input_div">
-                  <input type="number" name="productQuantity" value="1" min="1" max="10" id="count" required>
-                  <!--buttons used for +/- of quantity
-                  <input type="button" value="-" id="mins" onclick="minus()">
-                  <input type="button" value="+" id="plus" onclick="plus()">
-                  -->
-              </div>
-              <p id="amount"><b>Amount: </b>$<?php echo $price ?></p>
-              <input type="hidden" name="productID" value="<?php echo $productsID; ?>"/>
-              <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button>
+                <div id="input_div">
+                    <input type="number" name="productQuantity" size="2" value="1" maxlength="2" id="count" min="1" max="99">
+                    <input type="button" value="-" id="mins" onclick="decrement()">
+                    <input type="button" value="+" id="plus" onclick="increment()">
+                </div>
+                <p id="amount"><b>Amount: $<?php echo $price ?></b>
+                </p>
+                <input type="hidden" name="productID" value="<?php echo $productsID; ?>" />
+                <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button>
             </form>
         </div>
-
         <?php
         if (isset($_GET['newPwd'])) {
             if ($_GET['newPwd'] == "success") {

@@ -10,7 +10,7 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <title>INSERT NAME OF SHOP</title>
+    <title>Neweregg</title>
     <link rel="stylesheet" href="stylesheets/searchresults.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -26,9 +26,8 @@ session_start();
 
     <div class="mainNavigation">
         <a class="active" href="homepage.php">Home</a>
-        <a href="#">About</a>
         <a href="contact.php">Contact</a>
-        <a href="editaccount.php">Account</a>
+        <a href="account.php">Account</a>
         <a href="cart.php">Cart</a>
         <form action="includes/logout.inc.php" method="post">
             <?php
@@ -87,25 +86,31 @@ session_start();
                   <?php
                   //get how many rows to render based on amount of products
                   //intdivision of #ofProducts and 5(or products per row) then add 1 row if required (ex: 12 products = 3 rows)
-                  $rowCount = intdiv($queryResult, 5) + 1;
+                  $rowCount = intdiv($queryResult, 4) + 1;
                   //first loop for rows
                   for ($r = 0; $r < $rowCount; $r++) {
                       echo "<tr>";
                       //second loop for columns
-                      for ($c = 0; $c < 5; $c++) {
+                      for ($c = 0; $c <4; $c++) {
                           //check if there are any more items to iterate through
                           if ($itemsRemaining > 0) {
                               ?>
-                          <td>
+                          <td class="itemDisplay">
                             <?php
                             $row = mysqli_fetch_assoc($result);
                               $img = $row['productImage']; ?>
                             <div class="prodContainer">
                               <form action="includes/addtocart.inc.php" method="post">
-                                <img class="prodImg" src="<?php echo $img ?>" height="500" width="500"/>
-                                <p class="prodInfo"><b>Product: <br></b><?php echo $row['prodName']?></p>
+                                <a href="productView.php?productID=<?php echo $row['productID'] ?>">
+                                  <img
+                                          src="<?php echo $img ?> "
+                                          class="prodImg"
+                                          alt="Picture Unavailable"
+                                  />
+                                </a>
+                                <a href="productView.php?productID=<?php echo $row['productID']?>" class="prodInfoLink"><?php echo $row['prodName']?></a>
                                 <p class="prodInfo"><b>Manufacturer: </b><?php echo $row['manufacturerName'] ?></p>
-                                <p class="prodInfo"><b>Price: </b><?php echo $row['prodPrice'] ?></p>
+                                <p class="prodInfo"><b>Price: </b>$<?php echo $row['prodPrice'] ?></p>
                                 <input type="hidden" name="productID" value="<?php echo $row['productID']; ?>"/>
                                 <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button><br><br><br>
                               </form>

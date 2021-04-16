@@ -65,7 +65,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>INSERT NAME OF SHOP</title>
+        <title>Neweregg</title>
         <link rel="stylesheet" href="stylesheets/checkout.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="scripts/register.js"></script>
@@ -81,9 +81,8 @@
 
         <div class="mainNavigation">
             <a href="homepage.php">Home</a>
-            <a href="#">About</a>
             <a href="contact.php">Contact</a>
-            <a href="editaccount.php">Account</a>
+            <a href="account.php">Account</a>
             <a href="cart.php" class="active">Cart</a>
             <form action="includes/logout.inc.php" method="post">
                 <?php
@@ -396,7 +395,7 @@
               <span class="required" id="">*</span><br>
               -->
               <input id="continue" type="submit" value="Continue" name="continuecheckout-submit">
-              <input id="reset" type="reset" value="Clear Fields"><br>
+              <input id="reset" type="reset" value="Reset Fields"><br>
 
           </form>
         </main>
