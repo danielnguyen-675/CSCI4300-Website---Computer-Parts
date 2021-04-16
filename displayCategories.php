@@ -12,15 +12,6 @@ $products = $db->query($query);
 <html lang="en">
 
 <head>
-
-    <style>
-        .GPUImg {
-            max-width: 1000%;
-            max-height: 1000%;
-            display: block;
-        }
-    </style>
-
     <meta charset="UTF-8">
     <title>Neweregg</title>
     <link rel="stylesheet" href="stylesheets/homepage.css">
