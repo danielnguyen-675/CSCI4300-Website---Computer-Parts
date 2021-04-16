@@ -57,7 +57,7 @@
    //display message if password is successfully changed
    $succmsg = "";
    if ( isset($_GET['edit']) ) {
-       $succmsg = "Your password has been changed!";
+       $succmsg = "Your account information has been updated!";
    }
 
    ?>
@@ -98,6 +98,9 @@
         </div>
 
         <main>
+            <!-- See if user successfully updated account info -->
+            <p><?php echo $succmsg ?></p>
+
             <h1>Edit Your Info</h1>
 
             <form id="personalinfo" action="includes/editaccount-info.inc.php" method="post" onsubmit="return checkFields()">
@@ -386,8 +389,6 @@
 
                 <input id="infosubmit" type="submit" name="editaccount-info-submit" value="Update Account">
                 <input id="inforeset" type="reset" value="Reset Fields"><br>
-
-            <p><?php echo $succmsg ?></p>
 
             </form>
             <form id="passwordinfo" action="includes/editaccount-pw.inc.php" method="post" onsubmit="return checkFields()">
