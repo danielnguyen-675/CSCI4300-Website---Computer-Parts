@@ -66,7 +66,7 @@ session_start();
                     <input type="password" name ="password" placeholder="Enter a new password" required> <br>
                     <label> Confirm Password: </label>
                     <input type="password" name ="confirmPassword" placeholder="Confirm the new password" required> <br>
-                    <button type="submit" name="reset-password-submit"> Reset my password </button>
+                    <button type="submit" name="reset-password-submit"> Reset My Password </button>
                   </form>
 
           <?php

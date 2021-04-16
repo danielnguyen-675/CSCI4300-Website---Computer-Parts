@@ -70,7 +70,7 @@ if (isset($_SESSION['customerID'])) {
             }
             ?>
 
-            <button id="forgotpwsubmit" type="submit" name="forgotpwd-submit"> Send email </button>
+            <button id="forgotpwsubmit" type="submit" name="forgotpwd-submit"> Send Email </button>
            </form>
         </main>
 
