@@ -62,10 +62,18 @@ html {
 }
 
 .addtocartbtn {
-  padding: 5px;
-  color: black;
-  margin-top: 1em;
-  clear: both;
+  border-radius: 3px;
+  background-color: #ff3333;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 0.75em;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  width: 7em;
+  clear:both;
 }
 
 .prodContainer {
