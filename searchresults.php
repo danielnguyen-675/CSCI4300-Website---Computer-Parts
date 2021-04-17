@@ -17,7 +17,7 @@ session_start();
 
 <body>
 
-    <a href="homepage.php"><img src="uga.png" alt="University of Georgia"></a>
+    <a href="homepage.php" id="toTopPicture"><img src="uga.png" alt="University of Georgia"></a>
 
     <header>
         <h1 id="storeName">Neweregg</h1>
@@ -25,7 +25,7 @@ session_start();
     </header>
 
     <div class="mainNavigation">
-        <a class="active" href="homepage.php">Home</a>
+        <a href="homepage.php">Home</a>
         <a href="contact.php">Contact</a>
         <a href="account.php">Account</a>
         <a href="cart.php">Cart</a>
@@ -51,14 +51,15 @@ session_start();
 
     <aside id="leftSide">
         <div class="vertical-menu">
-            <a href="./displayCategories.php?categoryName=GPU" class="active">Graphics Cards</a>
-            <a href="./displayCategories.php?categoryName=CPU">CPUs</a>
-            <a href="./displayCategories.php?categoryName=Keyboard and Mouse">Mouse & Keyboard</a>
-            <a href="./displayCategories.php?categoryName=RAM">RAM</a>
-            <a href="./displayCategories.php?categoryName=Power Supply">Power Supplies</a>
-            <a href="./displayCategories.php?categoryName=Storage">Storage</a>
-            <a href="./displayCategories.php?categoryName=Monitors">Monitors</a>
-            <a href="./displayCategories.php?categoryName=Headsets and Speakers">Headsets & Speakers</a>
+          <h1 id="verticalMenuH1">Shop PC Parts & Accessories</h1>
+          <a href="./displayCategories.php?categoryName=GPU"><button type="button" class="sideMenuButton">Graphics Cards</button></a>
+          <a href="./displayCategories.php?categoryName=CPU"><button type="button" class="sideMenuButton">CPUs</button></a>
+          <a href="./displayCategories.php?categoryName=Keyboard and Mouse"><button type="button" class="sideMenuButton">Mouse & Keyboard</button></a>
+          <a href="./displayCategories.php?categoryName=RAM"><button type="button" class="sideMenuButton">RAM</button></a>
+          <a href="./displayCategories.php?categoryName=Power Supply"><button type="button" class="sideMenuButton">Power Supplies</button></a>
+          <a href="./displayCategories.php?categoryName=Storage"><button type="button" class="sideMenuButton">Storage</button></a>
+          <a href="./displayCategories.php?categoryName=Monitors"><button type="button" class="sideMenuButton">Monitors</button></a>
+          <a href="./displayCategories.php?categoryName=Headsets and Speakers"><button type="button" class="sideMenuButton">Headsets & Speakers</button></a>
         </div>
     </aside>
 
@@ -112,7 +113,7 @@ session_start();
                                 <p class="prodInfo"><b>Manufacturer: </b><?php echo $row['manufacturerName'] ?></p>
                                 <p class="prodInfo"><b>Price: </b>$<?php echo $row['prodPrice'] ?></p>
                                 <input type="hidden" name="productID" value="<?php echo $row['productID']; ?>"/>
-                                <button class="addtocartbtn" type="submit" name="addtocart-submit"> Add to Cart </button><br><br><br>
+                                <button class="addToCart" type="submit" name="addtocart-submit"> Add to Cart </button><br><br><br>
                               </form>
                             </div>
                           </td>
@@ -142,6 +143,7 @@ session_start();
 
 
     <footer>
+        <a href="#toTopPicture" id="toTop"><button type="button" class="sideMenuButton">Return to Top</button></a>
         <p>&copy; Neweregg</p>
     </footer>
 

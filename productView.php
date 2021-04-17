@@ -30,7 +30,7 @@ $products = $db->query($query);
     </header>
 
     <div class="mainNavigation">
-        <a class="active" href="homepage.php">Home</a>
+        <a href="homepage.php">Home</a>
         <a href="contact.php">Contact</a>
         <a href="account.php">Account</a>
         <a href="cart.php">Cart</a>
@@ -55,14 +55,15 @@ $products = $db->query($query);
 
     <aside id="leftSide">
         <div class="vertical-menu">
-            <a href="./displayGPU.php" class="active">Graphics Cards</a>
-            <a href="./displayCPU.php">CPUs</a>
-            <a href="./displayMouseAndKey.php">Mouse & Keyboard</a>
-            <a href="./displayRAM.php">RAM</a>
-            <a href="./displayPowerSupplies.php">Power Supplies</a>
-            <a href="./displayStorage.php">Storage</a>
-            <a href="./displayMonitors.php">Monitors</a>
-            <a href="./displayHeadsetsAndSpeakers.php">Headsets & Speakers</a>
+          <h1 id="verticalMenuH1">Shop PC Parts & Accessories</h1>
+          <a href="./displayCategories.php?categoryName=GPU"><button type="button" class="sideMenuButton">Graphics Cards</button></a>
+          <a href="./displayCategories.php?categoryName=CPU"><button type="button" class="sideMenuButton">CPUs</button></a>
+          <a href="./displayCategories.php?categoryName=Keyboard and Mouse"><button type="button" class="sideMenuButton">Mouse & Keyboard</button></a>
+          <a href="./displayCategories.php?categoryName=RAM"><button type="button" class="sideMenuButton">RAM</button></a>
+          <a href="./displayCategories.php?categoryName=Power Supply"><button type="button" class="sideMenuButton">Power Supplies</button></a>
+          <a href="./displayCategories.php?categoryName=Storage"><button type="button" class="sideMenuButton">Storage</button></a>
+          <a href="./displayCategories.php?categoryName=Monitors"><button type="button" class="sideMenuButton">Monitors</button></a>
+          <a href="./displayCategories.php?categoryName=Headsets and Speakers"><button type="button" class="sideMenuButton">Headsets & Speakers</button></a>
         </div>
     </aside>
 
@@ -85,7 +86,9 @@ $products = $db->query($query);
             <h2><?php echo $name ?></h2>
             <img src=<?php echo $image ?> id="productImg" />
             <p id="price"><b>Price: </b>$<?php echo $price ?></p>
-            <p><b>Stock: </b><?php echo $stock ?> </p>
+            <!--
+            <p><b>Stock: </b><?php //echo $stock?> </p>
+            -->
             <p><b>Manufacturer: </b><?php echo $manufacturer ?> </p>
             <p id="itemDesc"><b>Item Description: </b><?php echo $description ?></p>
             <form action="includes/addtocart.inc.php" method="post">

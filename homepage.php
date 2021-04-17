@@ -7,11 +7,11 @@
     $names = array();
     $prices = array();
     $images = array();
-    foreach ( $ids as $i ) {
+    foreach ($ids as $i) {
         $query = "SELECT prodName, prodPrice, productImage FROM products WHERE productID=$i";
 
         $row = $connection->query($query);
-        foreach ( $row as $r ) {
+        foreach ($row as $r) {
             array_push($names, $r['prodName']);
             array_push($prices, $r['prodPrice']);
             array_push($images, $r['productImage']);
@@ -67,14 +67,15 @@
 
     <aside id="leftSide">
         <div class="vertical-menu">
-            <a href="./displayCategories.php?categoryName=GPU" class="active">Graphics Cards</a>
-            <a href="./displayCategories.php?categoryName=CPU">CPUs</a>
-            <a href="./displayCategories.php?categoryName=Keyboard and Mouse">Mouse & Keyboard</a>
-            <a href="./displayCategories.php?categoryName=RAM">RAM</a>
-            <a href="./displayCategories.php?categoryName=Power Supply">Power Supplies</a>
-            <a href="./displayCategories.php?categoryName=Storage">Storage</a>
-            <a href="./displayCategories.php?categoryName=Monitors">Monitors</a>
-            <a href="./displayCategories.php?categoryName=Headsets and Speakers">Headsets & Speakers</a>
+          <h1 id="verticalMenuH1">Shop PC Parts & Accessories</h1>
+          <a href="./displayCategories.php?categoryName=GPU"><button type="button" class="sideMenuButton">Graphics Cards</button></a>
+          <a href="./displayCategories.php?categoryName=CPU"><button type="button" class="sideMenuButton">CPUs</button></a>
+          <a href="./displayCategories.php?categoryName=Keyboard and Mouse"><button type="button" class="sideMenuButton">Mouse & Keyboard</button></a>
+          <a href="./displayCategories.php?categoryName=RAM"><button type="button" class="sideMenuButton">RAM</button></a>
+          <a href="./displayCategories.php?categoryName=Power Supply"><button type="button" class="sideMenuButton">Power Supplies</button></a>
+          <a href="./displayCategories.php?categoryName=Storage"><button type="button" class="sideMenuButton">Storage</button></a>
+          <a href="./displayCategories.php?categoryName=Monitors"><button type="button" class="sideMenuButton">Monitors</button></a>
+          <a href="./displayCategories.php?categoryName=Headsets and Speakers"><button type="button" class="sideMenuButton">Headsets & Speakers</button></a>
         </div>
     </aside>
 
@@ -111,21 +112,21 @@
 
         <h2>Have a look at our current deals!</h2>
 
-        <?php 
-            for( $i = 0; $i < count($ids); $i++ ) {
+        <?php
+            for ($i = 0; $i < count($ids); $i++) {
                 $id = $ids[$i];
                 $name = $names[$i];
                 $price = $prices[$i];
                 $img = $images[$i];
 
                 echo '<div class="productRow">';
-                    echo '<a href="productView.php?productID='.$id.'">';
-                        echo '<div class="productTile">';
-                            echo '<img src="'.$img.'"><br>';
-                            echo $name.'<br><br>';
-                            echo '$'.$price;
-                        echo '</div>';
-                    echo '</a>';
+                echo '<a href="productView.php?productID='.$id.'">';
+                echo '<div class="productTile">';
+                echo '<img src="'.$img.'"><br>';
+                echo $name.'<br><br>';
+                echo '$'.$price;
+                echo '</div>';
+                echo '</a>';
                 echo '</div>';
 
                 echo '<div class="cf"><br></div>';
