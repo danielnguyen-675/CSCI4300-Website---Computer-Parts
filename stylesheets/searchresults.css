@@ -15,8 +15,9 @@ html {
   transition: transform 0.5s;
 }
 
-.prodImg img:hover {
+.prodImg:hover {
   transform: translateY(-20px);
+  transition: transform 0.5s;
 }
 
 .prodInfo {
@@ -78,9 +79,11 @@ img {
   background: transparent !important;
 }
 
+/* makes UGA logo hover!
 img:hover {
   transform: translateY(-20px);
 }
+*/
 
 header {
   padding-left: 12%;
