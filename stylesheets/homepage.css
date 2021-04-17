@@ -344,10 +344,13 @@ main {
 .productTile {
   padding: 1em;
   overflow: auto;
+  transition: transform 0.5s;
 }
 
 .productTile:hover {
   border: 2px solid red;
+  transform: translateY(-20px);
+  transition: transform 0.5s;
 }
 
 .productTile img {
