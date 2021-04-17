@@ -160,6 +160,7 @@
               <input type="hidden" name="state" value="<?php echo $state; ?>"/>
               <input type="hidden" name="zipcode" value="<?php echo $zipcode; ?>"/>
               <input type="hidden" name="country" value="<?php echo $country; ?>"/>
+              <input type="hidden" name="totalprice" value="<?php echo $totalprice; ?>"/>
 
               <input id="confirm" type="submit" value="Confirm and Pay" name="confirmorder-submit">
               <input id="reset" type="reset" value="Clear Fields"><br>

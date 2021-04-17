@@ -25,6 +25,8 @@
       $zipcode = $_POST['zipcode'];
       $country = $_POST['country'];
 
+      $totalprice = $_POST['totalprice'];
+
       //session user info
       $customerID = $_SESSION['customerID'];
 
@@ -145,6 +147,8 @@
 
           $message .= "<p><b>Quantity:</b>  ".$_SESSION['cartQuantity'][$key]."</p><br>";
       }
+
+      $message .= "<p><b>Total Price: </b>$  ".$totalprice."</p><br>";
 
       $mail->Body = $message;
       $mail->isHTML(true);

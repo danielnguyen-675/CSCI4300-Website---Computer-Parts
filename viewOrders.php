@@ -70,21 +70,26 @@
             <h1>View Your Orders</h1>
 
             <?php
-              while ($row = mysqli_fetch_assoc($result)) {
-                  $fetchedOrderID = $row['orderID']; ?>
-              <!-- <a href="orderView.php?orderID=<?php echo $row['orderID'] ?>" id="orderLinks">
-                View Order <?php //echo $row['orderID']?>
-              </a> -->
-              <form action="orderView.php" method="post">
-                <input id="viewOrdersSubmitBtn" type="submit" name="viewOrders-submit" value="Order # <?php echo $row['orderID'] ?>">
-                <input type="hidden" name="street" value="<?php echo $row['street']; ?>">
-                <input type="hidden" name="city" value="<?php echo $row['city']; ?>">
-                <input type="hidden" name="state" value="<?php echo $row['state']; ?>">
-                <input type="hidden" name="zipcode" value="<?php echo $row['zipcode']; ?>">
-                <input type="hidden" name="country" value="<?php echo $row['country']; ?>">
-                <input type="hidden" name="orderID" value="<?php echo $fetchedOrderID ?>">
-              </form>
-            <?php
+              $numRows = mysqli_num_rows($result);
+              if ($numRows == 0) {
+                  echo "<p>You have no orders.</p>";
+              } else {
+                  while ($row = mysqli_fetch_assoc($result)) {
+                      $fetchedOrderID = $row['orderID']; ?>
+                <!-- <a href="orderView.php?orderID=<?php echo $row['orderID'] ?>" id="orderLinks">
+                  View Order <?php //echo $row['orderID']?>
+                </a> -->
+                <form action="orderView.php" method="post">
+                  <input id="viewOrdersSubmitBtn" type="submit" name="viewOrders-submit" value="Order # <?php echo $row['orderID'] ?>">
+                  <input type="hidden" name="street" value="<?php echo $row['street']; ?>">
+                  <input type="hidden" name="city" value="<?php echo $row['city']; ?>">
+                  <input type="hidden" name="state" value="<?php echo $row['state']; ?>">
+                  <input type="hidden" name="zipcode" value="<?php echo $row['zipcode']; ?>">
+                  <input type="hidden" name="country" value="<?php echo $row['country']; ?>">
+                  <input type="hidden" name="orderID" value="<?php echo $fetchedOrderID ?>">
+                </form>
+              <?php
+                  }
               }
              ?>
 
