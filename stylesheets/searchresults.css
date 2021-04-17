@@ -12,6 +12,11 @@ html {
   float: left;
   clear: both;
   margin-bottom: 0.5em;
+  transition: transform 0.5s;
+}
+
+.prodImg img:hover {
+  transform: translateY(-20px);
 }
 
 .prodInfo {
@@ -71,6 +76,10 @@ img {
   width: 23%;
   height: 23%;
   background: transparent !important;
+}
+
+img:hover {
+  transform: translateY(-20px);
 }
 
 header {
