@@ -52,10 +52,10 @@
             $message .= '<p> If you did not request this, ignore this message.<br></p>';
             $message .= '<p> Here is what you sent: <br></p>';
             $message .= '<p>==============================</p>';
-            $message .= '<p>What would you rate our website out of 10? '.$rating.'<br><br>';
-            $message .= 'Would your recommend our website to a friend? '.$recommend.'<br><br>';
-            $message .= 'What is your reason for contacting us today? '.$reason.'<br><br>';
-            $message .= 'Please include any additional feedback below. '.$comments.'<br></p>';
+            $message .= '<p>What would you rate our website out of 10? <br><b>'.$rating.'</b><br><br>';
+            $message .= '<br>Would your recommend our website to a friend? <br><b>'.$recommend.'</b><br><br>';
+            $message .= '<br>What is your reason for contacting us today? <br><b>'.$reason.'</b><br><br>';
+            $message .= '<br>Please include any additional feedback below. <br><b>'.$comments.'</b><br></p>';
 
             $mail->Body = $message;
             $mail->AddAddress($email);
