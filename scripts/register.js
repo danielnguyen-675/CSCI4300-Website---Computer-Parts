@@ -109,6 +109,10 @@ var checkFields = function () {
             req5 = "Phone number must be of the form (123) 456-7890";
             isValid = false;
         }
+        if (phone.length != 14) {
+            req5 = "Phone number must be of the form (123) 456-7890";
+            isValid = false;
+        }
     }
 
     //reset span values

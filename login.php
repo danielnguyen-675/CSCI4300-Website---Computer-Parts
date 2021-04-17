@@ -46,15 +46,13 @@ if (isset($_SESSION['customerID'])) {
           <form action="includes/login.inc.php" method="post">
             <h1 id="loginh1">Login</h1>
 
-            <label for="email"><b> Email: </b></label>
-            <input type="email" placeholder="Enter email here" name="email" required><br>
-            <label for="password"><b> Password: </b></label>
-            <input type="password" placeholder="Password" name="password" required><br>
-
             <?php
             if (isset($_GET['error'])) {
                 if ($_GET['error'] == "notfound") {
-                    echo '<p style="color:red">The email you entered was not found.</p>';
+                    echo '<p style="color:red; margin-left: 3em;">The email you entered was not found.</p>';
+                }
+                if ($_GET['error'] == "wrongcredentials") {
+                    echo '<p style="color:red; margin-left: 3em;">The email or password you entered was not found.</p>';
                 }
             }
             if (isset($_GET['sentmail'])) {
@@ -66,6 +64,11 @@ if (isset($_SESSION['customerID'])) {
                 echo '<p style="color:red"> Email has not been sent.  Mail system error - check header.</p>' . $_GET[$msg];
             }
             ?>
+
+            <label for="email"><b> Email: </b></label>
+            <input type="email" placeholder="Enter email here" name="email" required><br>
+            <label for="password"><b> Password: </b></label>
+            <input type="password" placeholder="Password" name="password" required><br>
 
             <button id="loginsubmit" type="submit" name="login-submit"> Login </button><br>
           </form>

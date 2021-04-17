@@ -93,18 +93,18 @@
         <?php
         if (isset($_GET['newPwd'])) {
             if ($_GET['newPwd'] == "success") {
-                echo '<h2 style="text-align:center;"> Your password was updated! </h2>';
-                echo '<p style="text-align:center;"> Please login with your new password. </p>';
+                echo '<h2 style="text-align:center; color:blue;"> Your password was updated! </h2>';
+                echo '<p style="text-align:center; color:blue;"> Please login with your new password. </p>';
             }
         }
         if (isset($_GET['activate'])) {
             if ($_GET['activate'] == "success") {
-                echo '<h2 style="text-align:center;"> Your account was activated! </h2>';
+                echo '<h2 style="text-align:center; color:blue;"> Your account was activated! </h2>';
             }
         }
         if (isset($_GET['user'])) {
             if ($_GET['user'] == "activationrequired") {
-                echo '<h2 style="text-align:center;"> You need to activate your account. Check your email! </h2>';
+                echo '<h2 style="text-align:center; color:red;"> You need to activate your account. Check your email! </h2>';
             }
         }
 

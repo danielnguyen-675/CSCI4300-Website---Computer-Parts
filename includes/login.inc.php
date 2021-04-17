@@ -22,7 +22,7 @@
               if ($row = mysqli_fetch_assoc($result)) {
                   $pwdCheck = password_verify($password, $row['password']);
                   if ($pwdCheck == false) {
-                      header("Location: ../login.php?error=wrongpass");
+                      header("Location: ../login.php?error=wrongcredentials");
                       exit();
                   } else {
                       session_start();

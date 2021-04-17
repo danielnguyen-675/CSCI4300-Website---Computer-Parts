@@ -47,16 +47,16 @@
 
    //display error message if invalid inputs given
    $errmsg = "";
-   if ( isset($_GET['error']) ) {
+   if (isset($_GET['error'])) {
        $error = $_GET['error'];
-       if ( $error == "wrongpass" ) {
+       if ($error == "wrongpass") {
            $errmsg = "Current password is incorrect.";
        }
    }
 
    //display message if password is successfully changed
    $succmsg = "";
-   if ( isset($_GET['edit']) ) {
+   if (isset($_GET['edit'])) {
        $succmsg = "Your account information has been updated!";
    }
 
@@ -99,7 +99,7 @@
 
         <main>
             <!-- See if user successfully updated account info -->
-            <p><?php echo $succmsg ?></p>
+            <p style="color: blue;"><?php echo $succmsg ?></p>
 
             <h1>Edit Your Info</h1>
 
