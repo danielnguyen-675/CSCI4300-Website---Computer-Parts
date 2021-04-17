@@ -16,7 +16,7 @@ session_start();
         <title>Neweregg</title>
         <link rel="stylesheet" href="stylesheets/createnewpassword.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="scripts/register.js"></script>
+        <script src="scripts/newPassword.js"></script>
     </head>
 
     <body>
@@ -56,17 +56,23 @@ session_start();
             } else {
                 if (ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {
                     ?>
-                  <form action="includes/reset-password.inc.php" method="post">
+                  <form action="includes/reset-password.inc.php" method="post" onsubmit="return checkFields()">
                     <input type="hidden" name="selector" value="<?php echo $selector; ?>">
                     <input type="hidden" name="validator" value="<?php echo $validator; ?>">
                     <!--<p> TESTING inside hidden </p>
                     <p> The selector is <?php //echo $selector;?></p>
                     <p> The validator is <?php //echo $validator;?></p> -->
-                    <label> Password: </label>
-                    <input type="password" name ="password" placeholder="Enter a new password" required> <br>
+                    <div id="anchor">
+                        <label> Password: </label>
+                        <input type="password" id="password" name ="password" placeholder="Enter a new password">
+                    </div>
+                    <span class="required" id="req1">*</span><br>
+
                     <label> Confirm Password: </label>
-                    <input type="password" name ="confirmPassword" placeholder="Confirm the new password" required> <br>
-                    <button type="submit" name="reset-password-submit"> Reset My Password </button>
+                    <input type="password" id="password2" name ="confirmPassword" placeholder="Confirm the new password"> 
+                    <span class="required" id="req2">*</span><br>
+
+                    <button type="submit" is="submit" name="reset-password-submit"> Reset My Password </button>
                   </form>
 
           <?php
