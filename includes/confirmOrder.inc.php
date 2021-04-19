@@ -57,7 +57,7 @@
       $sql = "SELECT * FROM customer WHERE customerID = ?";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../checkout.php?error=sqlerror");
+          header("Location: ../confirmOrder.php?error=sqlerror");
           exit();
       } else {
           mysqli_stmt_bind_param($stmt, "s", $customerID);
@@ -69,7 +69,7 @@
               $sql = "INSERT INTO paymentinfo (customerID) SELECT customerID FROM customer WHERE customerID=?; ";
               $stmt = mysqli_stmt_init($connection);
               if (!mysqli_stmt_prepare($stmt, $sql)) {
-                  header("Location: ../checkout.php?error=customerIDinsert-sqlerror");
+                  header("Location: ../confirmOrder.php?error=customerIDinsert-sqlerror");
                   exit();
               } else {
                   mysqli_stmt_bind_param($stmt, "s", $customerID);
@@ -91,7 +91,7 @@
                   $hashedCC = password_hash($cardNumber, PASSWORD_DEFAULT);
                   $hashedCVC = password_hash($cvc, PASSWORD_DEFAULT);
                   if (!$hashedCVC) {
-                      header("Location: ../checkout.php?error=hashedCVCfalse");
+                      header("Location: ../confirmOrder.php?error=hashedCVCfalse");
                       exit();
                   }
                   mysqli_stmt_bind_param($stmt, "sssss", $fullName, $hashedCC, $expiry, $hashedCVC, $customerID);
@@ -99,7 +99,7 @@
                   header("Location: ../orderSuccess.php?order=success");
               }
           } else {
-              header("Location: ../checkout.php?error=sql-user");
+              header("Location: ../confirmOrder.php?error=sql-user");
               exit();
           }
       }
@@ -165,12 +165,12 @@
       $sql = "INSERT INTO orders (customerID, street, city, state, zipcode, country, firstName, lastName, phoneNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: TEST.php?error=INSERT-sqlerror='$stmt->error'");
+          header("Location: ../confirmOrder.php?error=INSERT-sqlerror='$stmt->error'");
           exit();
       } else {
           mysqli_stmt_bind_param($stmt, "sssssssss", $customerID, $street, $city, $state, $zipcode, $country, $firstName, $lastName, $phoneNumber);
           if (!mysqli_stmt_execute($stmt)) {
-              header("Location: TEST.php?error=INSERT-sqlerror='$stmt->error'");
+              header("Location: ../confirmOrder.php?error=INSERT-sqlerror='$stmt->error'");
               exit();
           }
       }
@@ -180,12 +180,12 @@
       $sql = "SELECT orderID FROM orders WHERE customerID=? ORDER BY orderID DESC LIMIT 1";
       $stmt = mysqli_stmt_init($connection);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: TEST.php?error=SELECT-sqlerror='$stmt->error'");
+          header("Location: ../confirmOrder.php?error=SELECT-sqlerror='$stmt->error'");
           exit();
       } else {
           mysqli_stmt_bind_param($stmt, "s", $customerID);
           if (!mysqli_stmt_execute($stmt)) {
-              header("Location: TEST.php?error=SELECT-sqlerror='$stmt->error'");
+              header("Location: ../confirmOrder.php?error=SELECT-sqlerror='$stmt->error'");
               exit();
           } else {
               $result = mysqli_stmt_get_result($stmt);
@@ -215,12 +215,12 @@
           $sql = "INSERT INTO orderdetails (orderID, productQuantity, productID) VALUES (?, ?, ?); ";
           $stmt = mysqli_stmt_init($connection);
           if (!mysqli_stmt_prepare($stmt, $sql)) {
-              header("Location: TEST.php?error=INSERTorderdetails-sqlerror='$stmt->error'");
+              header("Location: ../confirmOrder.php?error=INSERTorderdetails-sqlerror='$stmt->error'");
               exit();
           } else {
               mysqli_stmt_bind_param($stmt, "sss", $fetchedOrderID, $productQuantity, $productID);
               if (!mysqli_stmt_execute($stmt)) {
-                  header("Location: TEST.php?error=INSERTorderdetails-sqlerror='$stmt->error'");
+                  header("Location: ../confirmOrder.php?error=INSERTorderdetails-sqlerror='$stmt->error'");
                   exit();
               }
           }
