@@ -135,22 +135,22 @@
           <div>
             <h2>Payment Information</h2>
             <p>Enter your payment information to complete your order</p>
-            <form action="includes/confirmOrder.inc.php" method="post">
+            <form action="includes/confirmOrder.inc.php" method="post" onsubmit="return checkPaymentInfo()">
               <label>Full Name:</label>
               <input id="fullName" name="fullName" type="text" required>
               <span class="required" id="req1">*</span><br>
 
               <label>Card Number:</label>
               <input id="cardNumber" name="cardNumber" type="text" required>
-              <span class="required" id="">*</span><br>
+              <span class="required" id="req2">*</span><br>
 
               <label>Expiry Date:</label>
-              <input id="expiry" name="expiry" type="date" required>
-              <span class="required" id="">*</span><br>
+              <input id="expiry" name="expiry" type="text" placeholder="mm-yy" required>
+              <span class="required" id="req3">*</span><br>
 
               <label>CVC:</label>
               <input id="cvc" name="cvc" type="text" required>
-              <span class="required" id="">*</span><br>
+              <span class="required" id="req4">*</span><br>
 
               <input type="hidden" name="firstName" value="<?php echo $firstName; ?>"/>
               <input type="hidden" name="lastName" value="<?php echo $lastName; ?>"/>

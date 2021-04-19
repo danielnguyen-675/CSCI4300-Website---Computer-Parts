@@ -28,6 +28,11 @@ var checkPaymentInfo = function () {
         isValid = false;
         req2 = "Card info is not valid, try again!";
     }
+    if (cardNumber.length != 16) {
+        isValid = false;
+        req2 = "Card info is not valid, try again!";
+    }
+
 
     if (!expiration.match(/(0[1-9]|1[0-2])[-][0-9]{2}/)) {
         req3 = "The expired date is not correct! Use format: 'mm-yy'";
