@@ -11,11 +11,7 @@ $products = $db->query($query);
 <!DOCTYPE html>
 
 <html lang="en">
-<<<<<<< HEAD
-<script src="./scripts/productView.js"></script>
-=======
 <script src="scripts/productView.js"></script>
->>>>>>> main
 
 <head>
     <meta charset="UTF-8">
@@ -75,7 +71,7 @@ $products = $db->query($query);
         echo "<a href=\"javascript:history.go(-1)\" class='backbutton'>GO BACK</a>";
         ?>
 
-            <div class="productView">
+        <div class="productView">
             <?php
             while ($row = $products->fetch(PDO::FETCH_ASSOC)) {
                 $name = $row['prodName'];
